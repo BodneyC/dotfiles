@@ -1,11 +1,11 @@
-#Set our umask
 umask 022
 
-# Set our default path
-GOPATH="/home/BodneyC/Documents/Programming/Go"
+GOPATH="/home//Documents/Programming/Go"
 export GOPATH
 PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$GOPATH/bin"
 export PATH
+EDITOR=vim
+export EDITOR
 
 # Load profiles from /etc/profile.d
 if test -d /etc/profile.d/; then

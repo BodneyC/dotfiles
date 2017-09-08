@@ -1,13 +1,13 @@
 #########################################################################
 #-----------------------------------------------------------------------#
-#----Name: arch_setup.sh------------------------------------------------#
+#-----Name: arch_setup.sh-----------------------------------------------#
 #-----------------------------------------------------------------------#
-#----Info: Work-in-progress shell script for setting up Arch linux------#
-#--------- from boot of live-media to completion. Whilst incomplete,----#
-#--------- this can be used as a guide (specifically for my setup I-----#
-#----------suppose) in purley command form.-----------------------------#
+#-----Info: Work-in-progress shell script for setting up Arch linux-----#
+#---------- from boot of live-media to completion. Whilst incomplete,---#
+#---------- this can be used as a guide (specifically for my setup I----#
+#-----------suppose) in purley command form.----------------------------#
 #-----------------------------------------------------------------------#
-#----NOTE: DO NOT JUST RUN THIS SCRIPT, IT WILL NOT WORK----------------#
+#-----NOTE: DO NOT JUST RUN THIS SCRIPT, IT WILL NOT WORK---------------#
 #-----------------------------------------------------------------------#
 #########################################################################
 
@@ -159,10 +159,15 @@ fi
 # Audio configuration
 pacman -S --noconfirm alsa-utils pulseaudio
 amixer sset Master unmute
+	########## TESTING ALSA #############
+	# systemctl status alsa-state.service
+	# systemctl start alsa-state.service
+	# systemctl enable alsa-state.service
 
 # XFCE4 installation
 pacman -S --noconfirm xfce4 xfce4-goodies
 echo exec startxfce4 > /home/${USERNAME}/.xinitrc
+	# CONSIDER THEMES
 
 
 #########################################################################
@@ -174,18 +179,26 @@ reboot 																	#
 
 localectl set-keymap uk
 
-mkdir -p ~/{gitclones,Documents/{Current,Programming/{CPP,C,OpenMP,Go,LaTeX}}}
+mkdir -p ~/{gitclones,.vim/{bundle},Documents/{Current,Programming/{CPP,bash,C,OpenMP,Go/{src,pkg,bin},LaTeX}}}
 
 cd ~/gitclones
 
 # Dotfiles
-git clone [URL TO BE DECIDED]
-cp ./{.bashrc,.bash_aliases,.vimrc,.Xresources} ~/
+git clone https://github.com/BodneyC/dotfiles.git
+cd dotfiles
+cp ./{.bashrc,.bash_aliases,.vimrc,.Xresources,} ~/
+sed -i "/s/e\/\/D/e\/${USERNAME}\/D" profile
 cp profile /etc/profile
 cp local.conf /etc/fonts/
 
+# Vim
+pacman -S --noconfirm build-essential clang cmake
+vim +PluginInstall +quall && cd .vim/bundle/YouCompleteMe/
+./install.py --clang-completer --system-libclang --gocode-completer
+
+
 # Xfce4-terminal colourschemes
-cd ../
+cd ~/gitclones
 git clone https://github.com/afg984/base16-xfce4-terminal.git
 cp -r base16-xfce4-terminal/colorschemes/* /usr/share/xfce4/terminal/colorschemes/
 
@@ -199,4 +212,23 @@ rm droid-sans-mono
 echo "[archlinuxfr]" >> /etc/pacman.conf
 echo "SigLevel = Never" >> /etc/pacman.conf
 echo "Server = http://repo.archlinux.fr/\$arch" >> /etc/pacman.conf
-pacman -Sy yaourt
+pacman -Sy  --noconfirm yaourt
+
+# Languages
+yorn = 1
+while [[ $yorn -ne 0 ]]; do
+	printf "Languages\n---------\n 1) TeX\n 2) Go\n\n 0) Continue..."
+	read yorn
+	case "$yorn" in
+		1)
+			pacman -S texlive-most texlive-lang
+			;;
+		2)
+			pacman -S go
+			;;
+	esac
+done
+
+# Additional apps
+pacman -S atom htop firefox qbittorrent steam
+yaourt -S discord spotify
