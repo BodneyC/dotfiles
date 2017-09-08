@@ -1,16 +1,19 @@
-#########################################################################
-#-----------------------------------------------------------------------#
-#-----Name: arch_setup.sh-----------------------------------------------#
-#-----------------------------------------------------------------------#
-#-----Info: Work-in-progress shell script for setting up Arch linux-----#
-#---------- from boot of live-media to completion. Whilst incomplete,---#
-#---------- this can be used as a guide (specifically for my setup I----#
-#-----------suppose) in purley command form.----------------------------#
-#-----------------------------------------------------------------------#
-#-----NOTE: DO NOT JUST RUN THIS SCRIPT, IT WILL NOT WORK---------------#
-#-----------------------------------------------------------------------#
-#########################################################################
+#############################################################################
+#---------------------------------------------------------------------------#
+#-------Name: arch_setup.sh-------------------------------------------------#
+#---------------------------------------------------------------------------#
+#-------Info: Work-in-progress shell script for setting up Arch linux-------#
+#------------ from boot of live-media to completion. Whilst incomplete,-----#
+#------------ this can be used as a guide (specifically for my setup I------#
+#-------------suppose) in purley command form.------------------------------#
+#---------------------------------------------------------------------------#
+#-------NOTE: DO NOT JUST RUN THIS SCRIPT, IT WILL NOT WORK-----------------#
+#---------------------------------------------------------------------------#
+#############################################################################
 
+# /dev/sdx
+fdisk -l
+read -p "Installation drive: /dev/" instDrive
 # Username
 read -p "Username: " USERNAME
 
@@ -18,6 +21,7 @@ read -p "Username: " USERNAME
 ping -c 3 google.co.uk
 rc=$?
 if [[ $rc -ne 0 ]]; then
+	echo "Internet connection required"
 	exit 1
 fi
 
@@ -25,21 +29,21 @@ fi
 echo "mklabel msdos" > ./parted.txt
 read -p 'What percent of the disk should be /' rootSz
 echo "mkpart primary ext4 1MiB ${rootSz}%" >> ./parted.txt
-echo "set 1 boot on">> ./parted.txt
+echo "set 1 boot on" >> ./parted.txt
 read -p 'What percent of the disk should be /home' homeSz
 echo "mkpart primary ext4 ${rootSz}% $(($homeSz + $rootSz))%" >> parted.txt
 echo "mkpart primary linux-swap $(($homeSz + $rootSz))% 100%" >> parted.txt
 echo "quit" >> parted.txt
-parted /dev/sda < parted.txt
-mkfs.ext4 /dev/sda1
-mkfs.ext4 /dev/sda2
-mkswap /dev/sda3
-swapon /dev/sda3
+parted /dev/${instDrive} < parted.txt
+mkfs.ext4 /dev/${instDrive}1
+mkfs.ext4 /dev/${instDrive}2
+mkswap /dev/${instDrive}3
+swapon /dev/${instDrive}3
 
 # Mounting
 mkdir /mnt/home
-mount /dev/sda1 /mnt
-mount /dev/sda2 /mnt/home
+mount /dev/${instDrive}1 /mnt
+mount /dev/${instDrive}2 /mnt/home
 
 # Mirror list
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
@@ -53,11 +57,11 @@ pacstrap -i /mnt base base-devel
 # Fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
-#########################################################################
-#-------------------------Chroot into system----------------------------#
-arch-chroot /mnt														#
-#-----------------------Script needs splitting--------------------------#
-#########################################################################
+#############################################################################
+#---------------------------Chroot into system------------------------------#
+arch-chroot /mnt                                                            #
+#-------------------------Script needs splitting----------------------------#
+#############################################################################
 
 # Locale Config
 sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/' /ect/locale.gen
@@ -80,7 +84,7 @@ hwclock --systohc --utc
 pacman -S --noconfirm dialog wpa_suppliant wireless_tools grub os-prober iw sudo bash-completion vim git rofi
 
 # Boot Loader
-grub-install /dev/sda
+grub-install /dev/${instDrive}
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Host Info
@@ -88,15 +92,15 @@ echo $USERNAME > /etc/hostname
 printf "Enter root passwd\n"
 passwd --stdin)
 
-#########################################################################
-#-----------------------Exit chroot and reboot--------------------------#
-#---------------------Remove installation media-------------------------#
-#------------------------Boot; Login [root:a]---------------------------#
-exit																	#
-umount -R /mnt															#
-shutdown now															#
-#-----------------------Script needs splitting--------------------------#
-#########################################################################
+#############################################################################
+#-------------------------Exit chroot and reboot----------------------------#
+#-----------------------Remove installation media---------------------------#
+#--------------------------Boot; Login [root:a]-----------------------------#
+exit                                                                        #
+umount -R /mnt                                                              #
+shutdown now                                                                #
+#-------------------------Script needs splitting----------------------------#
+#############################################################################
 
 # Wireless
 ip link ### Get device name
@@ -170,12 +174,12 @@ echo exec startxfce4 > /home/${USERNAME}/.xinitrc
 	# CONSIDER THEMES
 
 
-#########################################################################
-#-----------------Reboot and login as ${USERNAME}:a---------------------#
-reboot 																	#
-#------------------------Post-installation------------------------------#
-#----------------------------.dotfiles----------------------------------#
-#########################################################################
+#############################################################################
+#-------------------Reboot and login as ${USERNAME}:a-----------------------#
+reboot                                                                      #
+#--------------------------Post-installation--------------------------------#
+#------------------------------.dotfiles------------------------------------#
+#############################################################################
 
 localectl set-keymap uk
 
