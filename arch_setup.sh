@@ -81,7 +81,7 @@ echo \"FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org\" >> /etc/sys
 hwclock --systohc --utc
 
 # Additional tools
-pacman -S --noconfirm dialog wpa_suppliant wireless_tools grub os-prober iw sudo bash-completion vim git rofi
+pacman -S --noconfirm dialog wpa_suppliant wireless_tools grub os-prober iw sudo bash-completion vim git rofi p7zip
 
 # Boot Loader
 grub-install /dev/${instDrive}
@@ -95,10 +95,10 @@ passwd --stdin)
 #############################################################################
 #-------------------------Exit chroot and reboot----------------------------#
 #-----------------------Remove installation media---------------------------#
-#--------------------------Boot; Login [root:a]-----------------------------#
 exit                                                                        #
 umount -R /mnt                                                              #
 shutdown now                                                                #
+#--------------------------Boot; Login [root:a]-----------------------------#
 #-------------------------Script needs splitting----------------------------#
 #############################################################################
 
@@ -134,13 +134,13 @@ pacman -Sy # update repos
 pacman -S --noconfirm xorg-server xorg-apps xorg-server-xwayland xorg-xinit xorg-xkill xorg-xinput xf86-input-libinput mesa
 
 printf "1) Nvidia (Nouveau)\n2) AMD\n3) VirtualBox"
-read cardMan
+read choiceVar
 
-if [[ $cardMan -eq 1 ]]; then
+if [[ $choiceVar -eq 1 ]]; then
     pacman -S --noconfirm xf86-video-nouveau mesa-libgl libvdpau-va-gl
-elif [[ $cardMan -eq 2 ]]; then
+elif [[ $choiceVar -eq 2 ]]; then
 	pacman -S  --noconfirm xf86-video-ati mesa-libgl mesa-vdpau libvdpau-va-gl
-elif [[ $cardMan -eq 3 ]]; then
+elif [[ $choiceVar -eq 3 ]]; then
 	pacman -S --noconfirm virtualbox-guest-{dkms,iso,modules,dkms,utils} lib32-mesa
     system_ctl disable ntpd
     system_ctl enable vboxservice
@@ -163,14 +163,15 @@ fi
 # Audio configuration
 pacman -S --noconfirm alsa-utils pulseaudio
 amixer sset Master unmute
-	########## TESTING ALSA #############
-	# systemctl status alsa-state.service
-	# systemctl start alsa-state.service
-	# systemctl enable alsa-state.service
+#----TESTING ALSA
+# systemctl status alsa-state.service
+# systemctl start alsa-state.service
+# systemctl enable alsa-state.service
 
 # XFCE4 installation
 pacman -S --noconfirm xfce4 xfce4-goodies
 echo exec startxfce4 > /home/${USERNAME}/.xinitrc
+echo setxkbmap gb >> /home/${USERNAME}/.xinitrc
 	# CONSIDER THEMES
 
 
@@ -182,8 +183,9 @@ reboot                                                                      #
 #############################################################################
 
 localectl set-keymap uk
+localectl set-x11-keymap uk
 
-mkdir -p ~/{gitclones,.vim/{bundle},Documents/{Current,Programming/{CPP,bash,C,OpenMP,Go/{src,pkg,bin},LaTeX}}}
+mkdir -p ~/{gitclones,.vim/{bundle/},Documents/{Current,Programming/{CPP,bash,C,OpenMP,Go/{src,pkg,bin},LaTeX}}}
 
 cd ~/gitclones
 
@@ -196,39 +198,45 @@ cp profile /etc/profile
 cp local.conf /etc/fonts/
 
 # Vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 pacman -S --noconfirm build-essential clang cmake
 vim +PluginInstall +quall && cd .vim/bundle/YouCompleteMe/
 ./install.py --clang-completer --system-libclang --gocode-completer
-
 
 # Xfce4-terminal colourschemes
 cd ~/gitclones
 git clone https://github.com/afg984/base16-xfce4-terminal.git
 cp -r base16-xfce4-terminal/colorschemes/* /usr/share/xfce4/terminal/colorschemes/
 
+# XFCE4 THEMES
+tar -xvf [vertex_thing].tar.gz
+cp -r Vertex* /usr/share/themes
+
 # DroidSansMono
 wget https://www.fontsquirrel.com/fonts/download/droid-sans-mono
 unzip droid-sans-mono
-cp DroidSansMono.ttf /usr/shar/fonts/TTF/
+cp DroidSansMono.ttf /usr/share/fonts/TTF/
 rm droid-sans-mono
 
 # Installing yaourt
 echo "[archlinuxfr]" >> /etc/pacman.conf
 echo "SigLevel = Never" >> /etc/pacman.conf
 echo "Server = http://repo.archlinux.fr/\$arch" >> /etc/pacman.conf
-pacman -Sy  --noconfirm yaourt
+pacman -Sy --noconfirm yaourt
 
 # Languages
-yorn = 1
-while [[ $yorn -ne 0 ]]; do
+choiceVar = 1
+while [[ $choiceVar -ne 0 ]]; do
 	printf "Languages\n---------\n 1) TeX\n 2) Go\n\n 0) Continue..."
-	read yorn
-	case "$yorn" in
+	read choiceVar
+	case "$choiceVar" in
 		1)
 			pacman -S texlive-most texlive-lang
 			;;
 		2)
 			pacman -S go
+			;;
+		0)
 			;;
 	esac
 done
