@@ -6,6 +6,8 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$GOPATH/bin"
 export PATH
 EDITOR=vim
 export EDITOR
+TZ='Europe/London'
+export TZ
 
 # Load profiles from /etc/profile.d
 if test -d /etc/profile.d/; then

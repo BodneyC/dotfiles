@@ -46,9 +46,11 @@ mount /dev/${instDrive}1 /mnt
 mount /dev/${instDrive}2 /mnt/home
 
 # Mirror list
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-sed -i 's/^#Server/Server/g' /etc/pacman.d/mirrorlist.backup
-rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+grep -A 1 "## United Kingdom" --group-separator "" /etc/pacman.d/mirrorlist > /etc/pacman.d/mirrorlist.backup && grep -A 1 -n "## United Kingdom" /etc/pacman.d/mirrorlist | sed -n 's/^\([0-9]\{1,\}\).*/\1d/p' | sed -f - /etc/pacman.d/mirrorlist >> /etc/pacman.d/mirrorlist.backup
+mv /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
+# cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+# sed -i 's/^#Server/Server/g' /etc/pacman.d/mirrorlist.backup
+# rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 rm /etc/pacman.d/mirrorlist.backup
 
 # Install base system
@@ -64,13 +66,11 @@ arch-chroot /mnt                                                            #
 #############################################################################
 
 # Locale Config
-sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/' /ect/locale.gen
+sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/g' /ect/locale.gen
 locale-gen
 echo LANG=en_GB.UTF-8 > /etc/locale.conf
 export LANG=en_GB.UTF-8
-localectl set-keymap --no-convert uk
 echo KEYMAP=uk >> /etc/vconsole.conf
-echo KEYMAP=uk >> /etc/rc.conf
 
 # TimeZone
 echo Europe/London >> /etc/timezone
@@ -102,17 +102,22 @@ shutdown now                                                                #
 #-------------------------Script needs splitting----------------------------#
 #############################################################################
 
+# Keyboard
+localectl set-keymap --no-convert uk
+loadkeys gb
+
 # Wireless
 ip link ### Get device name
 systemctl stop dhcpcd@<device-name>.service
-wifi-menu -o <device-name> { ### NEEDS AUTOMATING
+wifi-menu -o <device-name> { 		### NEEDS AUTOMATING
 	follow on-screen instr
 }
-if netctl start /etc/netctl/<profile>; then
-	netctl enable /etc/netctl/<profile>
+if netctl start <profile>; then
+	netctl enable <profile>
 else
-	netctl status /etc/netctl/<profile>
+	netctl status <profile>
 fi
+
 ### Check connection
 ping -c 3 google.co.uk
 rc=$?
@@ -126,15 +131,17 @@ echo -e "a\na" | (passwd --stdin ${USERNAME})
 sed -i '/%wheel ALL=(ALL) ALL/s/^#//' /etc/sudoers
 
 # Configure repos
-sed -i 's/#[multilib]/[multilib]/' /etc/pacman.conf
-sed -i 's/#Include = /etc/pacman.d/mirrorlist/Include = /etc/pacman.d/mirrorlist/' /etc/pacman.conf
+sed -i 's/#\[multilib\]/\[multilib\]/' /etc/pacman.conf
+sed -i '/\[multilib\]/{n;s/^#//}' /etc/pacman.conf
 pacman -Sy # update repos
 
 #Install X and ting
-pacman -S --noconfirm xorg-server xorg-apps xorg-server-xwayland xorg-xinit xorg-xkill xorg-xinput xf86-input-libinput mesa
-
-printf "1) Nvidia (Nouveau)\n2) AMD\n3) VirtualBox"
+printf "1) Nvidia (Nouveau)\n2) AMD\n3) VirtualBox\n4) Intel\n0) None"
 read choiceVar
+
+if [[ $choiceVar -ne 0 ]]; then
+	pacman -S --noconfirm xorg-server xorg-apps xorg-server-xwayland xorg-xinit xorg-xkill xorg-xinput xf86-input-libinput mesa
+fi
 
 if [[ $choiceVar -eq 1 ]]; then
     pacman -S --noconfirm xf86-video-nouveau mesa-libgl libvdpau-va-gl
@@ -144,6 +151,8 @@ elif [[ $choiceVar -eq 3 ]]; then
 	pacman -S --noconfirm virtualbox-guest-{dkms,iso,modules,dkms,utils} lib32-mesa
     system_ctl disable ntpd
     system_ctl enable vboxservice
+elif [[ $choiceVar -eq 4 ]]; then
+	pacman -S --no-confirm xf86-video-intel mesa lib32-mesa
 else
 	echo "Incorrect choice, ending script"
 	exit 1
@@ -183,9 +192,8 @@ reboot                                                                      #
 #############################################################################
 
 localectl set-keymap uk
-localectl set-x11-keymap uk
 
-mkdir -p ~/{gitclones,.vim/{bundle/},Documents/{Current,Programming/{CPP,bash,C,OpenMP,Go/{src,pkg,bin},LaTeX}}}
+mkdir -p ~/{gitclones,.vim/bundle/,Documents/{Current,Programming/{CPP,bash,C,OpenMP,Go/{src,pkg,bin},LaTeX}}}
 
 cd ~/gitclones
 
