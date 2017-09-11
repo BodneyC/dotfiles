@@ -269,4 +269,3 @@ pacman -Sy --noconfirm yaourt
 # Additional apps
 pacman -S atom htop firefox qbittorrent steam
 yaourt -S discord spotify
->>>>>>> Stashed changes:arch_setup.sh
