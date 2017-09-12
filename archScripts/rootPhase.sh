@@ -1,7 +1,13 @@
 #############################################################################
-#-----------------------Script 2: Root-logon phase--------------------------#
-#-------------------------Post-installation 1-------------------------------#
-#------------------------------.dotfiles------------------------------------#
+#---------------------------------------------------------------------------#
+#-------Name: rootPhase.sh--------------------------------------------------#
+#---------------------------------------------------------------------------#
+#-------Info: This script concerns commands after the first reboot whilst---#
+#-------------logged in as root, this is general system configuration and---#
+#-------------X install and configuration.----------------------------------#
+#---------------------------------------------------------------------------#
+#-------NOTE: DO NOT JUST RUN THIS SCRIPT, IT WILL NOT WORK-----------------#
+#---------------------------------------------------------------------------#
 #############################################################################
 
 # Keyboard
@@ -9,16 +15,16 @@ localectl set-keymap --no-convert uk
 loadkeys gb
 
 # Wireless
-ip link ### Get device name
-systemctl stop dhcpcd@<device-name>.service
-wifi-menu -o <device-name> { 		### NEEDS AUTOMATING
-	follow on-screen instr
-}
-if netctl start <profile>; then
-	netctl enable <profile>
-else
-	netctl status <profile>
-fi
+		ip link ### Get device name
+		systemctl stop dhcpcd@<device-name>.service
+		wifi-menu -o <device-name> { 		### NEEDS AUTOMATING
+			follow on-screen instr
+		}
+		if netctl start <profile>; then
+			netctl enable <profile>
+		else
+			netctl status <profile>
+		fi
 
 ### Check connection
 ping -c 3 google.co.uk
@@ -54,7 +60,9 @@ elif [[ $choiceVar -eq 3 ]]; then
     system_ctl disable ntpd
     system_ctl enable vboxservice
 elif [[ $choiceVar -eq 4 ]]; then
-	pacman -S --no-confirm xf86-video-intel mesa lib32-mesa
+	pacman -S --no-confirm xf86-video-intel lib32-mesa
+elif [[ $choiceVar -eq 0 ]]; then
+
 else
 	echo "Incorrect choice, ending script"
 	exit 1
@@ -63,7 +71,7 @@ fi
 printf "1) Laptop\n2) Other"
 read lapChoice
 if [[ $lapChoice -eq 1 ]]; then
-	pacman -S --noconfirm xf86-input-synaptics
+	pacman -S --noconfirm libinput
 elif [[ $lapChoice -eq 2 ]]; then
 	break
 else
@@ -81,10 +89,6 @@ amixer sset Master unmute
 
 # XFCE4 installation
 pacman -S --noconfirm xfce4 xfce4-goodies
-echo exec startxfce4 > /home/${USERNAME}/.xinitrc
-echo setxkbmap gb >> /home/${USERNAME}/.xinitrc
-	# CONSIDER THEMES
-
 
 #############################################################################
 #-------------------Reboot and login as ${USERNAME}:a-----------------------#
