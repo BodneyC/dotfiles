@@ -5,7 +5,7 @@ let g:python_host_prog='/usr/bin/python3'
 set nocompatible
 filetype off
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
