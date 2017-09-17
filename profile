@@ -1,10 +1,10 @@
 umask 022
 
-GOPATH="/home//Documents/Programming/Go"
+GOPATH="/home/benjc/Documents/Programming/Go"
 export GOPATH
 PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$GOPATH/bin"
 export PATH
-EDITOR=vim
+EDITOR=nvim
 export EDITOR
 TZ='Europe/London'
 export TZ
