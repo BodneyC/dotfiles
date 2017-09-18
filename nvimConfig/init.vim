@@ -25,6 +25,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/limelight.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/goyo.vim'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Colorschemes
 
@@ -131,6 +133,7 @@ set foldlevel=200  " disable auto folding
 source ~/.config/nvim/config/nerdtreeCFG.vim
 source ~/.config/nvim/config/goyo.vim
 source ~/.config/nvim/config/latex.vim
+source ~/.config/nvim/config/pandoc.vim
 source ~/.config/nvim/config/remappings.vim
 
 

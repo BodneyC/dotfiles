@@ -8,9 +8,11 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'delimitMate.vim'
 Plugin 'c.vim'
 Plugin 'fatih/vim-go'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
 Plugin 'scrooloose/nerdtree'
+"Plugin 'FuzzyFinder'
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -59,7 +61,22 @@ runtime! macros/matchit.vim
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 " For NERDTree
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif "Open if directory
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif "Close if last window
+
+" Folding
+set nofoldenable
+set foldmethod=syntax
+
+" Spelling
+set spelllang=en_gb
+hi clear SpellBad
+hi SpellBad cterm=underline,bold ctermfg=red
+hi SpellCap cterm=underline,bold ctermfg=red
+hi SpellRare cterm=underline,bold ctermfg=red
+hi SpellLocal cterm=underline,bold ctermfg=red
+autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.tex setlocal spell
+autocmd BufRead,BufNewFile *.txt setlocal spell
