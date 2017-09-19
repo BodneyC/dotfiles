@@ -27,12 +27,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/goyo.vim'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'BodneyC/TexTemplate-VimPlugin'
+Plug 'ervandew/supertab'
 
-" Colorschemes
+" Aesthetics
 
 Plug 'joshdick/onedark.vim'
 Plug 'chr4/jellygrass.vim'
 Plug 'itchyny/lightline.vim'
+"Plug 'ryanoasis/vim-devicons' "UNCOMMENT IF PATCHED FONT IS INSTALLED
 
 call plug#end()
 
