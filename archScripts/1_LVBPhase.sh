@@ -66,36 +66,36 @@ arch-chroot /mnt                                                            #
 #############################################################################
 
 # Locale Config
-sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/g' /ect/locale.gen
-locale-gen
-echo LANG=en_GB.UTF-8 > /etc/locale.conf
-export LANG=en_GB.UTF-8
-echo KEYMAP=uk >> /etc/vconsole.conf
+arch-chroot /mnt /bin/bash -c "sed -i 's/#en_GB.UTF-8/en_GB.UTF-8/g' /ect/locale.gen"
+arch-chroot /mnt /bin/bash -c "locale-gen"
+arch-chroot /mnt /bin/bash -c "echo LANG=en_GB.UTF-8 > /etc/locale.conf"
+arch-chroot /mnt /bin/bash -c "export LANG=en_GB.UTF-8"
+arch-chroot /mnt /bin/bash -c "echo KEYMAP=uk >> /etc/vconsole.conf"
 
 # TimeZone
-echo Europe/London >> /etc/timezone
-ln -s /usr/share/zoneinfo/Europe/London > /etc/localtime
-sed -i '/#NTP=/d' /etc/systemd/timesyncd.conf
-sed -i 's/#Fallback//' /etc/systemd/timesyncd.conf
-echo \"FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org\" >> /etc/systemd/timesyncd.conf
-hwclock --systohc --utc
+arch-chroot /mnt /bin/bash -c "echo Europe/London >> /etc/timezone"
+arch-chroot /mnt /bin/bash -c "ln -s /usr/share/zoneinfo/Europe/London > /etc/localtime"
+arch-chroot /mnt /bin/bash -c "sed -i '/#NTP=/d' /etc/systemd/timesyncd.conf"
+arch-chroot /mnt /bin/bash -c "sed -i 's/#Fallback//' /etc/systemd/timesyncd.conf"
+arch-chroot /mnt /bin/bash -c "echo \"FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org\" >> /etc/systemd/timesyncd.conf"
+arch-chroot /mnt /bin/bash -c "hwclock --systohc --utc"
 
 # Additional tools
-pacman -S --noconfirm dialog wpa_suppliant wireless_tools grub os-prober iw sudo bash-completion python gvim git rofi p7zip wget unzip
+arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm dialog wpa_suppliant wireless_tools grub os-prober iw sudo bash-completion python gvim git rofi p7zip wget unzip"
 
 # Boot Loader
-grub-install /dev/${instDrive}
-grub-mkconfig -o /boot/grub/grub.cfg
+arch-chroot /mnt /bin/bash -c "grub-install /dev/${instDrive}"
+arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
 
 # Host Info
-echo $USERNAME > /etc/hostname
-printf "Enter root passwd\n"
-passwd --stdin)
+arch-chroot /mnt /bin/bash -c "echo $USERNAME > /etc/hostname"
+arch-chroot /mnt /bin/bash -c "printf "Enter root passwd\n""
+arch-chroot /mnt /bin/bash -c "passwd --stdin)"
 
 #############################################################################
 #-------------------------Exit chroot and reboot----------------------------#
 #-----------------------Remove installation media---------------------------#
-exit                                                                        #
+# exit                                                                      #
 umount -R /mnt                                                              #
 shutdown now                                                                #
 #--------------------------Boot; Login [root:a]-----------------------------#

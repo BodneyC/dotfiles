@@ -4,6 +4,7 @@ let NERDTreeWinSize=25
 let NERDTreeMinimalUI=0
 let NERDTreeDirArrows=1
 let NERDTreeShowBookmarks=1
+let NERDTreeShowHidden=1
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif "Close if last window
 
