@@ -5,7 +5,7 @@ let g:python_host_prog='/usr/bin/python3'
 set nocompatible
 filetype off
 
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('/home/benjc/.local/share/nvim/plugged')
 
 Plug 'junegunn/vim-easy-align'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -55,7 +55,7 @@ set showmatch
 set matchtime=0
 set nobackup
 set nowritebackup
-set directory=~/.config/nvim/.swapfiles/
+set directory=/home/benjc/.config/nvim/.swapfiles/
 set smartcase
 set ignorecase
 set hlsearch
@@ -133,11 +133,11 @@ set foldlevelstart=200
 set foldlevel=200  " disable auto folding
 
 " Modular Config
-source ~/.config/nvim/config/nerdtreeCFG.vim
-source ~/.config/nvim/config/goyo.vim
-source ~/.config/nvim/config/latex.vim
-source ~/.config/nvim/config/pandoc.vim
-source ~/.config/nvim/config/remappings.vim
+source /home/benjc/.config/nvim/config/nerdtreeCFG.vim
+source /home/benjc/.config/nvim/config/goyo.vim
+source /home/benjc/.config/nvim/config/latex.vim
+source /home/benjc/.config/nvim/config/pandoc.vim
+source /home/benjc/.config/nvim/config/remappings.vim
 
 
 " NVIMUX
