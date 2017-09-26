@@ -1,8 +1,8 @@
 " Resizing of slices
 nnoremap <silent> <leader>j :resize +5<CR>
 nnoremap <silent> <leader>k :resize -5<CR>
-nnoremap <silent> <leader>h :vertical resize +5<CR>
-nnoremap <silent> <leader>l :vertical resize -5<CR>
+nnoremap <silent> <leader>l :vertical resize +5<CR>
+nnoremap <silent> <leader>h :vertical resize -5<CR>
 
 " Paste from sys-clipboard
 nnoremap <F6> "*yy

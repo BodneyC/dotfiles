@@ -81,7 +81,7 @@ arch-chroot /mnt /bin/bash -c "echo \"FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 
 arch-chroot /mnt /bin/bash -c "hwclock --systohc --utc"
 
 # Additional tools
-arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm dialog wpa_suppliant wireless_tools grub os-prober iw sudo bash-completion python gvim git rofi p7zip wget unzip"
+arch-chroot /mnt /bin/bash -c "pacman -S --noconfirm dialog wpa_suppliant wireless_tools grub os-prober iw sudo bash-completion python gvim git rofi p7zip wget unzip neovim"
 
 # Boot Loader
 arch-chroot /mnt /bin/bash -c "grub-install /dev/${instDrive}"

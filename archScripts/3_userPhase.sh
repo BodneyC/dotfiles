@@ -28,6 +28,12 @@ pacman -S --noconfirm build-essential clang cmake
 vim +PluginInstall +quall && cd .vim/bundle/YouCompleteMe/
 ./install.py --clang-completer --system-libclang --gocode-completer
 
+# nvim
+mkdir -p ~/.config/nvim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+cp -r ~/gitclones/dotfiles/nvimConfig/init.vim ~/.config/nvim/
+cp -r ~/gitclones/dotfiles/nvimConfig/config ~/.config/nvim/
+
 # Xfce4-terminal colourschemes
 cd ~/gitclones
 git clone https://github.com/afg984/base16-xfce4-terminal.git
