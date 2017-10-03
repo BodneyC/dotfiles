@@ -5,7 +5,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'delimitMate.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'junegunn/limelight.vim'
 Plugin 'c.vim'
 Plugin 'fatih/vim-go'
 "Plugin 'Valloric/YouCompleteMe'
@@ -13,6 +14,13 @@ Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'FuzzyFinder'
 Plugin 'kien/ctrlp.vim'
+Plugin 'ervandew/supertab'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+
+Plugin 'joshdick/onedark.vim'
+Plugin 'chr4/jellygrass.vim'
+Plugin 'itchyny/lightline.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -60,6 +68,8 @@ runtime! macros/matchit.vim
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
+
+
 " For NERDTree
 "autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
@@ -80,3 +90,18 @@ hi SpellLocal cterm=underline,bold ctermfg=red
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
+
+let g:onedark_termcolors = 256
+let g:lightline = { 'colorscheme': 'one', }
+set laststatus=2
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+hi CursorLine ctermbg=#434343
+hi CursorColumn ctermbg=#434343
+
+" Modular Config
+source /home/benjc/.vim/config/nerdtreeCFG.vim
+source /home/benjc/.vim/config/goyo.vim
+source /home/benjc/.vim/config/latex.vim
+source /home/benjc/.vim/config/pandoc.vim
+source /home/benjc/.vim/config/remappings.vim

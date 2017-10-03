@@ -4,7 +4,11 @@ GOPATH="/home/benjc/Documents/Programming/Go"
 export GOPATH
 PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$GOPATH/bin"
 export PATH
+<<<<<<< Updated upstream
 EDITOR=nvim
+=======
+EDITOR=neovim
+>>>>>>> Stashed changes
 export EDITOR
 TZ='Europe/London'
 export TZ
