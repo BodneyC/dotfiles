@@ -96,8 +96,6 @@ let g:lightline = { 'colorscheme': 'one', }
 set laststatus=2
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
-hi CursorLine ctermbg=#434343
-hi CursorColumn ctermbg=#434343
 
 " Modular Config
 source /home/benjc/.vim/config/nerdtreeCFG.vim
