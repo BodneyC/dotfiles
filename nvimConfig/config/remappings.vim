@@ -19,7 +19,7 @@ map <silent> <leader>gl :call goyo#Goyo_l()<CR>
 " Buffer Control
 nnoremap gp :bp<CR>
 nnoremap gn :bn<CR>
-nnoremap gd :bd<CR>
+nnoremap gd :bn|bd#<CR>
 nnoremap gl :ls<CR>
 " Made a function for this but 'b' doesn't like being passed variables
 nnoremap g1 :b1<CR>
@@ -31,5 +31,6 @@ nnoremap g4 :b4<CR>
 " Commands
 
 command! -nargs=0 TODO e D:\Users\BenJC\Documents\1_Current\Programming\TODO.md
+command! -nargs=0 ConvLineEndings %s///g
 
 
