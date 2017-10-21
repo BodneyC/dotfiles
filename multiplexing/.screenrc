@@ -1,4 +1,4 @@
-escape ^Dd
+escape ``
 
 defscrollback 5000
 
