@@ -4,19 +4,22 @@ SESSION=`basename $PWD`
 tmux -2 new-session -d -s ${SESSION}
 
 # Window 1
-tmux rename-window -t ${SESSION}:1 general-purpose 
+tmux rename-window -t ${SESSION}:1 General Purpose 
 # Window 2
-tmux new-window -t ${SESSION} -a -n git # -a: next index
+tmux new-window -t ${SESSION} -a -n Git # -a: next index
 tmux split-window -h
 tmux select-pane -t 0
 # Window 3
-tmux new-window -t ${SESSION} -a -n vim # -a: next index
+tmux new-window -t ${SESSION} -a -n Vim # -a: next index
 tmux split-window -h
 tmux select-pane -t 0
 tmux resize-pane -R 40
+# Window 4
+tmux new-window -t ${SESSION} -a -n Battery # -a: next index
 
 tmux send-keys -t ${SESS_NAME}:3.0 'vim ~/Dropbox/MSc/Modules/' Enter 
 tmux send-keys -t ${SESS_NAME}:3.1 'cd ~/Dropbox/MSc/Modules/' Enter
+tmux send-keys -t ${SESS_NAME}:4 'watch_power' Enter
 
 tmux select-window -t ${SESSION}:1
 tmux -2 attach -t ${SESSION}

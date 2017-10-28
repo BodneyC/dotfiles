@@ -8,4 +8,4 @@ alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "na
 # alias vim="nvim"
 alias sunvim="sudo -E nvim"
 # alias rm="trash"
-alias watch_power='watch upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "native-path|state|to\ full|percentage|time\ to\ empty"'
+alias watch_power='watch upower -i /org/freedesktop/UPower/devices/battery_BAT0' 
