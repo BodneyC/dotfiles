@@ -17,7 +17,7 @@ tmux resize-pane -R 40
 # Window 4
 tmux new-window -t ${SESSION} -a -n Battery # -a: next index
 
-tmux send-keys -t ${SESS_NAME}:3.0 'vim ~/Dropbox/MSc/Modules/' Enter 
+tmux send-keys -t ${SESS_NAME}:3.0 'cd ~/Dropbox/MSc/Modules/ && vim .' Enter 
 tmux send-keys -t ${SESS_NAME}:3.1 'cd ~/Dropbox/MSc/Modules/' Enter
 tmux send-keys -t ${SESS_NAME}:4 'watch_power' Enter
 

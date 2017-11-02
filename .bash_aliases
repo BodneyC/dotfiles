@@ -1,4 +1,5 @@
 alias q="shutdown -h now"
+alias qt="tmux kill-session && shutdown -h now"
 alias bodstall="sudo pacman -S"
 alias bodyao="yaourt -S"
 alias l="ls -sa"
