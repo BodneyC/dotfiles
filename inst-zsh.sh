@@ -19,6 +19,7 @@ do
     read -p "Change shell? [y/n]" yn
     case $yn in
         [Yy]* ) chsh -s /bin/zsh && sudo chsh -s /bin/zsh; break;;
-        * ) echo "Shell not changed"; break;;
+        [Nn]* ) echo "Shell not changed"; break;;
+        * ) echo "Answer [y/n] please";;
     esac
 done

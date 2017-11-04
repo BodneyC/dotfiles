@@ -1,17 +1,9 @@
 umask 022
 
-GOPATH="/home/benjc/Documents/Programming/Go"
-export GOPATH
-PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$GOPATH/bin"
-export PATH
-<<<<<<< Updated upstream
-EDITOR=nvim
-=======
-EDITOR=neovim
->>>>>>> Stashed changes
-export EDITOR
-TZ='Europe/London'
-export TZ
+export GOPATH="/home/benjc/Documents/Programming/Go"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$GOPATH/bin"
+export EDITOR=vim
+export TZ='Europe/London'
 
 # Load profiles from /etc/profile.d
 if test -d /etc/profile.d/; then
