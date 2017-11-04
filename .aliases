@@ -1,9 +1,9 @@
 alias q="shutdown -h now"
-alias qt="tmux kill-session && shutdown -h now"
+alias qt="tmux kill-session"
 alias bodstall="sudo pacman -S"
 alias bodyao="yaourt -S"
-alias l="ls -sa"
-alias ls="ls -ls"
+alias l="ls -a"
+alias ll="ls -ls"
 alias texclean="rm *.log *.aux *.toc *.lof *.lot *.out *.dvi"
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "native-path|state|to\ full|percentage|time\ to\ empty"'
 # alias vim="nvim"
