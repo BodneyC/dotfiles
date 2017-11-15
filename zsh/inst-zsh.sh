@@ -1,18 +1,11 @@
 #!/bin/bash
 
-cd ~/gitclones
 pacman -S zsh zsh-completions
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussel/oh-my-zsh/master/tools/install.sh)"
 
-# FONTS
-
-cd ~/gitclones
-git clone https://github.com/powerline/fonts.git --depth 1
-cd fonts
-./install.sh
-
 cp -t ~/ .zshrc .zprofile 
 cp CUSTOM1.zsh-theme ~/.oh-my-zsh/custom/
+cp vi-mode-plugin.zsh ~/.oh-my-zsh/custom/plugins
 
 while true; 
 do
@@ -23,3 +16,10 @@ do
         * ) echo "Answer [y/n] please";;
     esac
 done
+
+# FONTS
+cd ~/gitclones
+git clone https://github.com/powerline/fonts.git --depth 1
+cd fonts
+./install.sh
+
