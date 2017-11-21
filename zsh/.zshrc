@@ -13,7 +13,7 @@ CASE_SENSITIVE="true"
 
 ZSH_CUSTOM=$ZSH/custom
 
-plugins=(git archlinux dirhistory tmux)
+plugins=(git archlinux dirhistory tmux zsh-syntax-highlighting history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
