@@ -1,25 +1,20 @@
-#!/bin/bash
+#!/bin/zsh
 
-SESSION=`basename $PWD`
-tmux -2 new-session -d -s ${SESSION}
+SESS_NAME="GeneralUse"
 
-# Window 1
-tmux rename-window -t ${SESSION}:1 General Purpose 
-# Window 2
-tmux new-window -t ${SESSION} -a -n Git # -a: next index
-tmux split-window -h
-tmux select-pane -t 0
-# Window 3
-tmux new-window -t ${SESSION} -a -n Vim # -a: next index
-tmux split-window -h
-tmux select-pane -t 0
-tmux resize-pane -R 40
-# Window 4
-tmux new-window -t ${SESSION} -a -n Battery # -a: next index
+tmux has-session -t ${SESS_NAME}
 
-tmux send-keys -t ${SESS_NAME}:3.0 'cd ~/Dropbox/MSc/Modules/ && vim .' Enter 
-tmux send-keys -t ${SESS_NAME}:3.1 'cd ~/Dropbox/MSc/Modules/' Enter
-tmux send-keys -t ${SESS_NAME}:4 'watch_power' Enter
+if [ $? != 0 ]
+then
+    tmux -2 new-session -d -s ${SESS_NAME}
+    tmux split-window -h
+    tmux split-window -v
+    tmux select-pane -t 0
+    # Battery
+    tmux new-window -t ${SESS_NAME} -a -n Battery # -a: next index
+    tmux send-keys -t ${SESS_NAME}:2 'watch_power' Enter
+    # Finalise
+    tmux select-window -t ${SESSION}:1
+fi
 
-tmux select-window -t ${SESSION}:1
-tmux -2 attach -t ${SESSION}
+tmux -2 attach -t ${SESS_NAME}

@@ -1,12 +1,20 @@
 alias q="shutdown -h now"
-alias qt="tmux kill-session"
 alias bodstall="sudo pacman -S"
 alias bodyao="yaourt -S"
-alias l="ls -a"
-alias ll="ls -ls"
+alias l="ls -ha"
+alias ll="ls -hls"
 alias texclean="rm *.log *.aux *.toc *.lof *.lot *.out *.dvi"
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "native-path|state|to\ full|percentage|time\ to\ empty"'
 # alias vim="nvim"
 alias sunvim="sudo -E nvim"
 # alias rm="trash"
 alias watch_power='watch upower -i /org/freedesktop/UPower/devices/battery_BAT0' 
+alias qt="tmux kill-session"
+alias at="tmux attach"
+alias dt="tmux detach"
+alias sleep="systemctl suspend"
+alias nettest="ping -c 2 google.com"
+# Tmux
+alias tkill="tmux kill-server"
+alias tkeep="tmux kill-session -a"
+alias tlist="tmux list-session"
