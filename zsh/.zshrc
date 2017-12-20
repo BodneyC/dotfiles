@@ -18,6 +18,8 @@ plugins=(git archlinux dirhistory tmux zsh-syntax-highlighting history-substring
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 source $ZSH_CUSTOM/plugins/vi-mode.plugin.zsh
+autoload -Uz zcalc
+autoload -Uz zmv
 
 # Navigation Keys
 bindkey "${terminfo[khome]}" beginning-of-line
@@ -43,3 +45,4 @@ if [[ -o HIST_FIND_NO_DUPS ]]; then
     done
     _history_substring_search_matches=(${(@no)unique_matches})
 fi
+unsetopt share_history
