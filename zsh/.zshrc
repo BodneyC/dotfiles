@@ -8,12 +8,18 @@ CASE_SENSITIVE="true"
 
 # ENABLE_CORRECTION="true"
 # COMPLETION_WAITING_DOTS="true"
+HIST_STAMPS="mm/dd/yyyy"
 
-# HIST_STAMPS="mm/dd/yyyy"
-
+# Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$ZSH/custom
 
+# Add wisely, as too many plugins slow down shell startup.
 plugins=(git archlinux dirhistory tmux zsh-syntax-highlighting history-substring-search)
+
+# Vi-mode extras
+export KEYTIMEOUT=1
+MODE_INDICATOR="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
+MODE_INDICATOR_I="%{$fg_bold[yellow]%} [% INSERT]% %{$reset_color%}"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
@@ -43,3 +49,6 @@ if [[ -o HIST_FIND_NO_DUPS ]]; then
     done
     _history_substring_search_matches=(${(@no)unique_matches})
 fi
+bindkey '^i' expand-or-complete-prefix
+
+setopt dotglob
