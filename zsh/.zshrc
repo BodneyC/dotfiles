@@ -24,6 +24,8 @@ MODE_INDICATOR_I="%{$fg_bold[yellow]%} [% INSERT]% %{$reset_color%}"
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 source $ZSH_CUSTOM/plugins/vi-mode.plugin.zsh
+autoload -Uz zcalc
+autoload -Uz zmv
 
 # Navigation Keys
 bindkey "${terminfo[khome]}" beginning-of-line
@@ -52,3 +54,4 @@ fi
 bindkey '^i' expand-or-complete-prefix
 
 setopt dotglob
+unsetopt share_history
