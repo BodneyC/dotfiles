@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/benjc/.oh-my-zsh
+export ZSH=/home/${USER}/.oh-my-zsh
 
 ZSH_THEME="CUSTOM1"
 
@@ -17,9 +17,9 @@ ZSH_CUSTOM=$ZSH/custom
 plugins=(git archlinux dirhistory tmux zsh-syntax-highlighting history-substring-search)
 
 # Vi-mode extras
-export KEYTIMEOUT=1
-MODE_INDICATOR="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
-MODE_INDICATOR_I="%{$fg_bold[yellow]%} [% INSERT]% %{$reset_color%}"
+#export KEYTIMEOUT=1
+#MODE_INDICATOR="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
+#MODE_INDICATOR_I="%{$fg_bold[yellow]%} [% INSERT]% %{$reset_color%}"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
