@@ -53,5 +53,5 @@ if [[ -o HIST_FIND_NO_DUPS ]]; then
 fi
 bindkey '^i' expand-or-complete-prefix
 
-setopt dotglob
+#setopt dotglob
 unsetopt share_history
