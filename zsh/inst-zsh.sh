@@ -1,7 +1,7 @@
 #!/bin/bash
 
 pacman -S zsh zsh-completions
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussel/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 cp -t ~/ .zshrc .zprofile 
 cp CUSTOM1.zsh-theme ~/.oh-my-zsh/custom/
