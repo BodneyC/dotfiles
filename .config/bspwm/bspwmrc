@@ -19,5 +19,5 @@ compton --config /home/benjc/.config/compton.conf &
 
 xrdb -load .Xresources
 
-feh --bg-scale /usr/share/backgrounds/xfce/alone.jpg
+feh --bg-scale ~/Media/green-forest-floor-1920x1200.jpg
 xsetroot -cursor_name left_ptr

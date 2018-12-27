@@ -2,7 +2,7 @@
 # Wm independent hotkeys
 
 # Terminal emulator
-ctrl + alt + t
+super + Return
 	termite
 
 # Program launcher
@@ -47,6 +47,10 @@ super + y
 super + g
 	bspc node -s biggest
 
+# Next monocle
+alt + {_,shift +} Tab
+	bspc node -f {next,prev}
+
 ################################################################
 # State/flags
 
@@ -88,8 +92,11 @@ super + {o,i}
 	bspc wm -h on
 
 # Focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+super + {1-9,0}
+	bspc desktop -f '^{1-9,10}'
+
+super + shift + {1-9,0}
+	bspc node -d '^{1-9,10}'
 
 ################################################################
 # Preselect
