@@ -7,7 +7,8 @@ fi
 MAIN_DIR=$(pwd)
 BSPWM_DIR=/tmp/bspwm-inst-dir
 
-mkdir $BSPWM_DIR && cd $BSPWM_DIR
+mkdir $BSPWM_DIR 
+cd $BSPWM_DIR
 
 sudo pacman -S --noconfirm libxcb xcb-util xcb-util-keysims xcb-util-wm
 sudo pacman -S --noconfirm gcc make
@@ -32,11 +33,7 @@ cd $MAIN_DIR
 cp -r -t ~/.config .config/{bspwm,compton.conf,panel,sxhkd,termite}
 
 if [[ -f ~/.xinitrc ]]; then
-	if [[ "$SHELL" =~ zsh ]]; then
-		read "yn?~/.xinitrc exists, overwrite? [yN] "
-	else
-		read -p "~/.xinitrc exists, overwrite? [yN] " yn
-	fi
+	read -p "~/.xinitrc exists, overwrite? [yN] " yn
 
 	case $yn in
 		[yY]*)

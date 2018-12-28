@@ -1,10 +1,11 @@
 Dotfiles
 ===
 
-This repository is home to my general purpose dotfiles for installations of Linux.
+This repository is home to my general purpose dotfiles for installations of Linux distros.
 
-## Disclaimer
+Most of this is self-explanitory however it is worth mentioning that in `./scripts/` there are two short shell scripts:
 
-- The local font configuration (local.conf) is taken from this chap's [file](https://github.com/helmuthdu/dotfiles/blob/master/fonts.conf) but I hope to alter it as time goes on.
+1. `./scripts/inst-zsh.sh` is for installing ZSH and using [Oh My ZSH](https://github.com/robbyrussell/oh-my-zsh) for customisation.
+2. `./scripts/inst-bspwm.sh` is for installing [BSPWM](https://github.com/baskerville/bspwm) (and a couple of other tools) and configuring it to my liking.
 
-- Much of .bashrc is the default file provided with [Manjaro](https://manjaro.org/). Though there are several custom changes but nothing dramatic.
+
