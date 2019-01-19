@@ -24,6 +24,7 @@ git clone https://github.com/krypt-n/bar
 for dir in $(ls --); do
 	cd $dir
 	make && sudo make install
+	cd ..
 done
 
 cd $MAIN_DIR
