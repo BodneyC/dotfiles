@@ -14,8 +14,8 @@ bspc config normal_border_color  \#353535
 bspc config focused_border_color \#AAAAAA
 bspc config border_width		 1
 
-panel &
-compton --config /home/benjc/.config/compton.conf &
+polybar top-bar &
+compton --config $HOME/.config/compton.conf &
 
 xrdb -load .Xresources
 

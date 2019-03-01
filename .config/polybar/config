@@ -1,0 +1,115 @@
+[colors]
+clear = #00FFFFFF
+grey = #ffc4c4c4
+xcolor0 = ${xrdb:color0}
+xcolor1 = ${xrdb:color1}
+xcolor2 = ${xrdb:color2}
+xcolor3 = ${xrdb:color3}
+xcolor4 = ${xrdb:color4}
+xcolor5 = ${xrdb:color5}
+xcolor6 = ${xrdb:color6}
+xcolor7 = ${xrdb:color7}
+
+[bar/top-bar]
+monitor = LVDS1
+height = 13
+background = ${colors.clear}
+foreground = ${colors.grey}
+modules-left = bspwm
+module-margin-left = 2
+modules-right = memory cpu wlan battery date
+font-0 = Droid Sans Mono for Powerline:style=regular:pixelsize=11;2
+font-1 = Font Awesome 5 Free:style=Solid:pixelsize=8;0
+font-2 = Font Awesome 5 Free:style=Regular:pixelsize=8;0
+font-3 = "Wuncon Siji"
+
+border-size = 7
+padding-left = 1
+padding-right = 3
+
+[module/bspwm]
+type = internal/bspwm
+format = "<label-state> <label-mode>"
+label-monitor = "%name%"
+pin-workspaces = true
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
+label-focused = %name%
+label-focused-padding = 1
+label-occupied = %name%
+label-occupied-padding = 1
+label-urgent = %name%
+label-urgent-padding = 1
+label-empty = %name%
+label-empty-padding = 1
+label-separator = |
+label-separator-padding = 0
+label-separator-foreground = #ffb52a
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3
+format-connection = <ramp-signal> <label-connected>
+label-connected = "%essid% %downspeed:9%"
+format-disconnected = <ramp-signal> 
+ramp-signal-0 = 
+ramp-signal-1 =  
+ramp-signal-2 =  
+ramp-signal-3 =  
+ramp-signal-4 =  
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+label = " %percentage%%"
+
+[module/memory]
+type = internal/memory
+interval = 5
+label = " %percentage_used%%"
+
+[module/date]
+type = internal/date
+interval = 5
+date = %Y/%m/%d
+time = %H:%M
+label = " %date%  %time%"
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 99
+poll-interval = 5
+format-charging = <animation-charging> <label-charging>
+label-charging = "%percentage%%"
+format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = "%percentage%%"
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+ramp-capacity-9 = 
+ramp-capacity-10 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-5 = 
+animation-charging-6 = 
+animation-charging-framerate = 500
+
+[settings]
+screenchange-reload = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
