@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/${USER}/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="benjc_custom"
 
@@ -14,7 +14,7 @@ HIST_STAMPS="mm/dd/yyyy"
 ZSH_CUSTOM=$ZSH/custom
 
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux dirhistory tmux zsh-syntax-highlighting history-substring-search)
+plugins=(git archlinux dirhistory zsh-syntax-highlighting history-substring-search)
 
 # Vi-mode extras
 #export KEYTIMEOUT=1
