@@ -6,7 +6,7 @@ pacman -S zsh zsh-completions
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 cp -t ~/ .zshrc .zprofile 
-cp CUSTOM1.zsh-theme ~/.oh-my-zsh/custom/
+cp benjc_custom.zsh-theme ~/.oh-my-zsh/custom/
 cp vi-mode-plugin.zsh ~/.oh-my-zsh/custom/plugins
 
 while true; 
@@ -25,3 +25,6 @@ git clone https://github.com/powerline/fonts.git --depth 1
 cd fonts
 ./install.sh
 
+cd ~/.oh-my-zsh/custom/plugins/
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+cd -

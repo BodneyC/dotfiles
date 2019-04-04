@@ -23,7 +23,7 @@ plugins=(git archlinux dirhistory zsh-syntax-highlighting history-substring-sear
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
-source $ZSH_CUSTOM/plugins/vi-mode.plugin.zsh
+source $ZSH_CUSTOM/plugins/vi-mode-plugin.zsh
 autoload -Uz zcalc
 autoload -Uz zmv
 
