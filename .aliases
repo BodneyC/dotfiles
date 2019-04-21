@@ -11,3 +11,15 @@ alias tlist="tmux list-session"
 alias qt="tmux kill-session"
 alias at="tmux attach"
 alias dt="tmux detach"
+alias du='du -h'
+alias df='df -h'
+if hash exa 2>/dev/null; then
+  alias l="exa --classify --group-directories-first --all"
+  alias ll="${aliases[l]} --long"
+  alias ls="${aliases[ll]} --header --binary --group"
+  alias la="${aliases[ls]} --all"
+else
+  alias tree="exa -T"
+  alias l="ls -ha"
+  alias ll="ls -hls"
+fi
