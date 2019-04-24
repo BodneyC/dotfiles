@@ -6,7 +6,7 @@ function zle-keymap-select() {
 
 # Ensure that the prompt is redrawn when the terminal size changes.
 TRAPWINCH() {
-  zle &&  zle -R
+  zle && { zle -R; zle reset-prompt }
 }
 
 zle -N zle-keymap-select
@@ -14,9 +14,6 @@ zle -N edit-command-line
 
 
 bindkey -v
-
-# No waiting for mode switch
-export KEYTIMEOUT=1
 
 # allow v to edit the command line (standard behaviour)
 autoload -Uz edit-command-line
@@ -33,24 +30,20 @@ bindkey '^w' backward-kill-word
 
 # allow ctrl-r to perform backward search in history
 bindkey '^r' history-incremental-search-backward
+bindkey '^s' history-incremental-search-forward
 
 # allow ctrl-a and ctrl-e to move to beginning/end of line
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
-# if mode indicator wasn't setup by theme, define default
-if [[ "$MODE_INDICATOR_N" == "" ]]; then
-    MODE_INDICATOR_N="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
-fi
-if [[ "$MODE_INDICATOR_I" == "" ]]; then
-    MODE_INDICATOR_I="%{$fg_bold[yellow]%} [% INSERT]% %{$reset_color%}"
-fi
+MODE_INDICATOR_N="%{$fg_bold[yellow]%} [% Normal]% %{$reset_color%}"
+MODE_INDICATOR_I="%{$fg_bold[yellow]%} [% Insert]% %{$reset_color%}"
 
+# if mode indicator wasn't setup by theme, define default
 function vi_mode_prompt_info() {
-  echo "${${KEYMAP/vicmd/$MODE_INDICATOR_N}/(main|viins)/$MODE_INDICATOR_I}"
+  POT_RPS1="${${KEYMAP/vicmd/$MODE_INDICATOR_N}/(main|viins)/$MODE_INDICATOR_I}"
+  [[ -z "$POT_RPS1" ]] && echo $MODE_INDICATOR_I || echo "$POT_RPS1"
 }
 
 # define right prompt, if it wasn't defined by a theme
-#if [[ "$RPS1" == "" && "$RPROMPT" == "" ]]; then
-  RPS1="$(vi_mode_prompt_info)"
-#fi
+RPS1='$(vi_mode_prompt_info)'
