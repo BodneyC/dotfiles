@@ -5,9 +5,11 @@ cp ../zsh/
 sudo pacman -S --noconfirm zsh zsh-completions exa ranger ripgrep fd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+mkdir -p ~/.oh-my-zsh/customer/plugins/vi-mode
+
 cp -t ~/ .zshrc .zprofile 
 cp benjc_custom.zsh-theme ~/.oh-my-zsh/custom/
-cp vi-mode-plugin.zsh ~/.oh-my-zsh/custom/plugins/
+cp vi-mode.plugin.zsh ~/.oh-my-zsh/custom/plugins/vi-mode
 
 while true; do
     read -p "Change shell? [y/n]" yn

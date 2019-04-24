@@ -14,18 +14,17 @@ HIST_STAMPS="mm/dd/yyyy"
 ZSH_CUSTOM=$ZSH/custom
 
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux dirhistory zsh-syntax-highlighting history-substring-search)
-
-# Vi-mode extras
-#export KEYTIMEOUT=1
-#MODE_INDICATOR="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
-#MODE_INDICATOR_I="%{$fg_bold[yellow]%} [% INSERT]% %{$reset_color%}"
+plugins=(git archlinux dirhistory vi-mode zsh-syntax-highlighting history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
-source $ZSH_CUSTOM/plugins/vi-mode-plugin.zsh
 autoload -Uz zcalc
 autoload -Uz zmv
+
+# Glob with dotfiles
+compinit
+_comp_options+=(globdots)
+zstyle ':completion:*' special-dirs false
 
 # Navigation Keys
 bindkey "${terminfo[khome]}" beginning-of-line
@@ -55,3 +54,5 @@ bindkey '^i' expand-or-complete-prefix
 
 #setopt dotglob
 unsetopt share_history
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
