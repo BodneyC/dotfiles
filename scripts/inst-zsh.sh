@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp ../zsh/
+cd $(dirname "${BASH_SOURCE[0]}")/../zsh
 
 sudo pacman -S --noconfirm zsh zsh-completions exa ranger ripgrep fd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
