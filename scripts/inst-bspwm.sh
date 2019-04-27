@@ -1,8 +1,6 @@
 #!/bin/bash
 
-if [[ "$PWD" =~ scripts$ ]]; then
-	cd ..
-fi
+cd $(dirname "${BASH_SOURCE[0]}")/..
 
 MAIN_DIR=$(pwd)
 BSPWM_DIR=/tmp/bspwm-inst-dir
