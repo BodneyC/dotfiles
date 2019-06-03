@@ -18,8 +18,11 @@ if hash exa 2>/dev/null; then
   alias ll="${aliases[l]} --long"
   alias ls="${aliases[ll]} --header --binary --group"
   alias la="${aliases[ls]} --all"
-else
   alias tree="exa -T"
+else
   alias l="ls -ha"
   alias ll="ls -hls"
 fi
+alias vim="nvim"
+alias grso="git remote show origin"
+alias grsuo="git remote set-url origin"

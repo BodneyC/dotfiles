@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+KEYTIMEOUT=1
+
 ZSH_THEME="benjc_custom"
 
 # Uncomment the following line to use case-sensitive completion.
