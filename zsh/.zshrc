@@ -1,7 +1,7 @@
+(cat ~/.cache/wal/sequences &)
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-
-KEYTIMEOUT=1
 
 ZSH_THEME="benjc_custom"
 
@@ -57,4 +57,12 @@ bindkey '^i' expand-or-complete-prefix
 #setopt dotglob
 unsetopt share_history
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+if [[ "$VIRTUAL_ENV" && -e "$VIRTUAL_ENV/bin/activate" ]] then
+	. "$VIRTUAL_ENV/bin/activate"
+fi
+
+KEYTIMEOUT=1
+
+export EDITOR=/usr/bin/nvim
+export PATH="$PATH:$HOME/scripts:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/share/npm/bin:$HOME/.gem/ruby/2.6.0/bin"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude node_modules --exclude .git --exclude vendor'
