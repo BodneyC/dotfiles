@@ -14,15 +14,18 @@ alias dt="tmux detach"
 alias du='du -h'
 alias df='df -h'
 if hash exa 2>/dev/null; then
-  alias l="exa --classify --group-directories-first --all"
-  alias ll="${aliases[l]} --long"
-  alias ls="${aliases[ll]} --header --binary --group"
-  alias la="${aliases[ls]} --all"
+  alias e="exa --classify --group-directories-first --all"
+  alias el="${aliases[e]} --long"
+  alias es="${aliases[el]} --header --binary --group"
+  alias ea="${aliases[es]} --all"
+  alias e1="exa -1"
   alias tree="exa -T"
 else
   alias l="ls -ha"
   alias ll="ls -hls"
 fi
 alias vim="nvim"
-alias grso="git remote show origin"
-alias grsuo="git remote set-url origin"
+
+[[ $(alias | rg '^l=') ]] && unalias l
+[[ $(alias | rg '^ls=') ]] && unalias ls
+[[ $(alias | rg '^la=') ]] && unalias la
