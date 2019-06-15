@@ -32,3 +32,16 @@ git clone https://github.com/BodneyC/vim-neovim-config.git && \
 	cd vim-neovim-config || exit
 
 chmod +x ./inst-nvim.sh && ./inst-nvim.sh
+
+####### AUR
+
+mkdir "$HOME/aur" && cd "$HOME/aur" || exit
+
+AUR_URL="https://aur.archlinux.org"
+
+for PKG in gesture-manager-git libinput-gestures discord; do
+	git clone "$AUR_URL/$PKG.git"
+	cd "$PKG" || exit
+	makepkg -sri --noconfirm
+	cd .. || exit
+done
