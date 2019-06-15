@@ -16,6 +16,7 @@ alias df='df -h'
 if hash exa 2>/dev/null; then
   alias e="exa --classify --group-directories-first --all"
   alias el="${aliases[e]} --long"
+  alias ee="${aliases[e]} --long"
   alias es="${aliases[el]} --header --binary --group"
   alias ea="${aliases[es]} --all"
   alias e1="exa -1"
@@ -28,6 +29,7 @@ alias vim="nvim"
 alias grso="git remote show origin"
 alias grsuo="git remote set-url origin"
 alias grao="git remote add origin"
+alias fd="fd --hidden"
 
 [[ $(alias | rg '^l=') ]] && unalias l
 [[ $(alias | rg '^ls=') ]] && unalias ls

@@ -1,0 +1,28 @@
+#!/bin/bash
+ 
+COL_HEADER="$HOME/.cache/wal/colors-wal-st.h"
+ 
+COLORS=$(rg '^  \[\d*\]' "$COL_HEADER" -N \
+    | sed 's/^[^"]*"\(.*\)", *\/\* *\([^ ]*\).*$/    \2: "\1"/' \
+    | sed '1i\ \ normal:' \
+    | sed '10i\ \ bright:' \
+    | sed '19i\ \ primary:' \
+    | rg -v cursor)
+ 
+ALACRITTY="$HOME/.config/alacritty/alacritty.yml"
+ 
+RANGE=$(rg -A21 -n '^colors:' "$ALACRITTY" \
+    | awk -F'-' '{ if(NR==2) print $1 } END { print $1 }' \
+    | gsed ':a;N;$!ba;s/\n/,/g')
+ 
+START=$(( $(echo "$RANGE" | cut -d',' -f1) - 1 ))
+ 
+[[ $RANGE ]] && gsed -i "$RANGE s/^[^#]/#/" "$ALACRITTY"
+ 
+echo $START
+ 
+HEAD=$(head -"$START" "$ALACRITTY")
+TAIL=$(tail "+$(( "$START" + 1 ))" "$ALACRITTY")
+ 
+cp "$ALACRITTY" "$ALACRITTY".BAK
+printf "%s\n%s\n%s" "$HEAD" "$COLORS" "$TAIL" > "$ALACRITTY"
