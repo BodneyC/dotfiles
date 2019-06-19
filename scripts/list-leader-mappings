@@ -1,0 +1,19 @@
+#!/bin/bash
+
+LEAD=$(rg 'leader>' "$HOME/.config/nvim/config/remappings.vim" \
+  | sed 's/^.*leader>\([^ ]*\).*$/\1/g' \
+  | sort)
+
+function not_in() {
+	for l in $1; do
+		if ! rg -q "^$l$" <<< "$LEAD"; then
+			echo "$l"
+		fi
+	done
+}
+
+LOWER=$(not_in "$(echo {a..z})" | tr '\n' ' ')
+UPPER=$(not_in "$(echo {A..Z})" | tr '\n' ' ')
+LEAD="$(echo "$LEAD" | tr '\n' ' ')"
+
+echo -e "In use:\n\n$LEAD\n\nLower available:\n\n$LOWER\n\nUpper available:\n\n$UPPER"
