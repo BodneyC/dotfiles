@@ -11,17 +11,19 @@ xcolor6 = ${xrdb:color6}
 xcolor7 = ${xrdb:color7}
 
 [bar/top-bar]
-monitor = LVDS1
-height = 13
+monitor = eDP1
+height = 27
 background = ${colors.clear}
 foreground = ${colors.grey}
 modules-left = bspwm
-module-margin-left = 2
+module-margin-left = 1
+module-margin-right = 1
 modules-right = memory cpu wlan battery date
-font-0 = Droid Sans Mono for Powerline:style=regular:pixelsize=11;2
-font-1 = Font Awesome 5 Free:style=Solid:pixelsize=8;0
-font-2 = Font Awesome 5 Free:style=Regular:pixelsize=8;0
-font-3 = "Wuncon Siji"
+font-0 = Droid Sans Mono for Powerline:style=regular:pixelsize=23;2
+font-1 = Font Awesome 5 Free:style=Solid:pixelsize=15;0
+font-2 = Font Awesome 5 Free:style=Regular:pixelsize=15;0
+font-3 = Siji:style=Regular:scale=100;0
+separator = |
 
 border-size = 7
 padding-left = 1
@@ -35,7 +37,7 @@ pin-workspaces = true
 enable-click = true
 enable-scroll = true
 reverse-scroll = true
-label-focused = %name%
+label-focused = [%name%]
 label-focused-padding = 1
 label-occupied = %name%
 label-occupied-padding = 1
@@ -49,16 +51,11 @@ label-separator-foreground = #ffb52a
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlp59s0
 interval = 3
-format-connection = <ramp-signal> <label-connected>
-label-connected = "%essid% %downspeed:9%"
-format-disconnected = <ramp-signal> 
-ramp-signal-0 = 
-ramp-signal-1 =  
-ramp-signal-2 =  
-ramp-signal-3 =  
-ramp-signal-4 =  
+format-connected =  <label-connected>
+label-connected = "%essid%%downspeed:9%"
+format-disconnected = "No signal"
 
 [module/cpu]
 type = internal/cpu
@@ -75,7 +72,7 @@ type = internal/date
 interval = 5
 date = %Y/%m/%d
 time = %H:%M
-label = " %date%  %time%"
+label = " %date% |  %time%"
 
 [module/battery]
 type = internal/battery
@@ -87,24 +84,24 @@ format-charging = <animation-charging> <label-charging>
 label-charging = "%percentage%%"
 format-discharging = <ramp-capacity> <label-discharging>
 label-discharging = "%percentage%%"
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
-ramp-capacity-5 = 
-ramp-capacity-6 = 
-ramp-capacity-7 = 
-ramp-capacity-8 = 
-ramp-capacity-9 = 
-ramp-capacity-10 = 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-5 = 
-animation-charging-6 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+ramp-capacity-9 = 
+ramp-capacity-10 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-5 = 
+animation-charging-6 = 
 animation-charging-framerate = 500
 
 [settings]

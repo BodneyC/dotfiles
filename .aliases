@@ -19,7 +19,7 @@ if hash exa 2>/dev/null; then
   alias ee="${aliases[e]} --long"
   alias es="${aliases[el]} --header --binary --group"
   alias ea="${aliases[es]} --all"
-  alias e1="exa -1"
+  alias e1="exa -1 --all"
   alias tree="exa -T"
 else
   alias l="ls -ha"

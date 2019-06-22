@@ -3,7 +3,7 @@
 
 # Terminal emulator
 super + Return
-	termite
+	alacritty
 
 # Program launcher
 super + @space
@@ -23,6 +23,12 @@ XF86Audio{Raise,Lower}Volume
 # Mute volume
 XF86AudioMute
 	amixer sset 'Master' toggle
+
+XF86MonBrightnessDown
+  xbacklight -dec 10 
+
+XF86MonBrightnessUp
+  xbacklight -inc 10 
 
 ################################################################
 # Bspwm hotkeys
