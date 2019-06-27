@@ -88,7 +88,7 @@ super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
 # Focus the last node/desktop
-super + {grave,Tab}
+alt + {grave,Tab}
 	bspc {node,desktop} -f last
 
 # Focus the older or newer node in the focus history
@@ -135,12 +135,17 @@ super + alt + shift + r
 	bspc node @/ -R -90
 
 # Expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+super + alt + h
+	bspc node -z left -45 0 || bspc node -z right -45 0
 
-# Contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+super + alt + j
+	bspc node -z bottom 0 45 || bspc node -z top 0 45
+
+super + alt + k
+	bspc node -z top 0 -45 || bspc node -z bottom 0 -45
+
+super + alt + l
+	bspc node -z right 45 0 || bspc node -z left 45 0
 
 # Move a floating window
 super + {Left,Down,Up,Right}
