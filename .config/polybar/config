@@ -19,8 +19,8 @@ height = 30
 background = ${colors.bar-bg}
 foreground = ${colors.bar-fg}
 font-0 = Droid Sans Mono for Powerline:style=regular:pixelsize=23;2
-font-1 = Font Awesome 5 Free:style=Solid:pixelsize=15;0
-font-2 = Font Awesome 5 Free:style=Regular:pixelsize=15;0
+font-1 = Font Awesome 5 Free:style=Solid:pixelsize=17;0
+font-2 = Font Awesome 5 Free:style=Regular:pixelsize=17;0
 font-3 = Siji:style=Regular:scale=100;0
 separator = |
 border-size = 7
@@ -34,28 +34,51 @@ modules-center = date
 modules-right = data-open pulseaudio wlan
 
 [bar/data-bar]
-monitor = eDP1
-override-redirect = true
-enable-ipc = true
-wm-restack = bspwm
+monitor = ${bar/top-bar.monitor}
+override-redirect = ${bar/top-bar.override-redirect}
+enable-ipc = ${bar/top-bar.enable-ipc}
+wm-restack = ${bar/top-bar.wm-restack}
 
-height = 30
-background = ${colors.bar-bg}
-foreground = ${colors.bar-fg}
-font-0 = Droid Sans Mono for Powerline:style=regular:pixelsize=23;2
-font-1 = Font Awesome 5 Free:style=Solid:pixelsize=15;0
-font-2 = Font Awesome 5 Free:style=Regular:pixelsize=15;0
-font-3 = Siji:style=Regular:scale=100;0
-separator = |
-border-size = 7
-padding-left = 1
-padding-right = 3
-module-margin-left = 1
-module-margin-right = 1
+height = ${bar/top-bar.height}
+background = ${bar/top-bar.background}
+foreground = ${bar/top-bar.foreground}
+font-0 = ${bar/top-bar.font-0}
+font-1 = ${bar/top-bar.font-1}
+font-2 = ${bar/top-bar.font-2}
+font-3 = ${bar/top-bar.font-3}
+separator = ${bar/top-bar.separator}
+border-size = ${bar/top-bar.border-size}
+padding-left = ${bar/top-bar.padding-left}
+padding-right = ${bar/top-bar.padding-right}
+module-margin-left = ${bar/top-bar.module-margin-left}
+module-margin-right = ${bar/top-bar.module-margin-right}
 
 modules-left = bspwm
-modules-center = date
-modules-right = data-close memory cpu battery pulseaudio wlan
+modules-right = data-close temps pacman-updates memory cpu battery pulseaudio wlan-ip
+
+[module/temps]
+type = internal/temperature
+interval = 0.5
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
+warn-tempurature = 60
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+format = <ramp> <label>
+format-foreground = ${colors.icon}
+label = %temperature-c%
+label-foreground = ${colors.standard-text}
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.urgent-text}
+
+[module/pacman-updates]
+type = custom/script
+exec = pacman -Qu | wc -l
+interval = 1000
+label = %output%
+label-foreground = ${colors.standard-text}
+format =  <label>
+format-foreground = ${colors.icon}
 
 [module/data-open]
 type = custom/script
@@ -95,6 +118,21 @@ label-empty-foreground = ${colors.standard-text}
 label-separator = |
 label-separator-padding = 0
 label-separator-foreground = ${colors.bar-fg}
+
+[module/wlan-ip]
+type = internal/network
+interface = wlp59s0
+interval = 3
+
+label-connected = %essid% - %local_ip% %downspeed:9%
+label-connected-foreground = ${colors.standard-text}
+format-connected =  <label-connected>
+format-connected-foreground = ${colors.icon}
+
+label-disconnected = None
+label-disconnected-foreground = ${colors.urgent-text}
+format-disconnected =  <label-disconnected>
+format-disconnected-foreground = ${colors.icon}
 
 [module/wlan]
 type = internal/network
