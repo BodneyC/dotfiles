@@ -36,8 +36,8 @@ bindkey '^s' history-incremental-search-forward
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
-MODE_INDICATOR_N="%{$fg_bold[yellow]%} [% Normal]% %{$reset_color%}"
-MODE_INDICATOR_I="%{$fg_bold[yellow]%} [% Insert]% %{$reset_color%}"
+MODE_INDICATOR_N="%{$fg_bold[green]%}[%{$fg_bold[yellow]%}N%{$fg_bold[green]%}]% %{$reset_color%}"
+MODE_INDICATOR_I="%{$fg_bold[green]%}[%{$fg_bold[yellow]%}I%{$fg_bold[green]%}]% %{$reset_color%}"
 
 # if mode indicator wasn't setup by theme, define default
 function vi_mode_prompt_info() {
@@ -46,4 +46,4 @@ function vi_mode_prompt_info() {
 }
 
 # define right prompt, if it wasn't defined by a theme
-RPS1='$(vi_mode_prompt_info)'
+PROMPT='$(vi_mode_prompt_info) $PROMPT'
