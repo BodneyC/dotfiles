@@ -1,10 +1,8 @@
 #!/bin/bash
 
-cd $(dirname "${BASH_SOURCE[0]}")/.. || exit
+cd "$(dirname "${BASH_SOURCE[0]}")"/.. || exit
 
-if ! hash tmux 2>/dev/null; then
-  sudo pacman -S tmux
-fi
+! hash tmux 2>/dev/null && sudo pacman -S tmux
 
 cp -rt ~ ./multiplexing/.tmux{,.conf}
 

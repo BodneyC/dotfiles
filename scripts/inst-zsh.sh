@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $(dirname "${BASH_SOURCE[0]}")/../zsh
+cd "$(dirname "${BASH_SOURCE[0]}")"/../zsh || exit
 
 sudo pacman -S --noconfirm zsh zsh-completions exa ranger ripgrep fd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -21,11 +21,10 @@ while true; do
 done
 
 # FONTS
-mkdir ~/gitclones && cd ~/gitclones
+mkdir "$HOME/gitclones" && cd ~/gitclones || exit
 git clone https://github.com/powerline/fonts.git --depth 1
-cd fonts
+cd fonts || exit
 ./install.sh
 
-cd ~/.oh-my-zsh/custom/plugins/
+cd "$HOME/.oh-my-zsh/custom/plugins/" || exit
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-cd
