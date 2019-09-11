@@ -3,11 +3,11 @@ window:
     columns: 0
     lines: 0
   padding:
-    x: 10
-    y: 10
+    x: 4
+    y: 4
   dynamic_padding: false
   decorations: full
-  start_maximized: false
+  startup_mode: 'Windowed'
 
 scrolling:
   history: 10000
@@ -19,12 +19,15 @@ tabspaces: 8
 
 font:
   normal:
-    family: 'Droid Sans Mono for Powerline'
+    family: 'RobotoMono Nerd Font'
+    style: Light
   bold:
-    family: 'Droid Sans Mono for Powerline'
+    family: 'RobotoMono Nerd Font'
+    style: Medium
   italic:
-    family: 'Droid Sans Mono for Powerline'
-  size: 9
+    family: 'RobotoMono Nerd Font'
+    style: Light Italic
+  size: 8
   offset:
     x: 0
     y: 0
@@ -33,9 +36,10 @@ font:
     y: 0
   use_thin_strokes: true
 
-render_timer: false
-persistent_logging: false
-draw_bold_text_with_bright_colors: true
+debug:
+  render_timer: false
+  persistent_logging: false
+  draw_bold_text_with_bright_colors: true
 
 colors:
   primary:
@@ -64,7 +68,7 @@ visual_bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xffffff'
-background_opacity: 0.8
+background_opacity: .9
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 mouse:
@@ -139,7 +143,7 @@ key_bindings:
   - { key: F8,                      chars: "\x1b[19~"                        }
   - { key: F9,                      chars: "\x1b[20~"                        }
   - { key: F10,                     chars: "\x1b[21~"                        }
-  - { key: F11,                     chars: "\x1b[23~"                        }
+  - { key: F11, command:{ program: "wmctrl", args: ["-r", ":ACTIVE:", "-b", "toggle,fullscreen" ]}}
   - { key: F12,                     chars: "\x1b[24~"                        }
   - { key: F1,       mods: Shift,   chars: "\x1b[1;2P"                       }
   - { key: F2,       mods: Shift,   chars: "\x1b[1;2Q"                       }
