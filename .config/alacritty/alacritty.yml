@@ -27,7 +27,7 @@ font:
   italic:
     family: 'RobotoMono Nerd Font'
     style: Light Italic
-  size: 8
+  size: 11
   offset:
     x: 0
     y: 0
@@ -101,7 +101,7 @@ visual_bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xffffff'
-background_opacity: .9
+background_opacity: 1
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 mouse:
@@ -123,6 +123,8 @@ alt_send_esc: true
 key_bindings:
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }
+  - { key: C,        mods: Super,   action: Paste                            }
+  - { key: V,        mods: Super,   action: Copy                             }
   - { key: L,        mods: Control, action: ClearLogNotice                   }
   - { key: L,        mods: Control, chars: "\x0c"                            }
   - { key: Home,     mods: Alt,     chars: "\x1b[1;3H"                       }
