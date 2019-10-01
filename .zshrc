@@ -1,4 +1,4 @@
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -63,8 +63,8 @@ fi
 
 KEYTIMEOUT=1
 
-export EDITOR=/usr/bin/nvim
+export EDITOR="$(which nvim)"
 export PATH="$PATH:$HOME/scripts:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/share/npm/bin:$HOME/.gem/ruby/2.6.0/bin"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude node_modules --exclude .git --exclude vendor'
 
-[[ -z "$TMUX" ]] && tmux
+[[ -z "$TMUX" ]] && tmux new-session 'tmux_dash'
