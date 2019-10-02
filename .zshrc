@@ -1,4 +1,5 @@
 # (cat ~/.cache/wal/sequences &)
+eval $(thefuck --alias)
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -16,7 +17,17 @@ HIST_STAMPS="mm/dd/yyyy"
 ZSH_CUSTOM=$ZSH/custom
 
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux dirhistory vi-mode zsh-syntax-highlighting history-substring-search)
+plugins=(
+	git
+	docker
+	docker-compose
+	oc
+	mvn
+	dirhistory
+	vi-mode
+	zsh-syntax-highlighting
+	history-substring-search
+)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
@@ -63,8 +74,4 @@ fi
 
 KEYTIMEOUT=1
 
-export EDITOR="$(which nvim)"
-export PATH="$PATH:$HOME/scripts:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/share/npm/bin:$HOME/.gem/ruby/2.6.0/bin"
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude node_modules --exclude .git --exclude vendor'
-
-[[ -z "$TMUX" ]] && tmux new-session 'tmux_dash'
+[[ -z "$TMUX" && -n "$ALACRITTY_LOG" ]] && tmux new-session 'tmux_dash'
