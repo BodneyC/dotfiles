@@ -1,4 +1,4 @@
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
 eval $(thefuck --alias)
 
 # Path to your oh-my-zsh installation.
