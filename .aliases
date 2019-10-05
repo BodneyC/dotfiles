@@ -1,4 +1,5 @@
-alias q="shutdown -h now"
+alias q="systemctl poweroff -i"
+alias reboot="systemctl reboot -i"
 alias l="ls -ha"
 alias ll="ls -hls"
 #alias texclean="rm *.log *.aux *.toc *.lof *.lot *.out *.dvi"

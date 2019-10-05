@@ -41,24 +41,6 @@ debug:
   persistent_logging: false
   draw_bold_text_with_bright_colors: true
 
-  
-  # let g:terminal_color_0 = "#282c34"
-  # let g:terminal_color_8 = "#282c34"
-  # let g:terminal_color_1 = "#e06c75"
-  # let g:terminal_color_9 = "#e06c75"
-  # let g:terminal_color_2 = "#98c379"
-  # let g:terminal_color_10 = "#98c379"
-  # let g:terminal_color_3 = "#e5c07b"
-  # let g:terminal_color_11 = "#e5c07b"
-  # let g:terminal_color_4 = "#61afef"
-  # let g:terminal_color_12 = "#61afef"
-  # let g:terminal_color_5 = "#c678dd"
-  # let g:terminal_color_13 = "#c678dd"
-  # let g:terminal_color_6 = "#56b6c2"
-  # let g:terminal_color_14 = "#56b6c2"
-  # let g:terminal_color_7 = "#dcdfe4"
-  # let g:terminal_color_15 = "#dcdfe4"
-
 colors:
   primary:
     background: '0x282c34'
@@ -82,60 +64,42 @@ colors:
     cyan:       '0x56b6c2'
     white:      '0xdcdfe4'
 
-# colors:
-#  # Default colors
-#  primary:
-#    background: '0x2E3440'
-#    foreground: '0xD8DEE9'
-
-#  # Normal colors
-#  normal:
-#    black:   '0x3B4252'
-#    red:     '0xBF616A'
-#    green:   '0xA3BE8C'
-#    yellow:  '0xEBCB8B'
-#    blue:    '0x81A1C1'
-#    magenta: '0xB48EAD'
-#    cyan:    '0x88C0D0'
-#    white:   '0xE5E9F0'
-
-#  # Bright colors
-#  bright:
-#    black:   '0x4C566A'
-#    red:     '0xBF616A'
-#    green:   '0xA3BE8C'
-#    yellow:  '0xEBCB8B'
-#    blue:    '0x81A1C1'
-#    magenta: '0xB48EAD'
-#    cyan:    '0x8FBCBB'
-#    white:   '0xECEFF4'
-#    indexed_colors: []
 visual_bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xffffff'
+
 background_opacity: 1
+
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
+
 mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
   hide_when_typing: false
   url:
     modifiers: None
+
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
   save_to_clipboard: false
+
 dynamic_title: true
+
 cursor:
   style: Block
   unfocused_hollow: true
+
 live_config_reload: true
+
 enable_experimental_conpty_backend: false
+
 alt_send_esc: true
+
 key_bindings:
-  - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }
+  - { key: Paste,                   action: Paste                            }
   - { key: C,        mods: Super,   action: Copy                             }
   - { key: V,        mods: Super,   action: Paste                            }
   - { key: L,        mods: Control, action: ClearLogNotice                   }
