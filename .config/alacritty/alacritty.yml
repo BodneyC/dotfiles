@@ -27,7 +27,7 @@ font:
   italic:
     family: 'RobotoMono Nerd Font'
     style: Light Italic
-  size: 8
+  size: 11
   offset:
     x: 0
     y: 0
