@@ -100,8 +100,6 @@ alt_send_esc: true
 key_bindings:
   - { key: Copy,                    action: Copy                             }
   - { key: Paste,                   action: Paste                            }
-  - { key: C,        mods: Super,   action: Copy                             }
-  - { key: V,        mods: Super,   action: Paste                            }
   - { key: L,        mods: Control, action: ClearLogNotice                   }
   - { key: L,        mods: Control, chars: "\x0c"                            }
   - { key: Home,     mods: Alt,     chars: "\x1b[1;3H"                       }
