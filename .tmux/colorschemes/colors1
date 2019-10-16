@@ -65,7 +65,7 @@ set -g status-style bg=colour234
 set -g status-style fg=colour137
 set -g status-style dim
 set -g status-left ''
-set -g status-right '%d/%m %H:%M:%S '
+set -g status-right '%Y-%m-%d %H:%M:%S '
 set -g status-right-length 50
 set -g status-left-length 20
 

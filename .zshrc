@@ -75,3 +75,5 @@ fi
 KEYTIMEOUT=1
 
 [[ -z "$TMUX" && -n "$ALACRITTY_LOG" ]] && tmux new-session 'tmux_dash'
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
