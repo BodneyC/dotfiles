@@ -19,6 +19,7 @@ _add_to_path "/usr/local/opt/"
 _add_to_path "/usr/local/sbin/"
 _add_to_path "$HOME/go/bin"
 _add_to_path "$HOME/.local/share/npm/bin"
+_add_to_path "$HOME/.poetry/bin"
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
 export MAVEN_OPTS="$JAVA_OPTS"
@@ -30,4 +31,3 @@ export ALL_PROXY=""
 export HTTP_PROXY=""
 export HTTPS_PROXY=""
 export NO_PROXY=""
-
