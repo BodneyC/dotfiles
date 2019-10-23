@@ -19,8 +19,7 @@ plugins=(
 	zsh-autosuggestions
 	history-substring-search
 )
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#deaaaa"
-
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#756767"
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
@@ -38,7 +37,9 @@ bindkey "\e[6~" end-of-history
 bindkey "\e[3~" delete-char
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-bindkey '^j' autosuggest-accept
+bindkey '^j' autosuggest-execute
+bindkey '^k' autosuggest-fetch
+
 # bindkey '^i' expand-or-complete-prefix
 
 setopt HIST_IGNORE_ALL_DUPS
@@ -54,4 +55,4 @@ fi
 unsetopt share_history
 
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
-[[ -z "$TMUX" && -n "$ALACRITTY_LOG" ]] && tmux new-session 'tmux_dash'
+#[[ -z "$TMUX" && -n "$ALACRITTY_LOG" ]] && tmux new-session 'tmux_dash'
