@@ -1,6 +1,3 @@
-# env:
-#   TERM: xterm-256color-italic
-
 window:
   dimensions:
     columns: 0
@@ -30,7 +27,7 @@ font:
   italic:
     family: 'RobotoMono Nerd Font'
     style: Light Italic
-  size: 9
+  size: 7
   offset:
     x: 0
     y: 0
