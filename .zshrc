@@ -19,8 +19,7 @@ plugins=(
 	zsh-autosuggestions
 	history-substring-search
 )
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#deaaaa"
-
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
@@ -38,7 +37,9 @@ bindkey "\e[6~" end-of-history
 bindkey "\e[3~" delete-char
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-bindkey '^j' autosuggest-accept
+bindkey '^j' autosuggest-execute
+bindkey '^k' autosuggest-accept
+
 # bindkey '^i' expand-or-complete-prefix
 
 setopt HIST_IGNORE_ALL_DUPS
@@ -53,5 +54,22 @@ fi
 
 unsetopt share_history
 
+_yes_or_no() { # msg
+	# shellcheck disable=SC2050
+	while [[ 1 == 1 ]]; do
+		read -r "REPLY?$1 [yn] "
+		case "$REPLY" in
+			[yY]*) return 0 ;;
+			[nN]*) return 1 ;;
+			*)     echo "Invalid option"
+		esac
+	done
+}
+
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
-[[ -z "$TMUX" && -n "$ALACRITTY_LOG" ]] && tmux new-session 'tmux_dash'
+[[ -z "$TMUX" && -n "$ALACRITTY_LOG" ]] && \
+	if _yes_or_no "Launch tmux-dash?"; then
+		tmux new-session 'tmux_dash'
+	else
+		tmux
+	fi

@@ -52,6 +52,7 @@ alias grsuo="git remote set-url origin"
 alias grao="git remote add origin"
 alias fd="fd --hidden"
 alias IGNORE_PROXY="ALL_PROXY=\"\" HTTPS_PROXY=\"\" HTTP_PROXY=\"\" "
+alias bdate="date '+%Y-%M-%d'"
 
 [[ $(alias | rg '^l=') ]] && unalias l
 [[ $(alias | rg '^ls=') ]] && unalias ls
