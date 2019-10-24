@@ -36,8 +36,8 @@ bindkey '^s' history-incremental-search-forward
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
-MODE_INDICATOR_N="%{$fg_bold[green]%}[%{$fg_bold[yellow]%}N%{$fg_bold[green]%}]% %{$reset_color%}"
-MODE_INDICATOR_I="%{$fg_bold[green]%}[%{$fg_bold[yellow]%}I%{$fg_bold[green]%}]% %{$reset_color%}"
+MODE_INDICATOR_N="N"
+MODE_INDICATOR_I="I"
 
 # if mode indicator wasn't setup by theme, define default
 function vi_mode_prompt_info() {
