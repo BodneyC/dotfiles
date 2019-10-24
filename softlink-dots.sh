@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-mkdir -p "$HOME"/{.config/{alacritty,bspwm,panel,polybar,rofi,sxhkd,termite},.tmux/colorschemes,.oh-my-zsh/custom/{plugins/vi-mode,themes}}
+GITDIR="$(pwd)"
+
+mkdir -p "$HOME"/{.config,.tmux/colorschemes,.oh-my-zsh/custom/}
 
 _msg_exit() { # msg[, ret_val]
 	echo "$1, exiting..."
@@ -19,22 +21,22 @@ _yes_or_no() { # msg
 	done
 }
 
-_process() {
-	realpath="$1"; basename="$2"; home_file="$3"
-	cd "$(dirname "$home_file")" || { _msg_exit "Could not CD to $home_file dir"; return 1; }
-	if [[ -f "$basename" ]]; then
-		_yes_or_no "$home_file exists, delete?" || return 1
-		/bin/rm "$basename" || { _msg_ext "Could not delete $basename"; return 1; }
+_softlink() {
+	local f="$1"
+	if [[ -e "$f" ]]; then
+		_yes_or_no "Delete $f?" \
+			|| return
+		/bin/rm -rf "$f"
 	fi
-	ln -s "$realpath" "$(realpath "$basename")"
-	cd - >& /dev/null || _msg_exit "Could not return to git repo" 1
+	ln -s "$GITDIR/$f" "$f"
 }
 
-for f in $(fd -Htf | rg -v -e '^scripts' -e '^.git/' -e '.gitignore' -e '^old/' -e '^[^\.]'); do
-	realpath="$(realpath "$f")"
-	basename="$(basename "$f")"
-	home_file="$HOME/$f"
-	_process "$realpath" "$basename" "$home_file"
+for f in \
+		$(fd -H -tf -d1 "^\..*") \
+		$(fd -H -td -d1 . .config) \
+		$(fd -H -td -d1 . .oh-my-zsh/custom) \
+		.tmux/colorschemes \
+		; do
+	(cd "$HOME" && _softlink "$f")
 done
-
 
