@@ -6,7 +6,7 @@ window:
     x: 4
     y: 4
   dynamic_padding: false
-  decorations: full
+  decorations: none
   startup_mode: 'Windowed'
 
 scrolling:
