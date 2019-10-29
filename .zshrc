@@ -23,9 +23,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
+compinit
 _comp_options+=(globdots)
 zstyle ':completion:*' special-dirs false
-compinit
 
 # Navigation Keys
 bindkey "${terminfo[khome]}" beginning-of-line
@@ -68,7 +68,8 @@ _yes_or_no() { # msg
 }
 
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
-[[ -z "$TMUX" && -n "$ALACRITTY_LOG" ]] && \
+[[ -z "$TMUX" ]] && \
+	[[ -n "$ALACRITTY_LOG" || -n "$KITTY_WINDOW_ID" ]] && \
 	if _yes_or_no "Launch tmux-dash?"; then
 		tmux new-session 'tmux_dash'
 	else
