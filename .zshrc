@@ -25,6 +25,7 @@ source $HOME/.aliases
 
 _comp_options+=(globdots)
 zstyle ':completion:*' special-dirs false
+compinit
 
 # Navigation Keys
 bindkey "${terminfo[khome]}" beginning-of-line
