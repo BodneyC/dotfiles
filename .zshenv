@@ -20,6 +20,7 @@ _add_to_path "$HOME/.local/share/npm/bin"
 _add_to_path "$HOME/.poetry/bin"
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
+export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
 export MAVEN_OPTS="$JAVA_OPTS"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export VISUAL="$(which nvim)"

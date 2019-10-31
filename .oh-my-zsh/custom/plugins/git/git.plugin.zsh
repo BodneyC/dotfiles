@@ -1,3 +1,13 @@
+alias ga="git add"
+alias gc="git commit"
+alias gch.="git checkout ."
+alias gp="git push"
+alias gg="git graph"
+alias gst="git status"
+alias grso="git remote show origin"
+alias grsuo="git remote set-url origin"
+alias grao="git remote add origin"
+
 function current_branch() {
   git_current_branch
 }
