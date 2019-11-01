@@ -21,6 +21,7 @@ _add_to_path "$HOME/.poetry/bin"
 
 export TERMTHEME="light"
 export ZDOTDIR="$HOME/.config/zsh"
+export PROMPT_EOL_MARK=""
 export ZSH=$HOME/.oh-my-zsh
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
 # export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
