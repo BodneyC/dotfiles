@@ -1,8 +1,5 @@
 [[ -z "$ZSHRC_SOURCED" ]] && ZSHRC_SOURCED=1 || return
 
-export ZSH=$HOME/.oh-my-zsh
-export ZDOTDIR=$HOME/.config/zsh
-
 ZSH_THEME="benjc_custom"
 CASE_SENSITIVE="true"
 HIST_STAMPS="mm/dd/yyyy"
@@ -23,6 +20,8 @@ plugins=(
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
+
+fpath+=("$ZDOTDIR/completions")
 
 compinit
 _comp_options+=(globdots)
