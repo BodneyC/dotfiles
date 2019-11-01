@@ -1,11 +1,12 @@
 [[ -z "$ZSHRC_SOURCED" ]] && ZSHRC_SOURCED=1 || return
 
 export ZSH=$HOME/.oh-my-zsh
+export ZDOTDIR=$HOME/.config/zsh
 
 ZSH_THEME="benjc_custom"
 CASE_SENSITIVE="true"
 HIST_STAMPS="mm/dd/yyyy"
-ZSH_CUSTOM=$ZSH/custom
+ZSH_CUSTOM=$ZDOTDIR/custom
 KEYTIMEOUT=1
 
 plugins=(

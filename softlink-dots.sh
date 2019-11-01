@@ -2,7 +2,7 @@
 
 GITDIR="$(pwd)"
 
-mkdir -p "$HOME"/{.config,.tmux/colorschemes,.oh-my-zsh/custom/}
+mkdir -p "$HOME"/{.config,.tmux/colorschemes,.zsh/custom/}
 
 _msg_exit() { # msg[, ret_val]
 	echo "$1, exiting..."
@@ -34,9 +34,7 @@ _softlink() {
 for f in \
 		$(fd -H -tf -d1 "^\..*") \
 		$(fd -H -td -d1 . .config) \
-		$(fd -H -td -d1 . .oh-my-zsh/custom) \
-		.tmux/colorschemes \
-		; do
+		.tmux/colorschemes; do
 	(cd "$HOME" && _softlink "$f")
 done
 

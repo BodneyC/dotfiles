@@ -1,15 +1,15 @@
 # vim:ft=zsh ts=2 sw=2 sts=2
 
-PROMPT='%{$fg_bold[magenta]%}$USER %{$fg[yellow]%}⎩ %{$fg_bold[green]%}$(vi_mode_prompt_info)%{$reset_color%}%{$fg[yellow]%} ⎪ %{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)%{$fg[yellow]%} ⎫ %{$reset_color%}
-%{$fg[yellow]%}➢ %{$reset_color%}'
+PROMPT='%{$fg_bold[magenta]%}$USER %{$fg[black]%}⎩ %{$fg_bold[green]%}$(vi_mode_prompt_info)%{$reset_color%}%{$fg[black]%} ⎪ %{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)%{$fg[black]%} ⎫ %{$reset_color%}
+%{$fg[black]%}➢ %{$reset_color%}'
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" %{$reset_color%}%{$fg[yellow]%}⎪"
+ZSH_THEME_GIT_PROMPT_PREFIX=" %{$reset_color%}%{$fg[black]%}⎪"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}!"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[yellow]%}?"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[black]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✓"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[yellow]%} 🠂%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}🠀 %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[black]%} 🠂%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[black]%}🠀 %{$reset_color%}"
 
 git_prompt_info () {
 	local ref
