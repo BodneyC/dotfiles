@@ -1,7 +1,9 @@
 # vim:ft=zsh ts=2 sw=2 sts=2
 
-PROMPT='%{$fg_bold[magenta]%}$USER %{$reset_color%}%{$fg[magenta]%}⎩ %{$fg_bold[green]%}$(vi_mode_prompt_info)%{$reset_color%}%{$fg[magenta]%} ⎪ %{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)%{$reset_color%}%{$fg[magenta]%} ⎫ %{$reset_color%}
-%{$fg[magenta]%}➢ %{$reset_color%}'
+NEWLINE='
+'
+
+PROMPT='%{$fg_bold[magenta]%}$USER %{$reset_color%}%{$fg[magenta]%}⎩ %{$fg_bold[green]%}$(vi_mode_prompt_info)%{$reset_color%}%{$fg[magenta]%} ⎪ %{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)%{$reset_color%}%{$fg[magenta]%} ⎫%{$reset_color%}%{$fg[magenta]%}➢ %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" %{$reset_color%}%{$fg[magenta]%}⎪"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
