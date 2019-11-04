@@ -24,8 +24,10 @@ export ZDOTDIR="$HOME/.config/zsh"
 export PROMPT_EOL_MARK=""
 export ZSH=$HOME/.oh-my-zsh
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
-# export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
-export FZF_PREVIEW_COMMAND="bat --style=numbers --theme GitHub --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
+export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
+if [[ "$TERMTHEME" == "light"]]; then
+	export BAT_THEME="GitHub"
+fi
 export MAVEN_OPTS="$JAVA_OPTS"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export VISUAL="$(which nvim)"
