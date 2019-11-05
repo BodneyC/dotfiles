@@ -22,7 +22,8 @@ function _prake {
 		"--version[Show long version information]" \
 		"-d[Enable debugging]" \
 		"--debug[Enable debugging]" \
-		"--name[Specify project name]" \
+		"-n[Specify project name]:name" \
+		"--name[Specify project name]:name" \
 		"1:langs:($LANG_LIST)" \
 		"*:: :->args" \
 		&& ret=0
@@ -30,13 +31,15 @@ function _prake {
 	IDX=$(( ${#line[@]} - 1 ))
 
 	for i in {$IDX..0}; do
-		if _containsElement "${line[$i]}" "${LANG_LIST[@]}"; then
+		if _containsElement "${line[$i]}" "${LANG_LIST[@]} prake"; then
 			IDX="$i"
 			break
 		fi
 	done
 
 	case "$line[$IDX]" in
+		(prake)
+			_prake ;;
 		(bash)
 			_prake_bash ;;
 		(dirs) 
@@ -74,30 +77,30 @@ function _prake_dirs {
 		"--git[Git init]" \
 		"-v[Create VirkSpace]" \
 		"--virkspace[Create VirkSpace]" \
-		"-a[Comma separated list of dirs to make]" \
-		"--additional[Comma separated list of dirs to make]" \
-		"-p[Starting directory]" \
-		"--path[Starting directory]" \
+		"-a[Comma separated list of dirs to make]:dirs" \
+		"--additional[Comma separated list of dirs to make]:dirs" \
+		"-p[Starting directory]:path" \
+		"--path[Starting directory]:path" \
 		"*:langs:($LANG_LIST)"
 
 }
 
 function _prake_golang {
 	_arguments \
-		"-p[Package name (e.g. github.com/me/repo_name)]" \
-		"--package[Package name (e.g. github.com/me/repo_name)]" \
-		"-g[\`go env gopath\` / directory of choice]" \
-		"--gopath[\`go env gopath\` / directory of choice]" \
+		"-p[Package name (e.g. github.com/me/repo_name)]:pkg" \
+		"--package[Package name (e.g. github.com/me/repo_name)]:pkg" \
+		"-g[\`go env gopath\` / directory of choice]:dir" \
+		"--gopath[\`go env gopath\` / directory of choice]:dir" \
 		"*:langs:($LANG_LIST)"
 
 }
 
 function _prake_python {
 	_arguments \
-		"-p[Path to Python binary]" \
-		"--path[Path to Python binary]" \
-		"-r[Python revision (e.g. 3.7)]" \
-		"--revision[Python revision (e.g. 3.7)]" \
+		"-p[Path to Python binary]:path" \
+		"--path[Path to Python binary]:path" \
+		"-r[Python revision (e.g. 3.7)]:rev" \
+		"--revision[Python revision (e.g. 3.7)]:rev" \
 		"-v[Create a virtual environment]" \
 		"--venv[Create a virtual environment]" \
 		"*:langs:($LANG_LIST)"
@@ -106,8 +109,8 @@ function _prake_python {
 
 function _prake_nodejs {
 	_arguments \
-		"-b[Binpath to npm/yarn]" \
-		"--bin[Binpath to npm/yarn]" \
+		"-b[Binpath to npm/yarn]:path" \
+		"--bin[Binpath to npm/yarn]:path" \
 		"-n[Use NPM]" \
 		"--npm[Use NPM]" \
 		"-y[Use Yarn]" \
@@ -120,8 +123,8 @@ function _prake_nodejs {
 
 function _prake_jvm {
 	_arguments \
-		"-p[Package name (e.g. world.hello)]" \
-		"--package[Package name (e.g. world.hello)]" \
+		"-p[Package name (e.g. world.hello)]:pkg" \
+		"--package[Package name (e.g. world.hello)]:pkg" \
 		"-g[Use Gradle]" \
 		"--gradle[Use Gradle]" \
 		"-m[Use Maven]" \

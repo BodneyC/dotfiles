@@ -32,7 +32,7 @@ _softlink() {
 }
 
 for f in \
-		$(fd -H -tf -d1 "^\..*") \
+		$(fd -H -tf -d1 "^\..*" | rg -v "\.git[mi]") \
 		$(fd -H -td -d1 . .config) \
 		.tmux/colorschemes; do
 	(cd "$HOME" && _softlink "$f")
