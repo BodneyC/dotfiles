@@ -57,6 +57,7 @@ alias -g and="&&"
 alias -g or="||"
 alias xi="xclip -in -selection clipboard"
 alias xo="xclip -out -selection clipboard"
+alias rg="rg --hidden"
 
 [[ $(alias | rg '^l=') ]] && unalias l
 [[ $(alias | rg '^ls=') ]] && unalias ls
