@@ -68,6 +68,12 @@ _yes_or_no() { # msg
 	done
 }
 
+if [[ "$TERMTHEME" == "light" ]]; then
+	export BAT_THEME="GitHub"
+elif [[ "$TERMTHEME" == "dark" ]]; then
+	export BAT_THEME=""
+fi
+
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
 [[ -z "$TMUX" ]] && \
 	[[ -n "$ALACRITTY_LOG" || -n "$KITTY_WINDOW_ID" ]] && \
