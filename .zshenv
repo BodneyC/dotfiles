@@ -13,6 +13,8 @@ _add_to_path "$HOME/.rvm/bin"
 _add_to_path "$HOME/go/bin"
 _add_to_path "$HOME/.local/share/npm/bin"
 _add_to_path "$HOME/.poetry/bin"
+_add_to_path "$HOME/.fnm"
+_add_to_path "$HOME/.cargo/bin"
 _add_to_path "/usr/local/opt/maven@3.3/bin"
 _add_to_path "/usr/local/opt/curl-openssl/bin"
 _add_to_path "/usr/local/opt/"
@@ -24,6 +26,7 @@ export SHELL="$(which zsh)"
 
 export JAVA_OPTS=""
 export MAVEN_OPTS="$JAVA_OPTS"
+export GOPATH="$HOME/go"
 
 export ALL_PROXY=""
 export HTTP_PROXY=""
@@ -35,6 +38,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 export PROMPT_EOL_MARK=""
 export HOMEBREW_NO_AUTO_UPDATE=1
+export N_PREFIX="$HOME/.local"
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"

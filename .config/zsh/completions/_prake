@@ -6,9 +6,10 @@ LANG_LIST=(golang dirs bash python nodejs jvm alias)
 
 # https://stackoverflow.com/a/8574392
 function _containsElement () {
-	local e match="$1"
-	shift
-	for e; do [[ "$e" == "$match" ]] && return 0; done
+	local match="$1"; shift
+	for e in $@; do
+		[[ "$e" == "$match" ]] && return 0
+	done
 	return 1
 }
 
@@ -22,16 +23,15 @@ function _prake {
 		"--version[Show long version information]" \
 		"-d[Enable debugging]" \
 		"--debug[Enable debugging]" \
-		"-n[Specify project name]:name" \
-		"--name[Specify project name]:name" \
+		"-n[Specify project name]" \
+		"--name[Specify project name]" \
 		"1:langs:($LANG_LIST)" \
-		"*:: :->args" \
-		&& ret=0
+		"*:: :->args"
 
 	IDX=$(( ${#line[@]} - 1 ))
 
 	for i in {$IDX..0}; do
-		if _containsElement "${line[$i]}" "${LANG_LIST[@]} prake"; then
+		if _containsElement "${line[$i]}" ${LANG_LIST[@]} prake; then
 			IDX="$i"
 			break
 		fi
@@ -77,12 +77,11 @@ function _prake_dirs {
 		"--git[Git init]" \
 		"-v[Create VirkSpace]" \
 		"--virkspace[Create VirkSpace]" \
-		"-a[Comma separated list of dirs to make]:dirs" \
-		"--additional[Comma separated list of dirs to make]:dirs" \
+		"-a[Comma separated list of dirs to make]:path" \
+		"--additional[Comma separated list of dirs to make]:path" \
 		"-p[Starting directory]:path" \
 		"--path[Starting directory]:path" \
 		"*:langs:($LANG_LIST)"
-
 }
 
 function _prake_golang {
@@ -92,7 +91,6 @@ function _prake_golang {
 		"-g[\`go env gopath\` / directory of choice]:dir" \
 		"--gopath[\`go env gopath\` / directory of choice]:dir" \
 		"*:langs:($LANG_LIST)"
-
 }
 
 function _prake_python {
@@ -104,7 +102,6 @@ function _prake_python {
 		"-v[Create a virtual environment]" \
 		"--venv[Create a virtual environment]" \
 		"*:langs:($LANG_LIST)"
-
 }
 
 function _prake_nodejs {
@@ -118,7 +115,6 @@ function _prake_nodejs {
 		"-a[Default inputs]" \
 		"--auto[Default inputs]" \
 		"*:langs:($LANG_LIST)"
-
 }
 
 function _prake_jvm {
