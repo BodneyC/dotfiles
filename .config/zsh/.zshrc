@@ -71,7 +71,7 @@ _yes_or_no() { # msg
 if [[ "$TERMTHEME" == "light" ]]; then
 	export BAT_THEME="GitHub"
 elif [[ "$TERMTHEME" == "dark" ]]; then
-	export BAT_THEME=""
+	export BAT_THEME="OneHalfDark"
 fi
 
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh

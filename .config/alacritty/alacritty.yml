@@ -12,13 +12,14 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-  faux_multiplier: 3
   auto_scroll: false
 
 tabspaces: 8
 
 font:
   normal:
+    family: 'EmojiOne Color'
+    options: {size: 200}
     family: 'RobotoMono Nerd Font'
     style: Light
   bold:
@@ -27,7 +28,7 @@ font:
   italic:
     family: 'RobotoMono Nerd Font'
     style: Light Italic
-  size: 7
+  size: 9
   offset:
     x: 0
     y: 0
@@ -35,6 +36,7 @@ font:
     x: 0
     y: 0
   use_thin_strokes: true
+  WININT_HIDPI_FACTOR: true
 
 debug:
   render_timer: false
