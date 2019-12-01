@@ -16,6 +16,12 @@ _did_you_mean() {
   echo "Did you mean '$1'?"; return 1
 }
 
+pdfcat() {
+	for f in "$@"; do
+		pdftotext "$f" - | less
+	done
+}
+
 alias q="_yes_or_no 'Are you sure?' && systemctl poweroff -i"
 alias reboot="_yes_or_no 'Are you sure?' && systemctl reboot -i"
 alias l="ls -ha"
