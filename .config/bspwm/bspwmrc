@@ -14,10 +14,10 @@ bspc config normal_border_color  \#353535
 bspc config focused_border_color \#AAAAAA
 bspc config border_width		 1
 
-polybar top-bar &
+$HOME/.config/polybar/launch.sh &
 compton --config $HOME/.config/compton.conf &
 
 xrdb -load .Xresources
 
-feh --bg-scale ~/Media/green-forest-floor-1920x1200.jpg
+feh --bg-scale /usr/share/backgrounds/gnome/Fabric.jpg
 xsetroot -cursor_name left_ptr
