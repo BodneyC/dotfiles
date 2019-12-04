@@ -1,13 +1,16 @@
 ################################################################
 # Wm independent hotkeys
 
+super + @p
+    "$HOME/.config/polybar/scripts/sys-menu"
+
 # Terminal emulator
 super + Return
 	alacritty
 
 # Program launcher
 super + @space
-	rofi -show run
+	"$HOME/.config/polybar/scripts/start-menu"
 
 # Make sxhkd reload its configuration files:
 super + Escape
@@ -150,3 +153,6 @@ super + alt + l
 # Move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+################################################################
+# Custom

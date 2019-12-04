@@ -37,6 +37,7 @@ export NO_PROXY=""
 export ZDOTDIR="$HOME/.config/zsh"
 export ZSH=$HOME/.oh-my-zsh
 
+export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
 export PROMPT_EOL_MARK=""
 export HOMEBREW_NO_AUTO_UPDATE=1
 export N_PREFIX="$HOME/.local"
