@@ -21,6 +21,8 @@ _add_to_path "/usr/local/opt/curl-openssl/bin"
 _add_to_path "/usr/local/opt/"
 _add_to_path "/usr/local/sbin/"
 
+export TERMTHEME=dark
+
 export VISUAL="$(which nvim)"
 export EDITOR="$(which nvim)"
 export SHELL="$(which zsh)"
