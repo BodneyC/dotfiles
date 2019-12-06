@@ -3,7 +3,7 @@ configuration {
 	width: 22;
 	font: "Noto Sans 19";
 	bw: 5;
-	how-icons: true;
+	show-icons: true;
     ssh-client: "ssh";
     ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";
     run-command: "{cmd}";

@@ -1,7 +1,7 @@
 ################################################################
 # Wm independent hotkeys
 
-super + @p
+super + p
     "$HOME/.config/polybar/scripts/sys-menu"
 
 # Terminal emulator
@@ -9,7 +9,7 @@ super + Return
 	alacritty
 
 # Program launcher
-super + @space
+super + space
 	"$HOME/.config/polybar/scripts/start-menu"
 
 # Make sxhkd reload its configuration files:
@@ -56,10 +56,6 @@ super + y
 super + g
 	bspc node -s biggest
 
-# Next monocle
-alt + {_,shift +} Tab
-	bspc node -f {next,prev}
-
 ################################################################
 # State/flags
 
@@ -79,8 +75,8 @@ super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
 # Focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+# super + {p,b,comma,period}
+# 	bspc node -f @{parent,brother,first,second}
 
 # Focus the next/previous node in the current desktop
 super + {_,shift + }c
@@ -91,8 +87,11 @@ super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
 # Focus the last node/desktop
-alt + {grave,Tab}
-	bspc {node,desktop} -f last
+alt + {_,shift + }grave
+	bspc node -f {next,prev}
+
+alt + {_,shift + }Tab
+	bspc node -f last
 
 # Focus the older or newer node in the focus history
 super + {o,i}
