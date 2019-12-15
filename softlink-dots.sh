@@ -37,4 +37,3 @@ for f in \
 		.tmux/colorschemes; do
 	(cd "$HOME" && _softlink "$f")
 done
-

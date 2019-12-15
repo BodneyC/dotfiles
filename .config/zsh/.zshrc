@@ -30,7 +30,7 @@ zstyle ':completion:*' special-dirs false
 # Navigation Keys
 bindkey "${terminfo[khome]}" beginning-of-line
 bindkey "${terminfo[kend]}" end-of-line
-bindkey "\e[3~" delete-char 
+bindkey "\e[3~" delete-char
 bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 bindkey "\e[5~" beginning-of-history
@@ -57,13 +57,13 @@ unsetopt PROMPT_SP
 unsetopt share_history
 
 _yes_or_no() { # msg
-	# shellcheck disable=SC2050
-	while [[ 1 == 1 ]]; do
-		read -r "REPLY?$1 [yn] "
+	[[ -n "$2" ]] && OPTS="[Yn]" || OPTS="[yn]"
+	while [[ true ]]; do
+		read -rp "$1 $OPTS "
 		case "$REPLY" in
 			[yY]*) return 0 ;;
 			[nN]*) return 1 ;;
-			*)     echo "Invalid option"
+			*)     [[ -n "$2" ]] && return 0 || echo "Invalid option"
 		esac
 	done
 }
@@ -77,7 +77,7 @@ fi
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
 [[ -z "$TMUX" ]] && \
 	[[ -n "$ALACRITTY_LOG" || -n "$KITTY_WINDOW_ID" ]] && \
-	if _yes_or_no "Launch tmux-dash?"; then
+	if _yes_or_no "Launch tmux-dash?" Y; then
 		tmux new-session 'tmux_dash'
 	else
 		tmux
