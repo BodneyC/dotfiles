@@ -18,6 +18,21 @@ plugins=(
 	history-substring-search
 )
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
+
+_yes_or_no() { # msg
+	[[ "$2" ]] && OPTS="[Yn]" || OPTS="[yn]"
+	while [[ true ]]; do 
+		read "REPLY?$1 "$OPTS" "
+		case "$REPLY" in
+			[yY]*) return 0 ;;
+			[nN]*) return 1 ;;
+			*)     [[ "$2" ]] \
+				&& return 0 \
+				|| printf "%s\n" "${ERRO_COL}Invalid option$NORM_COL"
+		esac
+	done
+}
+
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 
@@ -55,18 +70,6 @@ fi
 
 unsetopt PROMPT_SP
 unsetopt share_history
-
-_yes_or_no() { # msg
-	[[ -n "$2" ]] && OPTS="[Yn]" || OPTS="[yn]"
-	while [[ true ]]; do
-		read -rp "$1 $OPTS "
-		case "$REPLY" in
-			[yY]*) return 0 ;;
-			[nN]*) return 1 ;;
-			*)     [[ -n "$2" ]] && return 0 || echo "Invalid option"
-		esac
-	done
-}
 
 if [[ "$TERMTHEME" == "light" ]]; then
 	export BAT_THEME="GitHub"

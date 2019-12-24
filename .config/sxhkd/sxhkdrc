@@ -28,10 +28,10 @@ XF86AudioMute
 	amixer sset 'Master' toggle
 
 XF86MonBrightnessDown
-  xbacklight -dec 10 
+  xbacklight -dec 1 
 
 XF86MonBrightnessUp
-  xbacklight -inc 10 
+  xbacklight -inc 1 
 
 ################################################################
 # Bspwm hotkeys
@@ -87,7 +87,10 @@ super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
 # Focus the last node/desktop
-alt + {_,shift + }grave
+alt + grave
+	rofi -show window -width 50 -height 10
+
+super + {_,shift + }Tab
 	bspc node -f {next,prev}
 
 alt + {_,shift + }Tab

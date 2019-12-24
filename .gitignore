@@ -1,5 +1,4 @@
 multiplexing/.tmux/plugin*
-.virkspace
-.virkspace
+.vim
 .virkignore
 .zcompdump*
