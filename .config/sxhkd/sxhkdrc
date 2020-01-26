@@ -2,7 +2,11 @@
 # Wm independent hotkeys
 
 super + p
-    "$HOME/.config/polybar/scripts/sys-menu"
+	if [[ "$(xrandr -q | rg -c ' connected')" -gt 1 ]]; then \
+		"$HOME/.config/polybar/scripts/sys-menu-2"; \
+	else \
+		"$HOME/.config/polybar/scripts/sys-menu"; \
+	fi
 
 # Terminal emulator
 super + Return
@@ -10,7 +14,11 @@ super + Return
 
 # Program launcher
 super + space
-	"$HOME/.config/polybar/scripts/start-menu"
+	if [[ "$(xrandr -q | rg -c ' connected')" -gt 1 ]]; then \
+		"$HOME/.config/polybar/scripts/start-menu-2"; \
+	else \
+		"$HOME/.config/polybar/scripts/start-menu"; \
+	fi
 
 # Make sxhkd reload its configuration files:
 super + Escape
