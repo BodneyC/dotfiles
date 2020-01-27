@@ -2,4 +2,5 @@
 	email = benjcarrington@gmail.com
 	name = BodneyC
 [alias]
+    branchdates = for-each-ref --sort=committerdate refs/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	graph = log --graph --pretty=format:'%C(magenta)%h %Creset%C(dim blue)%an [%ce]%n%Creset  %m%C(yellow)%d%Creset %s %Cgreen(%cr)%n%Creset' --abbrev-commit
