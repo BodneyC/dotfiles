@@ -15,9 +15,9 @@ super + Return
 # Program launcher
 super + space
 	if [[ "$(xrandr -q | rg -c ' connected')" -gt 1 ]]; then \
-		"$HOME/.config/polybar/scripts//start/start-menu-$(bspc query -M -d focused --names)"; \
+		"$HOME/.config/polybar/scripts/start/start-menu-$(bspc query -M -d focused --names)"; \
 	else \
-		"$HOME/.config/polybar/scripts//start/start-menu"; \
+		"$HOME/.config/polybar/scripts/start/start-menu"; \
 	fi
 
 # Make sxhkd reload its configuration files:
@@ -96,7 +96,11 @@ super + bracket{left,right}
 
 # Focus the last node/desktop
 alt + grave
-	rofi -show window -width 50 -height 10
+	if [[ "$(xrandr -q | rg -c ' connected')" -gt 1 ]]; then \
+		"$HOME/.config/polybar/scripts/task-switcher/task-switcher-$(bspc query -M -d focused --names)"; \
+    else \
+		"$HOME/.config/polybar/scripts/task-switcher/task-switcher"; \
+    fi
 
 super + {_,shift + }Tab
 	bspc node -f {next,prev}

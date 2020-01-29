@@ -1,0 +1,12 @@
+#!/bin/bash
+
+rofi -m DisplayPort-0 \
+	-no-lazy-grab -show window \
+	-hide-scrollbar true \
+	-lines 5 \
+	-line-padding 15 \
+	-border-raduis 25 \
+	-width 28 \
+	-columns 1 \
+	-show-icons -icon-theme "Papirus" \
+	-font "Noto Sans 14"
