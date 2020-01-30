@@ -39,11 +39,18 @@ xsetroot -cursor_name left_ptr
 
 libinput-gestures-setup restart &
 
+/usr/bin/ckb-next --background &
+
 ### User
 
 bspc desktop ^$TERMINAL_DESKTOP -l monocle
 bspc desktop ^$BROWSER_DESKTOP -l monocle
 
+bspc desktop --focus ^$TERMINAL_DESKTOP && alacritty & sleep 1
 bspc desktop --focus ^$BROWSER_DESKTOP && firefox &
-bspc desktop --focus ^$(( BROWSER_DESKTOP + 1 )) && firefox &
-bspc desktop --focus ^$TERMINAL_DESKTOP && alacritty &
+
+sleep 3 && bspc desktop --focus ^$TERMINAL_DESKTOP
+
+bspc desktop --focus ^$(( TERMINAL_DESKTOP + 1 )) && firefox & sleep 1
+
+bspc desktop --focus ^$TERMINAL_DESKTOP

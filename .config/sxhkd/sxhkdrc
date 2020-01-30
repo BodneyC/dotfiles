@@ -46,7 +46,7 @@ XF86MonBrightnessUp
 
 # Quit bspwm normally
 super + alt + Escape
-	bspc quit
+	bspc node --kill $(bspc nodes) && bspc quit
 
 # Close and kill
 super + {_,shift + }w
