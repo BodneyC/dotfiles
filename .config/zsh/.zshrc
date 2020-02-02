@@ -1,5 +1,7 @@
 [[ -z "$ZSHRC_SOURCED" ]] && ZSHRC_SOURCED=1 || return
 
+setopt HIST_IGNORE_SPACE
+
 ZSH_THEME="benjc_custom"
 CASE_SENSITIVE="true"
 HIST_STAMPS="mm/dd/yyyy"
@@ -21,7 +23,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 
 _yes_or_no() { # msg
 	[[ "$2" ]] && OPTS="[Yn]" || OPTS="[yn]"
-	while [[ true ]]; do 
+	while [[ true ]]; do
 		read "REPLY?$1 "$OPTS" "
 		case "$REPLY" in
 			[yY]*) return 0 ;;
