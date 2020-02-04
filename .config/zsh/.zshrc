@@ -57,6 +57,7 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^j' autosuggest-execute
 bindkey '^k' autosuggest-accept
+bindkey '[Z' reverse-menu-complete
 
 # bindkey '^i' expand-or-complete-prefix
 
