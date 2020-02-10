@@ -23,10 +23,12 @@ _add_to_path "/usr/local/sbin/"
 
 export TERMTHEME=dark
 
-export VISUAL="$(which nvim)"
-export EDITOR="$(which nvim)"
-export SHELL="$(which zsh)"
+export VISUAL="$(command -v nvim)"
+export EDITOR="$(command -v nvim)"
+export SHELL="$(command -v zsh)"
+export GIT_PAGER="$(command -v less) -F -X"
 
+export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"
 export JAVA_OPTS=""
 export MAVEN_OPTS="$JAVA_OPTS"
 export GOPATH="$HOME/go"
@@ -40,7 +42,7 @@ export ZDOTDIR="$HOME/.config/zsh"
 export ZSH=$HOME/.oh-my-zsh
 
 export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
-export PROMPT_EOL_MARK=""
+export PROMPT_EOL_MARK="\n"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export N_PREFIX="$HOME/.local"
 
