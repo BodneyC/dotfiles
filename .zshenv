@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 _add_to_path() {
 	[[ ! "$PATH" =~ $1 ]] \
 		&& export PATH="$PATH:$1"
@@ -20,6 +22,14 @@ _add_to_path "/usr/local/opt/maven@3.3/bin"
 _add_to_path "/usr/local/opt/curl-openssl/bin"
 _add_to_path "/usr/local/opt/"
 _add_to_path "/usr/local/sbin/"
+
+_MONITORS="$(xrandr -q | rg ' connected' | cut -d' ' -f1)"
+N_MONITORS="$(wc -l <<< "$_MONITORS")"
+
+MON_0="$(head -1 <<< "$_MONITORS")"
+MON_1=""; [[ "$N_MONITORS" -eq 2 ]] \
+    && MON_1="$(tail -1 <<< "$_MONITORS")"
+export N_MONITORS MON_0 MON_1
 
 export TERMTHEME=dark
 

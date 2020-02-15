@@ -1,14 +1,11 @@
-#!/bin/sh
-
-N_MONITORS="$(xrandr -q | rg -c ' connected')"
-SECOND_MNT="DisplayPort-1"
+#!/usr/bin/env bash
 
 sxhkd &
 
-if [ "$N_MONITORS" -gt 1 ]; then
-	xrandr --output "$SECOND_MNT" --rotate left
-	bspc monitor "$SECOND_MNT" -d 6 7 8 9 10
-	bspc monitor               -d 1 2 3 4 5
+if [[ -n "$MON_1" ]]; then
+    xrandr --output "$MON_1" --rotate left --right-of "$MON_0" --scale 1.4
+	bspc monitor "$MON_1" -d 6 7 8 9 10
+	bspc monitor -d 1 2 3 4 5
 	TERMINAL_DESKTOP=6
 	BROWSER_DESKTOP=1
 else
@@ -27,19 +24,19 @@ bspc config normal_border_color  \#353535
 bspc config focused_border_color \#AAAAAA
 bspc config border_width		 1
 
-### Sys
+# Sys
 
 "$HOME/.config/polybar/launch.sh" &
 compton --config "$HOME/.config/compton.conf" &
 
-xrdb -load .Xresources
+xrdb -load ~/.Xresources
 
 feh --bg-scale /usr/share/backgrounds/gnome/Fabric.jpg
 xsetroot -cursor_name left_ptr
 
 libinput-gestures-setup restart &
 
-/usr/bin/ckb-next --background &
+hash ckb-next && /usr/bin/ckb-next --background &
 
 ### User
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-rofi -m "$MON_0" \
+rofi -m DP1 \
 	-no-lazy-grab -show window \
 	-hide-scrollbar true \
 	-lines 5 \
 	-line-padding 15 \
 	-border-raduis 25 \
-	-width 28 \
+	-width 60 \
 	-columns 1 \
 	-show-icons -icon-theme "Papirus" \
-	-font "Noto Sans 14"
+	-font "Noto Sans 13"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
  
 COL_HEADER="$HOME/.cache/wal/colors-wal-st.h"
  

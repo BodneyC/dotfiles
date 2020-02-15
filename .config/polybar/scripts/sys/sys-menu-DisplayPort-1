@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 MENU="$(rofi -m "DisplayPort-1" -no-lazy-grab -sep "|" -dmenu -i -p 'System' \
 	-hide-scrollbar true \

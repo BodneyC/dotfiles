@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 LEAD=$(rg 'leader>' "$HOME/.config/nvim/config/remappings.vim" \
   | sed 's/^.*leader>\([^ ]*\).*$/\1/g' \

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rofi -m "DisplayPort-1" -no-lazy-grab -show drun \
+rofi -m DP1 -no-lazy-grab -show drun \
 	-drun-display-format "  {name}" \
 	-display-drun "Search" \
 	-hide-scrollbar true \

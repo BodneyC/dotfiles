@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ ! -d "$HOME/aur" ]]; then
 	echo "Aur folder not in the normal place, exiting..."

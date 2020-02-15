@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MENU="$(rofi -m "DisplayPort-0" -no-lazy-grab -sep "|" -dmenu -i -p 'System' \
+MENU="$(rofi -m eDP1 -no-lazy-grab -sep "|" -dmenu -i -p 'System' \
 	-hide-scrollbar true \
 	-bw 0 \
 	-lines 4 \

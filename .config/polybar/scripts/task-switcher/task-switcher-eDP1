@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rofi -m "$MON_0" \
+rofi -m eDP1 \
 	-no-lazy-grab -show window \
 	-hide-scrollbar true \
 	-lines 5 \
