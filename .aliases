@@ -54,7 +54,6 @@ alias -g and="&&"
 alias -g or="||"
 alias xi="xclip -in -selection clipboard"
 alias xo="xclip -out -selection clipboard"
-alias rg="rg --hidden"
 alias dockerun="docker run --rm -t -i"
 alias podrun="podman run --rm -t -i"
 alias IGNORE_PROXY='ALL_PROXY="" HTTPS_PROXY="" HTTP_PROXY=""'

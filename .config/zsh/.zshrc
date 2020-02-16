@@ -11,30 +11,30 @@ ZSH_CUSTOM=$ZDOTDIR/custom
 KEYTIMEOUT=1
 
 plugins=(
-	git
-	docker
-	docker-compose
-	mvn
-	dirhistory
-	vi-mode
-	zsh-syntax-highlighting
-	zsh-autosuggestions
-	history-substring-search
+    git
+    docker
+    docker-compose
+    mvn
+    dirhistory
+    vi-mode
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    history-substring-search
 )
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 
 _yes_or_no() { # msg
-	[[ "$2" ]] && OPTS="[Yn]" || OPTS="[yn]"
-	while true; do
-		read "REPLY?$1 "$OPTS" "
-		case "$REPLY" in
-			[yY]*) return 0 ;;
-			[nN]*) return 1 ;;
-			*)     [[ "$2" ]] \
-				&& return 0 \
-				|| printf "%s\n" "${ERRO_COL}Invalid option$NORM_COL"
-		esac
-	done
+    [[ "$2" ]] && OPTS="[Yn]" || OPTS="[yn]"
+    while true; do
+        read "REPLY?$1 "$OPTS" "
+        case "$REPLY" in
+            [yY]*) return 0 ;;
+            [nN]*) return 1 ;;
+            *)     [[ "$2" ]] \
+                && return 0 \
+                || printf "%s\n" "${ERRO_COL}Invalid option$NORM_COL"
+        esac
+    done
 }
 
 source $ZSH/oh-my-zsh.sh
@@ -66,27 +66,27 @@ bindkey '[Z' reverse-menu-complete
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 if [[ -o HIST_FIND_NO_DUPS ]]; then
-	local -A unique_matches
-	for n in $_history_substring_search_matches; do
-		unique_matches[${history[$n]}]="$n"
-	done
-	_history_substring_search_matches=(${(@no)unique_matches})
+    local -A unique_matches
+    for n in $_history_substring_search_matches; do
+        unique_matches[${history[$n]}]="$n"
+    done
+    _history_substring_search_matches=(${(@no)unique_matches})
 fi
 
 unsetopt PROMPT_SP
 unsetopt share_history
 
 if [[ "$TERMTHEME" == "light" ]]; then
-	export BAT_THEME="GitHub"
+    export BAT_THEME="GitHub"
 elif [[ "$TERMTHEME" == "dark" ]]; then
-	export BAT_THEME="OneHalfDark"
+    export BAT_THEME="OneHalfDark"
 fi
 
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
 [[ -z "$TMUX" ]] && \
-	[[ -n "$ALACRITTY_LOG" || -n "$KITTY_WINDOW_ID" ]] && \
-	if _yes_or_no "Launch tmux-dash?" Y; then
-		tmux new-session 'tmux_dash'
-	else
-		tmux
-	fi
+    [[ -n "$ALACRITTY_LOG" || -n "$KITTY_WINDOW_ID" ]] && \
+    if ! ps aux | grep -q tmux_dash &&_yes_or_no "Launch tmux-dash?" Y; then
+        tmux new-session 'tmux_dash'
+    else
+        tmux
+    fi

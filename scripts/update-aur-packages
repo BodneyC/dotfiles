@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
 if [[ ! -d "$HOME/aur" ]]; then
-	echo "Aur folder not in the normal place, exiting..."
-	exit 255
+    echo "Aur folder not in the normal place, exiting..."
+    exit 255
 fi
 
 cd "$HOME/aur" || exit
 
 NOCONF="$1"
 if [[ $NOCONF != "--noconfim" && $NOCONF ]]; then
-	echo "Invalid argument: $NOCONF , exiting..."
-	exit 255
+    echo "Invalid argument: $NOCONF , exiting..."
+    exit 255
 fi
 
 for DIR in $(fd -d 1 -t d); do
-	cd "$DIR" || exit
-	if git diff-index -q HEAD --; then
-		git checkout . && git stash
-	fi
-	git pull
-	makepkg -si "$NOCONF"
+    cd "$DIR" || exit
+    if git diff-index -q HEAD --; then
+        git checkout . && git stash
+    fi
+    git pull
+    makepkg -si "$NOCONF"
 done
