@@ -9,7 +9,7 @@ _add_to_path "$HOME/.local/apps/npm/bin"
 _add_to_path "$HOME/.local/bin"
 _add_to_path "$HOME/.yarn/bin"
 _add_to_path "$HOME/.config/yarn/global/node_modules/.bin"
-_add_to_path "$HOME/Library/Python/3.7/bin"
+_add_to_path "$HOME/Library/Python/3.8/bin"
 _add_to_path "$HOME/scripts"
 _add_to_path "$HOME/.rvm/bin"
 _add_to_path "$HOME/go/bin"
@@ -58,3 +58,5 @@ export N_PREFIX="$HOME/.local"
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
+
+test -f .zshenv-macos && . .zshenv-macos

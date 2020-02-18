@@ -1,5 +1,3 @@
-// Scala
-
 --langdef=scala
 --langmap=scala:.scala
 --regex-scala=/^[ \t]*((abstract|final|sealed|implicit|lazy)[ \t]*)*(private|protected)?[ \t]*class[ \t ]+([a-zA-Z0-9_]+)/\4/c,classes/
@@ -13,24 +11,19 @@
 --regex-scala=/^[ \t]*((abstract|final|sealed|implicit|lazy)[ \t]*)*var[ \t]+([a-zA-Z0-9_]+)/\3/l,variables/
 --regex-scala=/^[ \t]*package[ \t ]+([a-zA-Z0-9_.]+)/\1/p,packages/
 
-// Kotlin
-
 --langdef=kotlin
 --langmap=kotlin:.kt
 --langmap=kotlin:+.kts
---regex-kotlin=/^[ \t]*((abstract|final|open|sealed|implicit|lazy)[ \t]*)*(private[^ ]*|protected)?[ \t]*class[ \t]+([a-zA-Z0-9_]+)/\4/c,classes/
---regex-kotlin=/^[ \t]*((abstract|final|open|sealed|implicit|lazy)[ \t]*)*(private[^ ]*|protected)?[ \t]*object[ \t]+([a-zA-Z0-9_]+)/\4/o,objects/
---regex-kotlin=/^[ \t]*((abstract|final|open|sealed|implicit|lazy)[ \t]*)*(private[^ ]*|protected)?[ \t]*((abstract|final|sealed|implicit|lazy)[ \t]*)*data class[ \t]+([a-zA-Z0-9_]+)/data \6/c,data classes/
---regex-kotlin=/^[ \t]*((abstract|final|open|sealed|implicit|lazy)[ \t]*)*(private[^ ]*|protected)?[ \t]*interface[ \t]+([a-zA-Z0-9_]+)/\4/i,interfaces/
---regex-kotlin=/^[ \t]*type[ \t]+([a-zA-Z0-9_]+)/\1/T,types/
---regex-kotlin=/^[ \t]*((abstract|final|open|sealed|implicit|lazy|private[^ ]*(\[[a-z]*\])*|protected)[ \t]*)*fun[ \t]+([a-zA-Z0-9_]+)/\4/m,methods/
---regex-kotlin=/^[ \t]*(override[ \t]*)*fun[ \t]+([a-zA-Z0-9_]+)/ov \4/om,override methods/
---regex-kotlin=/^[ \t]*((abstract|final|open|sealed|implicit|lazy|private[^ ]*|protected|override)[ \t]*)*val[ \t]+([a-zA-Z0-9_]+)/\3/co,constants/
---regex-kotlin=/^[ \t]*((abstract|final|open|sealed|implicit|lazy|private[^ ]*|protected|override)[ \t]*)*var[ \t]+([a-zA-Z0-9_]+)/\3/va,variables/
---regex-kotlin=/^[ \t]*package[ \t]+([a-zA-Z0-9_.]+)/\1/p,packages/
---regex-kotlin=/^[ \t]*import[ \t]+([a-zA-Z0-9_.]+)/\1/p,imports/
-
-// Javascript
+--regex-kotlin=/^ *((abstract|final|sealed|implicit|lazy|inner|open) *)*(private[^ ]*|protected)? *class +([[:alnum:]_:]+)/\4/c,classes/
+--regex-kotlin=/^ *((abstract|final|sealed|implicit|lazy) *)*(private[^ ]*|protected)? *object +([[:alnum:]_:]+)/\4/o,objects/
+--regex-kotlin=/^ *((abstract|final|sealed|implicit|lazy|open) *)*(private[^ ]*|protected)? *((abstract|final|sealed|implicit|lazy) *)*data class +([[:alnum:]_:]+)/\6/d,data classes/
+--regex-kotlin=/^ *((abstract|final|sealed|implicit|lazy) *)*(private[^ ]*|protected)? *interface +([[:alnum:]_:]+)/\4/i,interfaces/
+--regex-kotlin=/^ *type +([[:alnum:]_:]+)/\1/T,types/
+--regex-kotlin=/^ *((abstract|final|sealed|implicit|lazy|override|open|private[^ ]*(\[[a-z]*\])*|protected) *)*fun +([[:alnum:]_:]+)/\4/m,methods/
+--regex-kotlin=/^ *((abstract|final|sealed|implicit|lazy|override|private[^ ]*|protected) *)*(const )*val +([[:alnum:]_]+)/\4/C,constants/
+--regex-kotlin=/^ *((abstract|final|sealed|implicit|lazy|override|private[^ ]*|protected) *)*(lateinit *)*var +([[:alnum:]_]+)/\4/v,variables/
+--regex-kotlin=/^ *package +([[:alnum:]_.:]+)/\1/p,packages/
+--regex-kotlin=/^ *import +([[:alnum:]_.:]+)/\1/I,imports/
 
 --langmap=javascript:.js.es6.es.jsx
 --javascript-kinds=-c-f-m-p-v
@@ -134,8 +127,6 @@
 --regex-javascript=/^[ \t]*let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\2/V,Variable,Variables/b
 --regex-javascript=/^[ \t]*var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\3/V,Variable,Variables/b
 --regex-javascript=/^[ \t]*let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\3/V,Variable,Variables/b
-
-// General
 
 --exclude=target
 --exclude=.git

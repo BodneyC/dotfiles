@@ -2,3 +2,4 @@ multiplexing/.tmux/plugin*
 .vim
 .virkignore
 .zcompdump*
+.zshenv-macos

@@ -10,6 +10,12 @@ pdfcat() {
 	done
 }
 
+curl() { "$(command -v curl)" "$@"; echo; }
+
+usrbinlink() {
+    mv "$1" /usr/local/bin/ && ln -s /usr/local/bin/"$1" .
+}
+
 alias q="_yes_or_no 'Are you sure?' && systemctl poweroff -i"
 alias reboot="_yes_or_no 'Are you sure?' && systemctl reboot -i"
 alias l="ls -ha"
@@ -27,16 +33,16 @@ alias dt="tmux detach"
 alias du='du -h'
 alias df='df -h'
 if hash exa 2>/dev/null; then
-	alias e="exa --classify --group-directories-first --all"
-	alias el="${aliases[e]} --long"
-	alias ee="${aliases[e]} --long"
-	alias es="${aliases[el]} --header --binary --group"
-	alias ea="${aliases[es]} --all"
-	alias e1="exa -1 --all"
-	alias et="exa -T"
-	[[ "${aliases[l]}" ]] && unalias l
-	[[ "${aliases[ls]}" ]] && unalias ls
-	[[ "${aliases[la]}" ]] && unalias la
+    alias e="exa --classify --group-directories-first --all"
+    alias el="${aliases[e]} --long"
+    alias ee="${aliases[e]} --long"
+    alias es="${aliases[el]} --header --binary --group"
+    alias ea="${aliases[es]} --all"
+    alias e1="exa -1 --all"
+    alias et="exa -T"
+    [[ "${aliases[l]}" ]] && unalias l
+    [[ "${aliases[ls]}" ]] && unalias ls
+    [[ "${aliases[la]}" ]] && unalias la
 else
 	alias l="ls -ha"
 	alias ll="ls -hls"
