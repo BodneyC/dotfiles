@@ -1,15 +1,33 @@
 # vim:ft=zsh ts=2 sw=2 sts=2
 
-PROMPT='%{$fg_bold[magenta]%}$USER %{$reset_color%}%{$fg[magenta]%}⎩ %{$fg_bold[green]%}$(vi_mode_prompt_info)%{$reset_color%}%{$fg[magenta]%} ⎪ %{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)%{$reset_color%}%{$fg[magenta]%} ⎫%{$reset_color%}
-%{$fg[magenta]%}➢ %{$reset_color%}'
+FA_ICONS=(                                                    )
+n_fa_icons=$(( ${#FA_ICONS[@]} - 1 ))
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" %{$reset_color%}%{$fg[magenta]%}⎪"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}!"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[magenta]%}?"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✓"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[magenta]%} 🠂%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[magenta]%}🠀 %{$reset_color%}"
+local _mag_b="%{$fg_bold[magenta]%}"
+local _grn_b="%{$fg_bold[green]%}"
+local _blu_b="%{$fg_bold[blue]%}"
+local _red_b="%{$fg_bold[red]%}"
+local _mag_n="%{$fg[magenta]%}"
+local _grn_n="%{$fg[green]%}"
+local _blu_n="%{$fg[blue]%}"
+local _red_n="%{$fg[red]%}"
+local _reset="%{$reset_color%}"
+
+PROMPT='$_mag_b$USER$_reset \
+$_mag_n⎩ $_grn_b$(vi_mode_prompt_info)$_reset \
+$_mag_n⎪ %(?.$_grn_n.$_red_b)%?$_reset \
+$_mag_n⎪ $_blu_b${PWD/#$HOME/~}$_reset\
+$(git_prompt_info)$_reset$_mag_n \
+⎫${_reset}
+$_blu_n${FA_ICONS[$RANDOM % $n_fa_icons]}  $_reset'
+
+ZSH_THEME_GIT_PROMPT_PREFIX=" $_reset$_mag_n⎪"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$_reset"
+ZSH_THEME_GIT_PROMPT_DIRTY="${_red_b}!"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="${_mag_b}?"
+ZSH_THEME_GIT_PROMPT_CLEAN="${_grn_b}✓"
+ZSH_THEME_GIT_PROMPT_AHEAD="$_mag_n 🠂$_reset"
+ZSH_THEME_GIT_PROMPT_BEHIND="${_mag_n}🠀 $_reset"
 
 git_prompt_info () {
 	local ref
@@ -20,3 +38,4 @@ git_prompt_info () {
 		echo "$ZSH_THEME_GIT_PROMPT_PREFIX $(git_prompt_behind)$(parse_git_dirty) %{$fg_bold[magenta]%}\uE0A0 ${ref#refs/heads/}$(git_prompt_ahead)$ZSH_THEME_GIT_PROMPT_SUFFIX"
 	fi
 }
+
