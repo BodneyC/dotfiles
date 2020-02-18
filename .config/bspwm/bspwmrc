@@ -1,9 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 sxhkd &
 
 if [[ -n "$MON_1" ]]; then
-    xrandr --output "$MON_1" --rotate left --right-of "$MON_0" --scale 1.4
+    xrandr --output "$MON_1" --rotate left --right-of "$MON_0"
+    [[ "$MON_1" == DP1 ]] && xrandr --output "$MON_1" --scale 1.4
 	bspc monitor "$MON_1" -d 6 7 8 9 10
 	bspc monitor -d 1 2 3 4 5
 	TERMINAL_DESKTOP=6
@@ -43,7 +44,7 @@ hash ckb-next && /usr/bin/ckb-next --background &
 bspc desktop ^$TERMINAL_DESKTOP -l monocle
 bspc desktop ^$BROWSER_DESKTOP -l monocle
 
-bspc desktop --focus ^$TERMINAL_DESKTOP && alacritty & sleep 1
+bspc desktop --focus ^$TERMINAL_DESKTOP && kitty & sleep 1
 bspc desktop --focus ^$BROWSER_DESKTOP && firefox &
 
 sleep 3 && bspc desktop --focus ^$TERMINAL_DESKTOP

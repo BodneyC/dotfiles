@@ -85,7 +85,7 @@ fi
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
 [[ -z "$TMUX" ]] && \
     [[ -n "$ALACRITTY_LOG" || -n "$KITTY_WINDOW_ID" ]] && \
-    if ! ps aux | grep -q tmux_dash &&_yes_or_no "Launch tmux-dash?" Y; then
+    if ! ps aux | rg -q tmux_dash | rg -v rg && _yes_or_no "Launch tmux-dash?" Y; then
         tmux new-session 'tmux_dash'
     else
         tmux
