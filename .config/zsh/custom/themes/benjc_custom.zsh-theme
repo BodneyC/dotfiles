@@ -1,6 +1,6 @@
 # vim:ft=zsh ts=2 sw=2 sts=2
 
-FA_ICONS=(                                                    )
+FA_ICONS=(                                             )
 n_fa_icons=$(( ${#FA_ICONS[@]} - 1 ))
 
 local _mag_b="%{$fg_bold[magenta]%}"
@@ -19,7 +19,7 @@ $_mag_n⎪ %(?.$_grn_n.$_red_b)%?$_reset \
 $_mag_n⎪ $_blu_b${PWD/#$HOME/~}$_reset\
 $(git_prompt_info)$_reset$_mag_n \
 ⎫${_reset}
-$_blu_n${FA_ICONS[$RANDOM % $n_fa_icons]}  $_reset'
+%(?.$_grn_n.$_red_b)${FA_ICONS[$RANDOM % $n_fa_icons + 1]}  $_reset'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" $_reset$_mag_n⎪"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$_reset"
@@ -35,7 +35,7 @@ git_prompt_info () {
 		ref=$(command git symbolic-ref HEAD 2> /dev/null) \
 			|| ref=$(command git rev-parse --short HEAD 2> /dev/null) \
 			|| return 0;
-		echo "$ZSH_THEME_GIT_PROMPT_PREFIX $(git_prompt_behind)$(parse_git_dirty) %{$fg_bold[magenta]%}\uE0A0 ${ref#refs/heads/}$(git_prompt_ahead)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+		echo "$ZSH_THEME_GIT_PROMPT_PREFIX $(git_prompt_behind)$(parse_git_dirty)$_mag_b\uE0A0 ${ref#refs/heads/}$(git_prompt_ahead)$ZSH_THEME_GIT_PROMPT_SUFFIX"
 	fi
 }
 
