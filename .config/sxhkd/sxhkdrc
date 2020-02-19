@@ -29,7 +29,7 @@ super + q
 
 # Raise/lower volume
 XF86Audio{Raise,Lower}Volume
-  amixer sset 'Master' 10%{+,-}
+  amixer sset 'Master' 2%{+,-}
 
 # Mute volume
 XF86AudioMute
