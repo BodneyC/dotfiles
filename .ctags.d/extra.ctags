@@ -1,0 +1,12 @@
+--exclude=target
+--exclude=.git
+--exclude=.svn
+--exclude=.hg
+--exclude=node_modules
+--exclude=bundle.js
+--exclude=*.js.map
+--exclude=*.min.*
+--exclude=*.swp
+--exclude=*.bak
+--exclude=*.tar.*
+--tag-relative=always

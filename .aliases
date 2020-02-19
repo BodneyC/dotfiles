@@ -10,7 +10,7 @@ pdfcat() {
 	done
 }
 
-curl() { "$(command -v curl)" "$@"; echo; }
+curl() { /usr/bin/curl "$@"; echo; }
 
 usrbinlink() {
     mv "$1" /usr/local/bin/ && ln -s /usr/local/bin/"$1" .
