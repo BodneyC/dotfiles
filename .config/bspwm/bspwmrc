@@ -35,7 +35,7 @@ xrdb -load ~/.Xresources
 feh --bg-scale /usr/share/backgrounds/gnome/Fabric.jpg
 xsetroot -cursor_name left_ptr
 
-libinput-gestures-setup restart &
+hash libinput-gestures-setup && libinput-gestures-setup restart &
 
 hash ckb-next && /usr/bin/ckb-next --background &
 

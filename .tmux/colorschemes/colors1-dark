@@ -24,16 +24,16 @@
     set -g status-position bottom
     set -g status-style dim
 
-    set -g status-left ''
     set -g status-left-length 20
-    set -g status-right '%Y-%m-%d %H:%M:%S '
     set -g status-right-length 50
+    set -g status-left '#[fg=colour154,nobold,nounderscore,noitalics]'
+    set -g status-right '#[fg=colour157] %R %a %Y #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour223,bg=colour238] #H #[fg=colour154,nobold,nounderscore,noitalics]'
 
 # Window Status
 
-    setw -g window-status-current-format ' #I#[fg=6]:#[fg=6]#W#[fg=6]#F '
+    setw -g window-status-format '#[fg=colour223]  #I #W  '
 
-    setw -g window-status-format ' #I#[fg=5]:#[fg=5]#W#[fg=5]#F '
+    setw -g window-status-current-format '#[fg=colour235,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour154,bg=colour238] #I #[fg=colour223]#W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]'
 
 # Message Style
 
