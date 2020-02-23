@@ -33,7 +33,7 @@
 
     setw -g window-status-format '#[fg=colour223]  #I #W  '
 
-    setw -g window-status-current-format '#[fg=colour235,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour154,bg=colour238] #I #[fg=colour223]#W #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]'
+    setw -g window-status-current-format '#[fg=colour235,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour154,bg=colour238] #I #[fg=colour223]#W #[fg=colour238,bg=#303030,nobold,nounderscore,noitalics]'
 
 # Message Style
 

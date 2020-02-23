@@ -47,8 +47,4 @@ bspc desktop ^$BROWSER_DESKTOP -l monocle
 bspc desktop --focus ^$TERMINAL_DESKTOP && kitty & sleep 1
 bspc desktop --focus ^$BROWSER_DESKTOP && firefox &
 
-sleep 3 && bspc desktop --focus ^$TERMINAL_DESKTOP
-
-bspc desktop --focus ^$(( TERMINAL_DESKTOP + 1 )) && firefox & sleep 1
-
 bspc desktop --focus ^$TERMINAL_DESKTOP
