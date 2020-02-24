@@ -37,7 +37,7 @@ xsetroot -cursor_name left_ptr
 
 hash libinput-gestures-setup && libinput-gestures-setup restart &
 
-hash ckb-next && /usr/bin/ckb-next --background &
+# hash ckb-next && /usr/bin/ckb-next --background &
 
 ### User
 
