@@ -29,4 +29,4 @@ feh --bg-scale /usr/share/backgrounds/gnome/Fabric.jpg
 xsetroot -cursor_name left_ptr
 
 hash libinput-gestures-setup && libinput-gestures-setup restart &
-hash ckb-next && (sleep 3 && /usr/bin/ckb-next --background) &
+# hash ckb-next && (sleep 7 && /usr/bin/ckb-next --background) &

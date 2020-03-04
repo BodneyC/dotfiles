@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
 _add_to_path() {
-	[[ ! "$PATH" =~ $1 ]] \
-		&& export PATH="$PATH:$1"
-}
+  [[ ! "$PATH" =~ $1 ]] \
+    && export PATH="$PATH:$1"
+  }
 
 _add_to_path "$HOME/.local/apps/npm/bin"
 _add_to_path "$HOME/.local/bin"
@@ -23,16 +23,16 @@ _add_to_path "/usr/local/opt/curl-openssl/bin"
 _add_to_path "/usr/local/opt/"
 _add_to_path "/usr/local/sbin/"
 
-if ! [[ "$(uname -s)" =~ Darwin ]]; then
-    _MONITORS="$(xrandr -q | rg ' connected' | cut -d' ' -f1)"
-    N_MONITORS="$(wc -l <<< "$_MONITORS")"
-    MON_0="$(head -1 <<< "$_MONITORS")"
-    MON_1=""; [[ "$N_MONITORS" -eq 2 ]] \
-        && MON_1="$(tail -1 <<< "$_MONITORS")"
-    export N_MONITORS MON_0 MON_1
+if [[ -n "$DISPLAY" ]] && ! [[ "$(uname -s)" =~ Darwin ]]; then
+  _MONITORS="$(xrandr -q | rg ' connected' | cut -d' ' -f1)"
+  N_MONITORS="$(wc -l <<< "$_MONITORS")"
+  MON_0="$(head -1 <<< "$_MONITORS")"
+  MON_1=""; [[ "$N_MONITORS" -eq 2 ]] \
+    && MON_1="$(tail -1 <<< "$_MONITORS")"
+  export N_MONITORS MON_0 MON_1
 
-    export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"
-    export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
+  export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"
+  export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
 fi
 
 export TERMTHEME=dark
@@ -52,13 +52,13 @@ export HTTPS_PROXY=""
 export NO_PROXY=""
 
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH=$HOME/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 
-export PROMPT_EOL_MARK="\n"
+export PROMPT_EOL_MARK="\n\n"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export N_PREFIX="$HOME/.local"
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
 
-test -e .zshenv-macos && . "$HOME/.zshenv-macos"
+test -e "$HOME/.zshenv-macos" && . "$HOME/.zshenv-macos"
