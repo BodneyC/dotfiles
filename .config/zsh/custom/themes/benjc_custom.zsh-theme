@@ -23,8 +23,8 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="$_reset"
 ZSH_THEME_GIT_PROMPT_DIRTY="${_red_b}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="${_mag_b}?"
 ZSH_THEME_GIT_PROMPT_CLEAN="${_grn_b}✓"
-ZSH_THEME_GIT_PROMPT_AHEAD="$_mag_n  $_reset"
-ZSH_THEME_GIT_PROMPT_BEHIND="${_mag_n}  $_reset"
+ZSH_THEME_GIT_PROMPT_AHEAD="$_mag_n → $_reset"
+ZSH_THEME_GIT_PROMPT_BEHIND="${_mag_n} ← $_reset"
 
 git_prompt_info () {
 	local ref

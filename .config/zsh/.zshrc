@@ -83,3 +83,5 @@ elif [[ "$TERMTHEME" == "dark" ]]; then
 fi
 
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
+
+[[ -z "$TMUX" ]] && tmux

@@ -18,14 +18,15 @@ tabspaces: 8
 
 font:
   normal:
-    family: 'EmojiOne Color'
-    options: {size: 200}
+    family: 'Front Awesome 5 Free'
     family: 'RobotoMono Nerd Font'
     style: Light
   bold:
+    family: 'Front Awesome 5 Free'
     family: 'RobotoMono Nerd Font'
     style: Medium
   italic:
+    family: 'Front Awesome 5 Free'
     family: 'RobotoMono Nerd Font'
     style: Light Italic
   size: 9
