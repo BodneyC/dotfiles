@@ -236,9 +236,9 @@ key_bindings:
     
 
 
-  - { key: C,        mods: Command, chars: "c"                               }
   - { key: C,        mods: Shift|Control, action: Copy                       }
-  - { key: V,        mods: Command, chars: "v"                               }
   - { key: V,        mods: Shift|Control, action: Paste                      }
   - { key: W,        mods: Command, chars: "w"                               }
   - { key: Q,        mods: Command, chars: "q"                               }
+  - { key: Slash,    mods: Control, chars: "" }
+  - { key: Q,    mods: Control, chars: "" }
