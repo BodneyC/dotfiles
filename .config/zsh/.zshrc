@@ -73,8 +73,7 @@ if [[ -o HIST_FIND_NO_DUPS ]]; then
     _history_substring_search_matches=(${(@no)unique_matches})
 fi
 
-unsetopt PROMPT_SP
-unsetopt share_history
+unsetopt PROMPT_SP PROMPT_CR SHARE_HISTORY
 
 if [[ "$TERMTHEME" == "light" ]]; then
     export BAT_THEME="GitHub"
