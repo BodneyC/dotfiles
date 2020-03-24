@@ -27,13 +27,13 @@
     set -g status-left-length 20
     set -g status-right-length 50
     set -g status-left '#[fg=colour154,nobold,nounderscore,noitalics]'
-    set -g status-right '#[fg=colour15] %R %a %Y #[fg=colour238,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour223,bg=colour238] #H #[fg=colour154,nobold,nounderscore,noitalics]'
+    set -g status-right '#[fg=colour15] %R %a %Y #[fg=colour238,bg=#303030,nobold,nounderscore,italics]#[fg=colour223,bg=colour238] #H #[fg=colour154,nobold,nounderscore,noitalics]'
 
 # Window Status
 
-    setw -g window-status-format '#[fg=colour223]  #I #W  '
+    setw -g window-status-format '#[fg=colour223,bg=#303030,noitalics,nobold]  #I #[italics,nobold]#W#{?window_zoomed_flag,  ,}  '
 
-    setw -g window-status-current-format '#[fg=colour235,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour154,bg=colour238] #I #[fg=colour223]#W #[fg=colour238,bg=#303030,nobold,nounderscore,noitalics]'
+    setw -g window-status-current-format '#[fg=#303030,bg=colour238,nobold,nounderscore,noitalics]#[fg=colour154,bg=colour238] #I #[fg=colour223,bold,italics]#W#{?window_zoomed_flag,  ,} #[fg=colour238,bg=#303030,nobold,nounderscore,noitalics]'
 
 # Message Style
 
