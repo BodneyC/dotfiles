@@ -60,6 +60,7 @@ bindkey '^[[B' history-substring-search-down
 bindkey '^f' autosuggest-execute
 # bindkey '^k' autosuggest-accept
 bindkey '[Z' reverse-menu-complete
+bindkey -r '^J'
 
 # bindkey '^i' expand-or-complete-prefix
 
