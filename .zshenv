@@ -3,25 +3,25 @@
 _add_to_path() {
   [[ ! "$PATH" =~ $1 ]] \
     && export PATH="$PATH:$1"
-  }
+}
 
+_add_to_path "$HOME/.cargo/bin"
+_add_to_path "$HOME/.config/yarn/global/node_modules/.bin"
+_add_to_path "$HOME/.dotnet/tools"
+_add_to_path "$HOME/.fnm"
+_add_to_path "$HOME/.gem/ruby/2.6.0/bin"
 _add_to_path "$HOME/.local/apps/npm/bin"
 _add_to_path "$HOME/.local/bin"
-_add_to_path "$HOME/.yarn/bin"
-_add_to_path "$HOME/.config/yarn/global/node_modules/.bin"
-_add_to_path "$HOME/Library/Python/3.8/bin"
-_add_to_path "$HOME/scripts"
-_add_to_path "$HOME/.rvm/bin"
-_add_to_path "$HOME/go/bin"
 _add_to_path "$HOME/.local/share/npm/bin"
 _add_to_path "$HOME/.poetry/bin"
-_add_to_path "$HOME/.gem/ruby/2.6.0/bin"
-_add_to_path "$HOME/.fnm"
-_add_to_path "$HOME/.cargo/bin"
-_add_to_path "$HOME/.dotnet/tools"
-_add_to_path "/usr/local/opt/maven@3.3/bin"
-_add_to_path "/usr/local/opt/curl-openssl/bin"
+_add_to_path "$HOME/.rvm/bin"
+_add_to_path "$HOME/.yarn/bin"
+_add_to_path "$HOME/Library/Python/3.8/bin"
+_add_to_path "$HOME/go/bin"
+_add_to_path "$HOME/scripts"
 _add_to_path "/usr/local/opt/"
+_add_to_path "/usr/local/opt/curl-openssl/bin"
+_add_to_path "/usr/local/opt/maven@3.3/bin"
 _add_to_path "/usr/local/sbin/"
 
 if [[ -n "$DISPLAY" ]] && ! [[ "$(uname -s)" =~ Darwin ]]; then

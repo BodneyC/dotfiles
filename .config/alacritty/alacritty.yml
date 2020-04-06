@@ -45,51 +45,27 @@ debug:
   draw_bold_text_with_bright_colors: true
 
 colors:
-  # 1989
   primary:
-    background: '0x303030'
-    foreground: '0xffffff'
+    background: '0x1c1b1d'
+    foreground: '0xfff8fc'
   normal:
-    black:      '0x878787'
-    red:        '0xffafdf'
-    green:      '0xafffd7'
-    yellow:     '0xffffaf'
-    blue:       '0xafffff'
-    magenta:    '0xdfafff'
-    cyan:       '0xffdfff'
-    white:      '0xffffff'
+    black:      '0x403a3a'
+    red:        '0xeec8a8'
+    green:      '0xb4dba5'
+    yellow:     '0xe3e999'
+    blue:       '0xa5cde0'
+    magenta:    '0xf9adb4'
+    cyan:       '0x92dfc3'
+    white:      '0xccc9cc'
   bright:
-    black:      '0x878787'
-    red:        '0xffafdf'
-    green:      '0xafffd7'
-    yellow:     '0xffffaf'
-    blue:       '0xafffff'
-    magenta:    '0xdfafff'
-    cyan:       '0xffdfff'
-    white:      '0xffffff'
-
-  # # two-firewatch
-  # primary:
-  #   background: '0x282c34'
-  #   foreground: '0xabb2bf'
-  # normal:
-  #   black:      '0x181823'
-  #   red:        '0xe06c75'
-  #   green:      '0x98c379'
-  #   yellow:     '0xe5c07b'
-  #   blue:       '0x61afef'
-  #   magenta:    '0xc678dd'
-  #   cyan:       '0x56b6c2'
-  #   white:      '0xdcdfe4'
-  # bright:
-  #   black:      '0x181823'
-  #   red:        '0xe06c75'
-  #   green:      '0x98c379'
-  #   yellow:     '0xe5c07b'
-  #   blue:       '0x61afef'
-  #   magenta:    '0xc678dd'
-  #   cyan:       '0x56b6c2'
-  #   white:      '0xdcdfe4'
+    black:      '0x403a3a'
+    red:        '0xa75757'
+    green:      '0x70a757'
+    yellow:     '0xdfde7d'
+    blue:       '0x89c6d0'
+    magenta:    '0xc26fae'
+    cyan:       '0x86b89e'
+    white:      '0xccc9cc'
 
 visual_bell:
   animation: EaseOutExpo

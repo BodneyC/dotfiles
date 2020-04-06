@@ -84,4 +84,4 @@ fi
 
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
 
-[[ -z "$TMUX" ]] && tmux && exit
+[[ -z "$TMUX" ]] && tmux #&& exit
