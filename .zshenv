@@ -24,17 +24,8 @@ _add_to_path "/usr/local/opt/curl-openssl/bin"
 _add_to_path "/usr/local/opt/maven@3.3/bin"
 _add_to_path "/usr/local/sbin/"
 
-if [[ -n "$DISPLAY" ]] && ! [[ "$(uname -s)" =~ Darwin ]]; then
-  _MONITORS="$(xrandr -q | rg ' connected' | cut -d' ' -f1)"
-  N_MONITORS="$(wc -l <<< "$_MONITORS")"
-  MON_0="$(head -1 <<< "$_MONITORS")"
-  MON_1=""; [[ "$N_MONITORS" -eq 2 ]] \
-    && MON_1="$(tail -1 <<< "$_MONITORS")"
-  export N_MONITORS MON_0 MON_1
-
-  export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"
-  export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
-fi
+export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"
+export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
 
 export TERMTHEME=dark
 

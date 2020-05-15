@@ -1,24 +1,9 @@
 ################################################################
 # Wm independent hotkeys
 
-super + p
-  if [[ "$(xrandr -q | rg -c ' connected')" -gt 1 ]]; then \
-    "$HOME/.config/polybar/scripts/sys/sys-menu-$(bspc query -M -d focused --names)"; \
-  else \
-    "$HOME/.config/polybar/scripts/sys/sys-menu"; \
-  fi
-
 # Terminal emulator
 super + Return
   kitty
-
-# Program launcher
-super + space
-  if [[ "$(xrandr -q | rg -c ' connected')" -gt 1 ]]; then \
-    "$HOME/.config/polybar/scripts/start/start-menu-$(bspc query -M -d focused --names)"; \
-  else \
-    "$HOME/.config/polybar/scripts/start/start-menu"; \
-  fi
 
 # Make sxhkd reload its configuration files:
 super + q
@@ -95,12 +80,8 @@ super + bracket{left,right}
   bspc desktop -f {prev,next}.local
 
 # Focus the last node/desktop
-alt + grave
-  if [[ "$(xrandr -q | rg -c ' connected')" -gt 1 ]]; then \
-    "$HOME/.config/polybar/scripts/task-switcher/task-switcher-$(bspc query -M -d focused --names)"; \
-  else \
-    "$HOME/.config/polybar/scripts/task-switcher/task-switcher"; \
-  fi
+alt + {_,shift +} grave
+  bspc node -f {next,prev}
 
 super + {_,shift + }Tab
   bspc node -f {next,prev}

@@ -26,7 +26,7 @@ font:
   bold-italic:
     family: 'VictorMono Nerd Font'
     style: Bold Italic
-  size: 13
+  size: 11
   offset:
     x: 0
     y: 2
