@@ -3,7 +3,7 @@
 
 # Terminal emulator
 super + Return
-  kitty
+  alacritty
 
 # Make sxhkd reload its configuration files:
 super + q
@@ -25,6 +25,21 @@ XF86MonBrightnessDown
 
 XF86MonBrightnessUp
   xbacklight -inc 1 
+
+################################################################
+# Polybar interaction
+
+ctrl + alt + Tab
+  ~/.config/polybar/scripts/task-switcher.sh
+
+ctrl + alt + shift + p
+  ~/.config/polybar/launch.sh
+
+super + p
+  ~/.config/polybar/scripts/system-menu.sh
+
+super + space
+  ~/.config/polybar/scripts/start-menu.sh
 
 ################################################################
 # Bspwm hotkeys
