@@ -9,6 +9,9 @@ super + Return
 super + q
   pkill -USR1 -x sxhkd
 
+ctrl + shift + q
+  i3lock-fancy-rapid 5 5
+
 ################################################################
 # Media
 

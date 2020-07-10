@@ -2,30 +2,23 @@
 
 sxhkd &
 
-if [[ -n "$MON_1" ]]; then
-  xrandr --output "$MON_1" --rotate left --right-of "$MON_0"
-  [[ "$MON_1" == DP1 ]] && xrandr --output "$MON_1" --scale 1.4
-  bspc monitor "$MON_1" -d 6 7 8 9 10
-  bspc monitor -d 1 2 3 4 5
-else
-  bspc monitor -d 1 2 3 4 5 6 7 8 9 10
-fi
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 bspc config border_width         1
-bspc config window_gap           2
+bspc config window_gap           10
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config normal_border_color  \#353535
-bspc config focused_border_color \#AAAAAA
+bspc config focused_border_color \#555577
 bspc config border_width     1
 
 "$HOME/.config/polybar/launch.sh" &
-compton --config "$HOME/.config/compton.conf" &
+compton --config ~/.config/compton.conf  --backend glx &
 
 xrdb -load ~/.Xresources
-feh --bg-scale /usr/share/backgrounds/gnome/Fabric.jpg
+feh --bg-scale /usr/share/backgrounds/wallpapers-2018/texture-2666357.jpg
 xsetroot -cursor_name left_ptr
 
 hash libinput-gestures-setup && libinput-gestures-setup restart &

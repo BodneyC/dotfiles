@@ -52,6 +52,6 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export N_PREFIX="$HOME/.local"
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
-export FZF_PREVIEW_COMMAND="bat --style=numbers --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
+export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=onehalfdark --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
 
 test -e "$HOME/.zshenv-macos" && . "$HOME/.zshenv-macos"

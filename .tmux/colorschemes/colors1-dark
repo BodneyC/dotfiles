@@ -27,7 +27,7 @@
     set -g status-left-length 20
     set -g status-right-length 50
     set -g status-left '#[fg=colour154,nobold,nounderscore,noitalics]'
-    set -g status-right '#[fg=colour15] %R %a %Y #[fg=#282729,bg=#1c1b1d,nobold,nounderscore,italics]#[fg=colour223,bg=#282729] #H #[fg=colour154,nobold,nounderscore,noitalics]'
+    set -g status-right '#[fg=colour15] %R %a %Y-%m-%d #[fg=#282729,bg=#1c1b1d,nobold,nounderscore,italics]#[fg=colour223,bg=#282729] #H #[fg=colour154,nobold,nounderscore,noitalics]'
 
 # Window Status
 
