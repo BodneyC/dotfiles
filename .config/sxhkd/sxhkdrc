@@ -12,22 +12,33 @@ super + q
 ctrl + shift + q
   i3lock-fancy-rapid 5 5
 
+shift + alt + 4
+  gnome-screenshot -a
+
 ################################################################
 # Media
 
 # Raise/lower volume
 XF86Audio{Raise,Lower}Volume
-  amixer sset 'Master' 2%{+,-}
+  amixer sset 'Master' 2%{+,-} && \
+    hash dunstify && \
+    dunstify -r 24345 -a amixer "$(amixer sget 'Master' | rg -m 1 % | cut -d' ' -f 7-)"
 
 # Mute volume
 XF86AudioMute
-  amixer sset 'Master' toggle
+  amixer sset 'Master' toggle && \
+    hash dunstify && \
+    dunstify -r 24345 -a amixer "$(amixer sget 'Master' | rg -m 1 % | cut -d' ' -f 7-)"
 
 XF86MonBrightnessDown
-  xbacklight -dec 1 
+  xbacklight -dec 1 && \
+    hash dunstify && \
+    dunstify -r 31231 -a "xbacklight" "$(xbacklight -get)" 
 
 XF86MonBrightnessUp
-  xbacklight -inc 1 
+  xbacklight -inc 1  && \
+    hash dunstify && \
+    dunstify -r 31231 -a "xbacklight" "$(xbacklight -get)" 
 
 ################################################################
 # Polybar interaction
