@@ -1,23 +1,30 @@
 #!/usr/bin/zsh
 
 _did_you_mean() {
-	echo "Did you mean '$1'?"; return 1
+  echo "Did you mean '$1'?"; return 1
 }
 
 pdfcat() {
-	for f in "$@"; do
-		pdftotext "$f" - | less
-	done
+  for f in "$@"; do
+    pdftotext "$f" - | less
+  done
 }
 
 curl() { /usr/bin/curl "$@"; echo; }
 
 usrbinlink() {
-    mv "$1" /usr/local/bin/ && ln -s /usr/local/bin/"$1" .
+  mv "$1" /usr/local/bin/ && ln -s /usr/local/bin/"$1" .
 }
 
-vprog() {
-    "$(command -v nvim)" "$(command -v $1)"
+v-prog() {
+  "$(command -v nvim)" "$(command -v $1)"
+}
+
+nvm-init() {
+  export NVM_DIR="$HOME/.nvm"
+  if [ -s "$NVM_DIR/nvm.sh" ]; then
+    . "$NVM_DIR/nvm.sh"
+  fi
 }
 
 alias q="_yes_or_no 'Are you sure?' && systemctl poweroff -i"
@@ -37,19 +44,19 @@ alias dt="tmux detach"
 alias du='du -h'
 alias df='df -h'
 if hash exa 2>/dev/null; then
-    alias e="exa --classify --group-directories-first --all"
-    alias el="${aliases[e]} --long"
-    alias ee="${aliases[e]} --long"
-    alias es="${aliases[el]} --header --binary --group"
-    alias ea="${aliases[es]} --all"
-    alias e1="exa -1 --all"
-    alias et="exa -T"
-    [[ "${aliases[l]}" ]] && unalias l
-    [[ "${aliases[ls]}" ]] && unalias ls
-    [[ "${aliases[la]}" ]] && unalias la
+  alias e="exa --classify --group-directories-first --all"
+  alias el="${aliases[e]} --long"
+  alias ee="${aliases[e]} --long"
+  alias es="${aliases[el]} --header --binary --group"
+  alias ea="${aliases[es]} --all"
+  alias e1="exa -1 --all"
+  alias et="exa -T"
+  [[ "${aliases[l]}" ]] && unalias l
+  [[ "${aliases[ls]}" ]] && unalias ls
+  [[ "${aliases[la]}" ]] && unalias la
 else
-	alias l="ls -ha"
-	alias ll="ls -hls"
+  alias l="ls -ha"
+  alias ll="ls -hls"
 fi
 alias vim="_did_you_mean 'v'"
 alias rm="_did_you_mean 'rem'"
