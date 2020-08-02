@@ -9,15 +9,6 @@ local _grn_n="%{$fg[green]%}"
 local _blu_n="%{$fg[blue]%}"
 local _red_n="%{$fg[red]%}"
 local _reset="%{$reset_color%}"
-local _beam="$(printf '\033[6 q')"
-
-PROMPT='$_mag_b$USER$_reset \
-$_mag_n⎩ $_grn_b$(vi_mode_prompt_info)$_reset \
-$_mag_n⎪ %(?.$_grn_n.$_red_b)%?$_reset \
-$_mag_n⎪ $_blu_b${PWD/#$HOME/~}$_reset\
-$(git_prompt_info)$_reset$_mag_n \
-⎫${_reset}
-%(?.$_grn_n.$_red_b) $_reset$_beam'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" $_reset$_mag_n⎪"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$_reset"
@@ -37,3 +28,20 @@ git_prompt_info () {
 	fi
 }
 
+_beam_cursor() { echo -ne '\e[6 q'; }
+PRECMD_FUNCTIONS+=(_beam_cursor)
+
+zle-keymap-select zle-line-init() {
+    case $KEYMAP in
+        vicmd)      echo -ne '\e[1 q';;
+        viins|main) echo -ne '\e[6 q';;
+    esac
+}
+
+PROMPT='$_mag_b$USER$_reset \
+$_mag_n⎩ $_grn_b$(vi_mode_prompt_info)$_reset \
+$_mag_n⎪ %(?.$_grn_n.$_red_b)%?$_reset \
+$_mag_n⎪ $_blu_b${PWD/#$HOME/~}$_reset\
+$(git_prompt_info)$_reset$_mag_n \
+⎫${_reset}
+%(?.$_grn_n.$_red_b) $_reset'
