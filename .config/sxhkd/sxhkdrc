@@ -22,23 +22,23 @@ shift + alt + 4
 XF86Audio{Raise,Lower}Volume
   amixer sset 'Master' 2%{+,-} && \
     hash dunstify && \
-    dunstify -r 24345 -a amixer "$(amixer sget 'Master' | rg -m 1 % | cut -d' ' -f 7-)"
+    dunstify -r 24345 -a amixer "$(amixer sget 'Master' | rg -m 1 % | cut -d' ' -f 6,8-)"
 
 # Mute volume
 XF86AudioMute
   amixer sset 'Master' toggle && \
     hash dunstify && \
-    dunstify -r 24345 -a amixer "$(amixer sget 'Master' | rg -m 1 % | cut -d' ' -f 7-)"
-
-XF86MonBrightnessDown
-  xbacklight -dec 1 && \
-    hash dunstify && \
-    dunstify -r 31231 -a "xbacklight" "$(xbacklight -get)" 
+    dunstify -r 24345 -a amixer "$(amixer sget 'Master' | rg -m 1 % | cut -d' ' -f 6,8-)"
 
 XF86MonBrightnessUp
-  xbacklight -inc 1  && \
+  light -A 3 && \
     hash dunstify && \
-    dunstify -r 31231 -a "xbacklight" "$(xbacklight -get)" 
+    dunstify -r 31231 -a "light" "$(light -G)" 
+
+XF86MonBrightnessDown
+  light -U 3 && \
+    hash dunstify && \
+    dunstify -r 31231 -a "light" "$(light -G)" 
 
 ################################################################
 # Polybar interaction

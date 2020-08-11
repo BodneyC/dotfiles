@@ -1,6 +1,6 @@
 [global]
     corner_radius = 15
-    font = VictorMono Nerd Font 11
+    font = VictorMono Nerd Font 15
     allow_markup = yes
     format = "<b>%a:</b> %s\n%b"
     sort = yes

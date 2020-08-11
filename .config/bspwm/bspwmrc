@@ -18,7 +18,7 @@ bspc config border_width     1
 compton --config ~/.config/compton.conf  --backend glx &
 
 xrdb -load ~/.Xresources
-feh --bg-scale /usr/share/backgrounds/wallpapers-2018/texture-2666357.jpg
+feh --bg-scale "$HOME/Pictures/wallpaper-space.jpg"
 xsetroot -cursor_name left_ptr
 
 hash libinput-gestures-setup && libinput-gestures-setup restart &

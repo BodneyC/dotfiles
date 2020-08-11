@@ -10,6 +10,7 @@ _add_to_path "$HOME/.config/yarn/global/node_modules/.bin"
 _add_to_path "$HOME/.dotnet/tools"
 _add_to_path "$HOME/.fnm"
 _add_to_path "$HOME/.gem/ruby/2.6.0/bin"
+_add_to_path "$HOME/.gem/ruby/2.7.0/bin"
 _add_to_path "$HOME/.local/apps/npm/bin"
 _add_to_path "$HOME/.local/bin"
 _add_to_path "$HOME/.local/share/npm/bin"
@@ -53,5 +54,7 @@ export N_PREFIX="$HOME/.local"
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=onehalfdark --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
+
+export GDK_DPI_SCALE=1.7
 
 test -e "$HOME/.zshenv-macos" && . "$HOME/.zshenv-macos"
