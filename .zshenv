@@ -55,6 +55,9 @@ export N_PREFIX="$HOME/.local"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=onehalfdark --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
 
-export GDK_DPI_SCALE=1.7
+export GDK_DPI_SCALE=1.8
+
+export AWS_SDK_LOAD_CONFIG=1
+export AWS_CONFIG_FILE="$HOME/.aws/config"
 
 test -e "$HOME/.zshenv-macos" && . "$HOME/.zshenv-macos"

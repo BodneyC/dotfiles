@@ -11,6 +11,7 @@ ZSH_CUSTOM=$ZDOTDIR/custom
 KEYTIMEOUT=1
 
 plugins=(
+    aws
     git
     docker
     docker-compose

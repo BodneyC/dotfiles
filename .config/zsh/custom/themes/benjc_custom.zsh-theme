@@ -12,9 +12,9 @@ local _reset="%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" $_reset$_mag_n⎪"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$_reset"
-ZSH_THEME_GIT_PROMPT_DIRTY="${_red_b}!"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="${_mag_b}?"
-ZSH_THEME_GIT_PROMPT_CLEAN="${_grn_b}✓"
+ZSH_THEME_GIT_PROMPT_DIRTY="${_red_n}!"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="${_mag_n}?"
+ZSH_THEME_GIT_PROMPT_CLEAN="${_grn_n}✓"
 ZSH_THEME_GIT_PROMPT_AHEAD="$_mag_n → $_reset"
 ZSH_THEME_GIT_PROMPT_BEHIND="${_mag_n} ← $_reset"
 
@@ -38,10 +38,10 @@ zle-keymap-select zle-line-init() {
     esac
 }
 
-PROMPT='$_mag_b$USER$_reset \
-$_mag_n⎩ $_grn_b$(vi_mode_prompt_info)$_reset \
-$_mag_n⎪ %(?.$_grn_n.$_red_b)%?$_reset \
-$_mag_n⎪ $_blu_b${PWD/#$HOME/~}$_reset\
+PROMPT='$_mag_n$USER$_reset \
+$_mag_n⎩ $_grn_n$(vi_mode_prompt_info)$_reset \
+$_mag_n⎪ %(?.$_grn_n.$_red_n)%?$_reset \
+$_mag_n⎪ $_blu_n${PWD/#$HOME/~}$_reset\
 $(git_prompt_info)$_reset$_mag_n \
 ⎫${_reset}
-%(?.$_grn_n.$_red_b) $_reset'
+%(?.$_grn_n.$_red_n) $_reset'
