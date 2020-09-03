@@ -27,6 +27,11 @@ nvm-init() {
   fi
 }
 
+cd() {
+  builtin cd "$@"
+  exa --classify --group-directories-first --all
+}
+
 alias q="_yes_or_no 'Are you sure?' && systemctl poweroff -i"
 alias reboot="_yes_or_no 'Are you sure?' && systemctl reboot -i"
 alias l="ls -ha"
@@ -65,7 +70,9 @@ alias v-novirk="$(command -v nvim) +\"let g:virk_enabled=0\""
 alias mci="mvn clean install"
 alias scim="TERM=xterm-256color scim"
 alias gotop="TERM=xterm-256color gotop"
-alias open="xdg-open"
+hash "xdg-open" && alias open="xdg-open"
+alias t="task"
+alias lg="lazygit"
 
 alias IGNORE_PROXY="ALL_PROXY=\"\" HTTPS_PROXY=\"\" HTTP_PROXY=\"\" "
 alias bdate="date '+%Y-%M-%d'"

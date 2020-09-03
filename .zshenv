@@ -28,10 +28,10 @@ _add_to_path "/usr/local/sbin/"
 export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"
 export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
 
-export TERMTHEME=dark
+export TERMTHEME=light
 
 export VISUAL="$(command -v nvim)"
-export EDITOR="$(command -v nvim)"
+export EDITOR="$VISUAL"
 export SHELL="$(command -v zsh)"
 export GIT_PAGER="$(command -v less) -F -X"
 

@@ -34,6 +34,75 @@ debug:
 draw_bold_text_with_bright_colors: true
 
 schemes:
+  plint: &plint
+    primary:
+      background: '0x101211'
+      foreground: '0xfff8fc'
+    normal:
+      black:      '0x928c92'
+      red:        '0xE6FEFF'
+      green:      '0xCBFCFE'
+      yellow:     '0xDEEAE9'
+      blue:       '0xF7FFFD'
+      magenta:    '0xD3EBE3'
+      cyan:       '0xEBF0EE'
+      white:      '0xccc9cc'
+    bright:
+      black:      '0x928c92'
+      red:        '0xAEC1C2'
+      green:      '0x91A19F'
+      yellow:     '0x99B49F'
+      blue:       '0xB0B5B4'
+      magenta:    '0x91A19C'
+      cyan:       '0xA2A6A4'
+      white:      '0xccc9cc'
+
+  unicorn: &unicorn
+    primary:
+      background: '0x292429'
+      foreground: '0xfff8fc'
+    normal:
+      black:      '0x928c92'
+      red:        '0xfdbad5'
+      green:      '0xc1fffb'
+      yellow:     '0xE3FFD1'
+      blue:       '0xd0d5fe'
+      magenta:    '0xdfc2e8'
+      cyan:       '0xd2f0ff'
+      white:      '0xccc9cc'
+    bright:
+      black:      '0x928c92'
+      red:        '0xbc92a4'
+      green:      '0xa9c8bd'
+      yellow:     '0xbec7a7'
+      blue:       '0x9089b0'
+      magenta:    '0xab8bb0'
+      cyan:       '0x819790'
+      white:      '0xccc9cc'
+
+  solarized-light: &solarized-light
+    primary:
+      background: '0xffffd7'
+      foreground: '0x808080'
+    normal:
+      black:      '0x8a8a8a'
+      red:        '0xaf8700'
+      green:      '0x5f8700'
+      yellow:     '0xaf0000'
+      blue:       '0x5f5faf'
+      magenta:    '0xaf005f'
+      cyan:       '0x00afaf'
+      white:      '0x8a8a8a'
+    bright:
+      black:      '0x8a8a8a'
+      red:        '0xd75f00'
+      green:      '0x5f8700'
+      yellow:     '0xaf8700'
+      blue:       '0x0087ff'
+      magenta:    '0xaf005f'
+      cyan:       '0x00afaf'
+      white:      '0x8a8a8a'
+
   subdued: &subdued
     primary:
       background: '0x1c1b1d'
@@ -57,7 +126,7 @@ schemes:
       cyan:       '0x86b89e'
       white:      '0xccc9cc'
 
-colors: *subdued
+colors: *solarized-light
 
 bell:
   animation: EaseOutExpo

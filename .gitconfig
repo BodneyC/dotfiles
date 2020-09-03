@@ -4,8 +4,9 @@
 [alias]
   branchdates = for-each-ref --sort=committerdate refs/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
   graph = log --graph --pretty=format:'%C(magenta)%h %Creset%C(dim blue)%an [%ce]%n%Creset  %m%C(yellow)%d%Creset %s %Cgreen(%cr)%n%Creset' --abbrev-commit
+  diffp = diff @^..@
 [mergetool "nvim"]
-  cmd = nvim -f  -c \"let g:virk_enabled=0\" -c \"Gdiffsplit!\" \"$MERGED\"
+  cmd = nvim -f +"let g:virk_enabled=0" -c "Gdiffsplit!" "$MERGED"
 [merge]
   tool = nvim
 [mergetool]
