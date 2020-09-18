@@ -6,7 +6,7 @@
   graph = log --graph --pretty=format:'%C(magenta)%h %Creset%C(dim blue)%an [%ce]%n%Creset  %m%C(yellow)%d%Creset %s %Cgreen(%cr)%n%Creset' --abbrev-commit
   diffp = diff @^..@
 [mergetool "nvim"]
-  cmd = nvim -f +"let g:virk_enabled=0" -c "Gdiffsplit!" "$MERGED"
+	cmd = nvim +'let g:virk_enabled=0' -c 'Gdiffsplit!' $MERGED
 [merge]
   tool = nvim
 [mergetool]

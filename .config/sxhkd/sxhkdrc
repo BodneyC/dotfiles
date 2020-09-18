@@ -12,8 +12,8 @@ super + q
 ctrl + shift + q
   i3lock-fancy-rapid 5 5
 
-shift + alt + 4
-  gnome-screenshot -a
+alt + shift + 4
+  sleep 0.2 && scrot -s
 
 ################################################################
 # Media

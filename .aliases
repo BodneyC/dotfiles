@@ -16,7 +16,7 @@ usrbinlink() {
   mv "$1" /usr/local/bin/ && ln -s /usr/local/bin/"$1" .
 }
 
-v-prog() {
+v-which() {
   "$(command -v nvim)" "$(command -v $1)"
 }
 
@@ -32,22 +32,6 @@ cd() {
   exa --classify --group-directories-first --all
 }
 
-alias q="_yes_or_no 'Are you sure?' && systemctl poweroff -i"
-alias reboot="_yes_or_no 'Are you sure?' && systemctl reboot -i"
-alias l="ls -ha"
-alias ll="ls -hls"
-alias gs="echo \"No ghostscript, you spanner\""
-# alias texclean="rm *.log *.aux *.toc *.lof *.lot *.out *.dvi"
-alias nettest="ping -c 2 google.com"
-# Tmux
-alias tkill="tmux kill-server"
-alias tkeep="tmux kill-session -a"
-alias tlist="tmux list-session"
-alias qt="tmux kill-session"
-alias at="tmux attach"
-alias dt="tmux detach"
-alias du='du -h'
-alias df='df -h'
 if hash exa 2>/dev/null; then
   alias e="exa --classify --group-directories-first --all"
   alias el="${aliases[e]} --long"
@@ -63,23 +47,32 @@ else
   alias l="ls -ha"
   alias ll="ls -hls"
 fi
-alias vim="_did_you_mean 'v'"
-alias rm="_did_you_mean 'rem'"
-alias v="nvim"
-alias v-novirk="$(command -v nvim) +\"let g:virk_enabled=0\""
-alias mci="mvn clean install"
-alias scim="TERM=xterm-256color scim"
-alias gotop="TERM=xterm-256color gotop"
-hash "xdg-open" && alias open="xdg-open"
-alias t="task"
-alias lg="lazygit"
-
-alias IGNORE_PROXY="ALL_PROXY=\"\" HTTPS_PROXY=\"\" HTTP_PROXY=\"\" "
+alias IGNORE_PROXY='ALL_PROXY="" HTTPS_PROXY="" HTTP_PROXY=""'
+alias tat="tmux attach"
 alias bdate="date '+%Y-%M-%d'"
-alias -g and="&&"
-alias -g or="||"
+alias df='df -h'
+alias dockerun="docker run --rm -t -i"
+alias dt="tmux detach"
+alias du='du -h'
+alias gotop="TERM=xterm-256color gotop"
+alias gs="echo \"No ghostscript, you spanner\""
+alias lg="lazygit"
+alias mci="mvn clean install"
+alias nettest="ping -c 2 google.com"
+alias podrun="podman run --rm -t -i"
+alias q="_yes_or_no 'Are you sure?' && systemctl poweroff -i"
+alias qt="tmux kill-session"
+alias reboot="_yes_or_no 'Are you sure?' && systemctl reboot -i"
+alias rm="_did_you_mean 'rem'"
+alias scim="TERM=xterm-256color scim"
+alias t="task"
+alias tkeep="tmux kill-session -a"
+alias tkill="tmux kill-server"
+alias tlist="tmux list-session"
+alias v-novirk="$(command -v nvim) +\"let g:virk_enabled=0\""
+alias v-startup="$(command -v nvim) --startuptime /tmp/nvim.log -c 'qall' && v-novirk /tmp/nvim.log"
+alias v="nvim"
+alias vim="_did_you_mean 'v'"
 alias xi="xclip -in -selection clipboard"
 alias xo="xclip -out -selection clipboard"
-alias dockerun="docker run --rm -t -i"
-alias podrun="podman run --rm -t -i"
-alias IGNORE_PROXY='ALL_PROXY="" HTTPS_PROXY="" HTTP_PROXY=""'
+hash xdg-open && alias open="xdg-open"

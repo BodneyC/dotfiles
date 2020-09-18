@@ -57,6 +57,29 @@ schemes:
       cyan:       '0xA2A6A4'
       white:      '0xccc9cc'
 
+  plint-light: &plint-light
+    primary:
+      background: '0xefffff'
+      foreground: '0x000000'
+    normal:
+      black:      '0x7f7f7f'
+      red:        '0x881111'
+      green:      '0x118811'
+      yellow:     '0x888811'
+      blue:       '0x111188'
+      magenta:    '0x881188'
+      cyan:       '0x118888'
+      white:      '0x888888'
+    bright:
+      black:      '0x7f7f7f'
+      red:        '0x661111'
+      green:      '0x116611'
+      yellow:     '0x666611'
+      blue:       '0x111166'
+      magenta:    '0x661166'
+      cyan:       '0x116666'
+      white:      '0x888888'
+
   unicorn: &unicorn
     primary:
       background: '0x292429'
@@ -82,13 +105,13 @@ schemes:
 
   solarized-light: &solarized-light
     primary:
-      background: '0xffffd7'
+      background: '0xfcfadd'
       foreground: '0x808080'
     normal:
       black:      '0x8a8a8a'
-      red:        '0xaf8700'
+      red:        '0xaf0000'
       green:      '0x5f8700'
-      yellow:     '0xaf0000'
+      yellow:     '0xaf8700'
       blue:       '0x5f5faf'
       magenta:    '0xaf005f'
       cyan:       '0x00afaf'
@@ -126,7 +149,7 @@ schemes:
       cyan:       '0x86b89e'
       white:      '0xccc9cc'
 
-colors: *solarized-light
+colors: *unicorn
 
 bell:
   animation: EaseOutExpo
