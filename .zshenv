@@ -33,7 +33,8 @@ export ZDOTDIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh"
 export PROMPT_EOL_MARK=""
 
-export VISUAL="$(command -v nvim)"
+
+export VISUAL="$(command -v nvim) +\"let g:virk_enabled=0\""
 export EDITOR="$VISUAL"
 export SHELL="$(command -v zsh)"
 export GIT_PAGER="$(command -v less) -F -X"
@@ -43,7 +44,7 @@ export HTTP_PROXY=""
 export HTTPS_PROXY=""
 export NO_PROXY=""
 
-command -v rofi && export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
+command -v rofi > /dev/null && export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
 
 # ---- Progs
 
