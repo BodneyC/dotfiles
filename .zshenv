@@ -48,7 +48,7 @@ command -v rofi > /dev/null && export SUDO_ASKPASS="$HOME/.config/rofi/askpass-r
 
 # ---- Progs
 
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor --exclude .clj-kondo --exclude .lsp"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=onehalfdark --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
 
 export HOMEBREW_NO_AUTO_UPDATE=1
