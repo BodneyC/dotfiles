@@ -22,6 +22,7 @@ _add_to_path "$HOME/Library/Python/3.8/bin"
 _add_to_path "$HOME/go/bin"
 _add_to_path "$HOME/scripts"
 _add_to_path "$HOME/.luarocks/bin"
+_add_to_path "$HOME/perl5/bin"
 _add_to_path "/usr/local/opt/"
 _add_to_path "/usr/local/opt/curl-openssl/bin"
 _add_to_path "/usr/local/opt/maven@3.3/bin"
@@ -33,18 +34,22 @@ export ZDOTDIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh"
 export PROMPT_EOL_MARK=""
 
-
-export VISUAL="$(command -v nvim) +\"let g:virk_enabled=0\""
+_shell="$(command -v zsh)" && export SHELL="$_shell"
+if _visual="$(command -v nvim)"; then
+  export VISUAL="$_visual +\"let g:virk_enabled=0\""
+elif _visual="$(command -v vi)"; then
+  export VISUAL="$_visual"
+fi
 export EDITOR="$VISUAL"
-export SHELL="$(command -v zsh)"
-export GIT_PAGER="$(command -v less) -F -X"
+
+_pager="$(command -v less)" && export GIT_PAGER="$_pager -F -X"
 
 export ALL_PROXY=""
 export HTTP_PROXY=""
 export HTTPS_PROXY=""
 export NO_PROXY=""
 
-command -v rofi > /dev/null && export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
+# command -v rofi > /dev/null && export SUDO_ASKPASS="$HOME/.config/rofi/askpass-rofi"
 
 # ---- Progs
 
@@ -56,13 +61,15 @@ export N_PREFIX="$HOME/.local"
 
 export GDK_DPI_SCALE=1.8
 
+export SHOW_AWS_PROMPT=false # for zsh plugin
 export AWS_SDK_LOAD_CONFIG=1
 export AWS_CONFIG_FILE="$HOME/.aws/config"
 
 # ---- Langs
 
+# Java
 _get_java_home() {
-  if command -v java && command -v rg; then
+  if command -v java &> /dev/null && command -v rg &> /dev/null; then
     java -XshowSettings:properties -version 2>&1 | rg -o --pcre2 '(?<=java.home = ).*'
   elif test -x /usr/libexec/java_home; then
     /usr/libexec/java_home
@@ -70,16 +77,30 @@ _get_java_home() {
     dirname "$(dirname "$(readlink -f "$(which javac)")")"
   elif [[ "$(uname -s)" == "Darwin" ]]; then
     echo "$(dirname "$(readlink "$(which javac)")")/java_home"
+  else
+    return 1
   fi
 }
-export JAVA_HOME="$(_get_java_home)"
+
+_java_home="$(_get_java_home)" && export JAVA_HOME="$_java_home"
 export JAVA_OPTS=""
 export MAVEN_OPTS="$JAVA_OPTS"
 
+# Go
 export GOPATH="$HOME/go"
 
+# Lua, yes the `@` is needed
 export LUA_INIT="@$HOME/.lua-init.lua"
 
+# Dotnet
 export DOTNET_ROOT="$HOME/.dotnet"
+
+# Perl
+# export PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+# export PERL_LOCAL_LIB_ROOT="$HOME/perl5/${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+# export PERL_MB_OPT="--install_base \"$HOME/perl5/\""
+# export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5/"
+
+# Macos env for work...
 
 test -e "$HOME/.zshenv-macos" && . "$HOME/.zshenv-macos"

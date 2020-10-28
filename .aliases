@@ -1,35 +1,44 @@
 #!/usr/bin/zsh
 
-_did_you_mean() {
-  echo "Did you mean '$1'?"; return 1
-}
+# _did_you_mean() {
+#   echo "Did you mean '$1'?"; return 1
+# }
 
 pdfcat() {
-  for f in "$@"; do
-    pdftotext "$f" - | less
-  done
+  command -v pdftotext &> /dev/null && \
+    for f in "$@"; do
+      pdftotext "$f" - | less
+    done
 }
 
-curl() { /usr/bin/curl "$@"; echo; }
+curl() {
+  /usr/bin/curl "$@"
+  echo
+}
 
 usrbinlink() {
   mv "$1" /usr/local/bin/ && ln -s /usr/local/bin/"$1" .
 }
 
 v-which() {
-  "$(command -v nvim)" "$(command -v $1)"
+  "$(command -v nvim)" "$(command -v "$1")"
 }
 
 nvm-init() {
   export NVM_DIR="$HOME/.nvm"
   if [ -s "$NVM_DIR/nvm.sh" ]; then
+    # shellcheck source=~/.nvm/nvm.sh
     . "$NVM_DIR/nvm.sh"
   fi
 }
 
 cd() {
-  builtin cd "$@"
-  exa --classify --group-directories-first --all
+  builtin cd "$@" || return 1
+  eval "$_cd_cmd"
+}
+
+pretty-print-path() {
+  echo "${PATH//:/\n}" | sort
 }
 
 if hash exa 2>/dev/null; then
@@ -43,9 +52,11 @@ if hash exa 2>/dev/null; then
   [[ "${aliases[l]}" ]] && unalias l
   [[ "${aliases[ls]}" ]] && unalias ls
   [[ "${aliases[la]}" ]] && unalias la
+  _cd_cmd="exa --classify --group-directories-first --all"
 else
   alias l="ls -ha"
   alias ll="ls -hls"
+  _cd_cmd="ls -a"
 fi
 alias IGNORE_PROXY='ALL_PROXY="" HTTPS_PROXY="" HTTP_PROXY=""'
 alias tat="tmux attach"
@@ -63,7 +74,7 @@ alias podrun="podman run --rm -t -i"
 alias q="_yes_or_no 'Are you sure?' && systemctl poweroff -i"
 alias qt="tmux kill-session"
 alias reboot="_yes_or_no 'Are you sure?' && systemctl reboot -i"
-alias rm="_did_you_mean 'rem'"
+# alias rm="_did_you_mean 'rem'"
 alias scim="TERM=xterm-256color scim"
 alias t="task"
 alias tkeep="tmux kill-session -a"
@@ -72,7 +83,7 @@ alias tlist="tmux list-session"
 alias v-novirk="$(command -v nvim) +\"let g:virk_enabled=0\""
 alias v-startup="$(command -v nvim) --startuptime /tmp/nvim.log -c 'qall' && v-novirk /tmp/nvim.log"
 alias v="nvim"
-alias vim="_did_you_mean 'v'"
+# alias vim="_did_you_mean 'v'"
 alias xi="xclip -in -selection clipboard"
 alias xo="xclip -out -selection clipboard"
-hash xdg-open && alias open="xdg-open"
+command -v xdg-open &> /dev/null && alias open="xdg-open"

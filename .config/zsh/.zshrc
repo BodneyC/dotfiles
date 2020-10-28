@@ -6,22 +6,23 @@ setopt HIST_IGNORE_SPACE
 
 ZSH_THEME="benjc_custom"
 CASE_SENSITIVE="true"
-HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM=$ZDOTDIR/custom
 KEYTIMEOUT=1
 
 plugins=(
-    aws
+    # aws
     git
     docker
-    docker-compose
+    # docker-compose
     mvn
     dirhistory
     vi-mode
+    history-substring-search
     zsh-syntax-highlighting
     zsh-autosuggestions
-    history-substring-search
 )
+
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 
 _yes_or_no() { # msg
@@ -38,8 +39,8 @@ _yes_or_no() { # msg
     done
 }
 
-source $ZSH/oh-my-zsh.sh
-source $HOME/.aliases
+source "$ZSH/oh-my-zsh.sh"
+source "$HOME/.aliases"
 
 fpath+=("$ZDOTDIR/completions")
 
@@ -58,11 +59,11 @@ bindkey "\e[6~" end-of-history
 bindkey "\e[3~" delete-char
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-bindkey '^f' autosuggest-execute
-# bindkey '^k' autosuggest-accept
 bindkey '[Z' reverse-menu-complete
+bindkey '^f' autosuggest-execute
 bindkey -r '^J'
 
+# bindkey '^k' autosuggest-accept
 # bindkey '^i' expand-or-complete-prefix
 
 setopt HIST_IGNORE_ALL_DUPS
@@ -85,4 +86,4 @@ fi
 
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
 
-[[ -z "$TMUX" ]] && tmux #&& exit
+[[ -z "$TMUX" ]] && tmux
