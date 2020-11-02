@@ -34,6 +34,30 @@ debug:
 draw_bold_text_with_bright_colors: true
 
 schemes:
+
+  spacegray: &spacegray
+    primary:
+      background: '0x111314'
+      foreground: '0xB3B8C4'
+    normal:
+      black:      '0x313234'
+      red:        '0xBF6262'
+      green:      '0xA2A565'
+      yellow:     '0xE9A96F'
+      blue:       '0x789BAD'
+      magenta:    '0x9F7AA5'
+      cyan:       '0x638E8A'
+      white:      '0xE3E8E3'
+    bright:
+      black:      '0x313234'
+      red:        '0xBF6262'
+      green:      '0xA2A565'
+      yellow:     '0xE9A96F'
+      blue:       '0x789BAD'
+      magenta:    '0x9F7AA5'
+      cyan:       '0x638E8A'
+      white:      '0xE3E8E3'
+
   plint: &plint
     primary:
       background: '0x101211'
@@ -149,7 +173,7 @@ schemes:
       cyan:       '0x86b89e'
       white:      '0xccc9cc'
 
-colors: *unicorn
+colors: *spacegray
 
 bell:
   animation: EaseOutExpo
