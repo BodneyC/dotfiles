@@ -9,7 +9,6 @@ CASE_SENSITIVE="true"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM=$ZDOTDIR/custom
 KEYTIMEOUT=1
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
 
 plugins=(
     # aws

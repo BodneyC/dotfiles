@@ -32,6 +32,7 @@ export TERMTHEME=dark
 
 export ZDOTDIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh"
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
 export PROMPT_EOL_MARK=""
 
 _shell="$(command -v zsh)" && export SHELL="$_shell"
