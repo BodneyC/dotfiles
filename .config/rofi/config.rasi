@@ -1,0 +1,28 @@
+configuration {
+	modi: "window,run,ssh,drun";
+	width: 22;
+	font: "Noto Sans 19";
+	bw: 5;
+	padding: 5;
+	show-icons: true;
+	ssh-client: "ssh";
+	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";
+	run-command: "{cmd}";
+	run-list-command: "";
+	run-shell-command: "{terminal} -e {cmd}";
+	drun-show-actions: false;
+	case-sensitive: false;
+	line-padding: 0;
+	hide-scrollbar: false;
+	fullscreen: false;
+	fake-transparency: true;
+	scrollbar-width: 8;
+	click-to-exit: true;
+	show-match: true;
+	theme: "~/.config/rofi/theme.rasi";
+	color-normal: "#2C3140, #B0B0B0, #2C3140, #273B59, #FFFFFF";
+	color-urgent: "#2b2e3c, #fdd835, #2C3140, #273B59, #FFFFFF";
+	color-active: "#2b2e3c, #00897b, #2C3140, #273B59, #FFFFFF";
+	color-window: "#2b2e3c, #282a39, #383C4A";
+	kb-toggle-case-sensitivity: "dead_grave";
+}

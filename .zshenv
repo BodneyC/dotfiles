@@ -60,8 +60,6 @@ export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=onehalfdark --color=alwa
 export HOMEBREW_NO_AUTO_UPDATE=1
 export N_PREFIX="$HOME/.local"
 
-export GDK_DPI_SCALE=1.8
-
 export SHOW_AWS_PROMPT=false # for zsh plugin
 export AWS_SDK_LOAD_CONFIG=1
 export AWS_CONFIG_FILE="$HOME/.aws/config"

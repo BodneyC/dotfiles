@@ -13,7 +13,8 @@ ctrl + shift + q
   i3lock-fancy-rapid 5 5
 
 alt + shift + 4
-  sleep 0.2 && scrot -s
+  rofi-scrot
+  # sleep 0.2 && scrot -s
 
 ################################################################
 # Media
@@ -44,16 +45,16 @@ XF86MonBrightnessDown
 # Polybar interaction
 
 ctrl + alt + Tab
-  ~/.config/polybar/scripts/task-switcher.sh
+  rofi-appsselect
 
 ctrl + alt + shift + p
   ~/.config/polybar/launch.sh
 
 super + p
-  ~/.config/polybar/scripts/system-menu.sh
+  rofi-power
 
 super + space
-  ~/.config/polybar/scripts/start-menu.sh
+  rofi-appsmenu
 
 ################################################################
 # Bspwm hotkeys
@@ -126,10 +127,10 @@ super + {o,i}
 
 # Focus or send to the given desktop
 super + {1-9,0}
-  bspc desktop -f '^{1-9,10}'
+  bspc desktop -f '{1-9,10}'
 
 super + shift + {1-9,0}
-  bspc node -d '^{1-9,10}'
+  bspc node -d '{1-9,10}'
 
 ################################################################
 # Preselect

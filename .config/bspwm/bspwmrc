@@ -2,7 +2,16 @@
 
 sxhkd &
 
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+_n_mon="$(bspc query -M | wc -l)"
+case "$_n_mon" in
+  1) bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+    ;;
+  2) "$HOME/.config/bspwm/two-mons.sh"
+		;;
+	*) echo "No script for $_n_mon monitors, doing as one"
+		bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+		;;
+esac
 
 bspc config border_width         1
 bspc config window_gap           10

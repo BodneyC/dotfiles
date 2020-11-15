@@ -4,9 +4,10 @@ killall -q polybar
 
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-if [[ -n "$MON_1" ]]; then
-	polybar main -c "$HOME/.config/polybar/config-$MON_0.ini" &
-    polybar main -c "$HOME/.config/polybar/config-$MON_1.ini" &
+if type "xrandr"; then
+  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+    MONITOR=$m polybar --reload main -c "$HOME/.config/polybar/config.ini" &
+  done
 else
-	polybar main -c "$HOME/.config/polybar/config.ini" &
+  polybar --reload main -c "$HOME/.config/polybar/config.ini" &
 fi

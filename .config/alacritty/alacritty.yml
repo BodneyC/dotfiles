@@ -18,7 +18,7 @@ font:
   normal:
     family: 'VictorMono Nerd Font'
     style: Light
-  size: 7
+  size: 8
   offset:
     x: 0
     y: 10
@@ -188,7 +188,7 @@ mouse_bindings:
 mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
-  hide_when_typing: false
+  hide_when_typing: true
   url:
     modifiers: None
 
