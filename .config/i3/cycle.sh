@@ -31,7 +31,8 @@ _i3_focused="$(i3-msg -t get_tree | jq '
           else 
             empty
           end
-        )
+        ),
+        0
     ;
 
     get_containers(.) as $data
