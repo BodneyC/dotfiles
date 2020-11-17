@@ -6,10 +6,9 @@ case "$_n_mon" in
     # shellcheck disable=SC2046
     xrandr --newmode 2560x1707 $(cvt 2560 1707 | tail +2 | cut -d' ' -f3-)
     xrandr --addmode eDP-1 2560x1707
-		export GDK_DPI_SCALE=1
     test -f "$HOME/.screenlayout/basic.sh" && "$HOME/.screenlayout/basic.sh"
 		;;
-	*) export GDK_DPI_SCALE=1.8
+	*) 
 		;;
 esac
 
