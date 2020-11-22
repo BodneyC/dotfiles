@@ -1,20 +1,22 @@
 # vim:ft=zsh ts=2 sw=2 sts=2
 
-local _mag_b="%{$fg_bold[magenta]%}"
-local _grn_b="%{$fg_bold[green]%}"
-local _blu_b="%{$fg_bold[blue]%}"
-local _red_b="%{$fg_bold[red]%}"
-local _mag_n="%{$fg[magenta]%}"
-local _grn_n="%{$fg[green]%}"
-local _blu_n="%{$fg[blue]%}"
-local _red_n="%{$fg[red]%}"
-local _reset="%{$reset_color%}"
+# shellcheck disable=SC1087
+
+_mag_b="%{$fg_bold[magenta]%}"
+_grn_b="%{$fg_bold[green]%}"
+_blu_b="%{$fg_bold[blue]%}"
+_red_b="%{$fg_bold[red]%}"
+_mag_n="%{$fg[magenta]%}"
+_grn_n="%{$fg[green]%}"
+_blu_n="%{$fg[blue]%}"
+_red_n="%{$fg[red]%}"
+_reset="%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" $_reset$_mag_n⎪"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$_reset"
 ZSH_THEME_GIT_PROMPT_DIRTY="${_red_n}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="${_mag_n}?"
-ZSH_THEME_GIT_PROMPT_CLEAN="${_grn_n}✓"
+ZSH_THEME_GIT_PROMPT_CLEAN="${_grn_n}"
 ZSH_THEME_GIT_PROMPT_AHEAD="$_mag_n → $_reset"
 ZSH_THEME_GIT_PROMPT_BEHIND="${_mag_n} ← $_reset"
 
