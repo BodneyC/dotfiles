@@ -7,7 +7,7 @@ window:
     x: 4
     y: 4
   dynamic_padding: false
-  decorations: full
+  decorations: none
   startup_mode: 'Windowed'
 
 scrolling:
@@ -21,7 +21,7 @@ font:
   size: 8
   offset:
     x: 0
-    y: 2
+    y: 0
   glyph_offset:
     x: 0
     y: 0
@@ -188,7 +188,7 @@ mouse_bindings:
 mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
-  hide_when_typing: true
+  hide_when_typing: false
   url:
     modifiers: None
 
@@ -204,7 +204,7 @@ live_config_reload: true
 
 enable_experimental_conpty_backend: false
 
-alt_send_esc: true
+alt_send_esc: false
 
 key_bindings:
   - { key: Copy,        action:   Copy           }

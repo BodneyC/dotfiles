@@ -1,0 +1,1 @@
+/home/benjc/.local/share/nvim/plugged/vim-kitty-navigator/pass_keys.py

@@ -14,20 +14,20 @@ _reset="%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" $_reset$_mag_n⎪"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$_reset"
-ZSH_THEME_GIT_PROMPT_DIRTY="${_red_n}!"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="${_mag_n}?"
-ZSH_THEME_GIT_PROMPT_CLEAN="${_grn_n}"
-ZSH_THEME_GIT_PROMPT_AHEAD="$_mag_n → $_reset"
-ZSH_THEME_GIT_PROMPT_BEHIND="${_mag_n} ← $_reset"
+ZSH_THEME_GIT_PROMPT_DIRTY="${_red_n} "
+ZSH_THEME_GIT_PROMPT_UNTRACKED="${_mag_n}~"
+ZSH_THEME_GIT_PROMPT_CLEAN="${_grn_n} "
+ZSH_THEME_GIT_PROMPT_AHEAD="$_mag_n  $_reset"
+ZSH_THEME_GIT_PROMPT_BEHIND="${_mag_n}  $_reset"
 
 git_prompt_info () {
-	local ref
-	if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1"  ]]; then
-		ref=$(command git symbolic-ref HEAD 2> /dev/null) \
-			|| ref=$(command git rev-parse --short HEAD 2> /dev/null) \
-			|| return 0;
-		echo "$ZSH_THEME_GIT_PROMPT_PREFIX $(git_prompt_behind)$(parse_git_dirty) $_mag_b\uE0A0 ${ref#refs/heads/}$(git_prompt_ahead)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-	fi
+  local ref
+  if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) \
+      || ref=$(command git rev-parse --short HEAD 2> /dev/null) \
+      || return 0;
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX $(git_prompt_behind)$(parse_git_dirty) $_mag_b${ref#refs/heads/}$(git_prompt_ahead)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  fi
 }
 
 _beam_cursor() { echo -ne '\e[6 q'; }
