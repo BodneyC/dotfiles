@@ -63,10 +63,13 @@ bindsym mod1+Control+Tab exec rofi-appsselector
 bindsym $mod+p exec rofi-power
 bindsym $mod+mod1+Shift+l exec rofi-i3layout
 
-bindsym mod1+Shift+grave workspace prev
-bindsym mod1+grave workspace next
-bindsym mod1+Shift+Tab exec "$HOME/.config/i3/cycle.sh down"
-bindsym mod1+Tab exec "$HOME/.config/i3/cycle.sh"
+bindsym mod4+shift+grave workspace prev
+bindsym mod4+grave workspace next
+
+bindsym mod1+shift+Tab   exec "$HOME/.config/i3/cycle.sh toggle"
+bindsym mod1+Tab         exec "$HOME/.config/i3/cycle.sh toggle"
+bindsym mod1+shift+grave exec "$HOME/.config/i3/cycle.sh down"
+bindsym mod1+grave       exec "$HOME/.config/i3/cycle.sh up"
 
 # change focus
 bindsym $mod+h focus left
