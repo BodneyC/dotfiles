@@ -37,7 +37,7 @@ export PROMPT_EOL_MARK=""
 
 _shell="$(command -v zsh)" && export SHELL="$_shell"
 if _visual="$(command -v nvim)"; then
-  export VISUAL="$_visual +\"let g:virk_enabled=0\""
+  export VISUAL="$_visual -c VirkDisable"
 elif _visual="$(command -v vi)"; then
   export VISUAL="$_visual"
 fi
