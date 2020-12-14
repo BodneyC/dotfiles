@@ -3,3 +3,4 @@ multiplexing/.tmux/plugin*
 .virkignore
 .zcompdump*
 .zshenv-macos
+.config/ranger/.rem_hist
