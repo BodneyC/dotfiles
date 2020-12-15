@@ -4,3 +4,5 @@ multiplexing/.tmux/plugin*
 .zcompdump*
 .zshenv-macos
 .config/ranger/.rem_hist
+__init__.py
+__pycache__
