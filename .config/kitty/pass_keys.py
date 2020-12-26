@@ -7,10 +7,12 @@ import re
 def main():
     pass
 
+
 def actions(extended):
     yield keys.defines.GLFW_PRESS
     if extended:
         yield keys.defines.GLFW_RELEASE
+
 
 def convert_mods(mods):
     """
@@ -35,7 +37,7 @@ def handle_result(args, result, target_window_id, boss):
     if w is None:
         return
 
-# 
+#
     if len(args) > 4:
         if not re.search(args[4], w.title):
             boss.active_tab.neighboring_window(args[2])

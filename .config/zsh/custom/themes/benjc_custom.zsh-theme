@@ -17,7 +17,7 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="$_reset"
 ZSH_THEME_GIT_PROMPT_DIRTY="${_red_n} "
 ZSH_THEME_GIT_PROMPT_UNTRACKED="${_mag_n}~"
 ZSH_THEME_GIT_PROMPT_CLEAN="${_grn_n} "
-ZSH_THEME_GIT_PROMPT_AHEAD="$_mag_n   $_reset"
+ZSH_THEME_GIT_PROMPT_AHEAD="$_mag_n  $_reset"
 ZSH_THEME_GIT_PROMPT_BEHIND="${_mag_n}   $_reset"
 
 git_prompt_info () {
@@ -33,12 +33,13 @@ git_prompt_info () {
 _beam_cursor() { echo -ne '\e[6 q'; }
 PRECMD_FUNCTIONS+=(_beam_cursor)
 
-zle-keymap-select zle-line-init() {
-    case $KEYMAP in
-        vicmd)      echo -ne '\e[1 q';;
-        viins|main) echo -ne '\e[6 q';;
-    esac
+MODE_INDICATOR_N="N"
+MODE_INDICATOR_I="I"
+vi_mode_prompt_info() {
+  POT_RPS1="${${KEYMAP/vicmd/$MODE_INDICATOR_N}/(main|viins)/$MODE_INDICATOR_I}"
+  [[ -z "$POT_RPS1" ]] && echo $MODE_INDICATOR_I || echo "$POT_RPS1"
 }
+RPS1=" "
 
 PROMPT='$_mag_n$USER$_reset \
 $_mag_n⎩ $_grn_n$(vi_mode_prompt_info)$_reset \

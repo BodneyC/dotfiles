@@ -1,6 +1,11 @@
+from kittens.tui.handler import result_handler
+
+
 def main(args):
     pass
 
+
+@result_handler(no_ui=True)
 def handle_result(args, answer, target_window_id, boss):
     tab = boss.active_tab
     if tab is not None:
@@ -8,5 +13,3 @@ def handle_result(args, answer, target_window_id, boss):
             tab.last_used_layout()
         else:
             tab.goto_layout('stack')
-
-handle_result.no_ui = True
