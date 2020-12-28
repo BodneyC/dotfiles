@@ -31,7 +31,7 @@ git_prompt_info () {
 }
 
 _beam_cursor() { echo -ne '\e[6 q'; }
-PRECMD_FUNCTIONS+=(_beam_cursor)
+precmd_functions+=(_beam_cursor)
 
 MODE_INDICATOR_N="N"
 MODE_INDICATOR_I="I"
