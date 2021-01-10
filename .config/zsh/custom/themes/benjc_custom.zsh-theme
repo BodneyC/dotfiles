@@ -30,8 +30,11 @@ git_prompt_info () {
   fi
 }
 
-_beam_cursor() { echo -ne '\e[6 q'; }
-precmd_functions+=(_beam_cursor)
+# _beam_cursor() { echo -ne '\e[6 q'; }
+# precmd_functions+=(_beam_cursor)
+
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+VI_MODE_SET_CURSOR=true
 
 MODE_INDICATOR_N="N"
 MODE_INDICATOR_I="I"
