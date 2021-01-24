@@ -62,6 +62,9 @@ _i3_focused="$(i3-msg -t get_tree | jq '
       | $data | .[$idx].id
 ')"
 
-# echo "$_i3_focused"
+if [[ -n "$2" && "$2" == '--no-act' ]]; then
+  echo "$_i3_focused"
+  exit 0
+fi
 
 i3-msg "[con_id=\"$_i3_focused\"] focus"
