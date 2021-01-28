@@ -34,8 +34,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy-rapid 5 5 --
 
 # Scripts
 set $startup           $HOME/.config/i3/startup.zsh
-set $cycle             $HOME/.config/i3/cycle.sh
-set $cycle_to          $HOME/.config/i3/cycle-to.sh
+set $cycle             $HOME/.config/i3/cycle.py
 set $notify_volume     $HOME/.config/dunst/scripts/notify-volume.sh
 set $notify_brightness $HOME/.config/dunst/scripts/notify-brightness.sh
 
@@ -64,13 +63,13 @@ bindsym mod1+Control+Tab exec rofi-appsselector
 bindsym $mod+p exec rofi-power
 bindsym $mod+mod1+Shift+l exec rofi-i3layout
 
-bindsym mod4+shift+grave workspace prev
-bindsym mod4+grave workspace next
+# bindsym mod4+shift+grave workspace prev
+# bindsym mod4+grave workspace next
 
-bindsym mod1+shift+Tab exec $cycle_to
-bindsym mod1+Tab exec $cycle_to
-bindsym mod1+shift+grave exec $cycle down && $cycle_to --update
-bindsym mod1+grave exec $cycle up && $cycle_to --update
+bindsym $mod+shift+Tab   exec --no-startup-id $cycle toggle
+bindsym $mod+Tab         exec --no-startup-id $cycle toggle
+bindsym $mod+shift+grave exec --no-startup-id $cycle down
+bindsym $mod+grave       exec --no-startup-id $cycle up
 
 # change focus
 bindsym $mod+h focus left
@@ -136,16 +135,16 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+1 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws1
-bindsym $mod+2 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws2
-bindsym $mod+3 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws3
-bindsym $mod+4 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws4
-bindsym $mod+5 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws5
-bindsym $mod+6 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws6
-bindsym $mod+7 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws7
-bindsym $mod+8 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws8
-bindsym $mod+9 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws9
-bindsym $mod+0 exec --no-startup-id $cycle_to --update && i3-msg workspace number $ws10
+bindsym $mod+1 exec --no-startup-id $cycle ws $ws1
+bindsym $mod+2 exec --no-startup-id $cycle ws $ws2
+bindsym $mod+3 exec --no-startup-id $cycle ws $ws3
+bindsym $mod+4 exec --no-startup-id $cycle ws $ws4
+bindsym $mod+5 exec --no-startup-id $cycle ws $ws5
+bindsym $mod+6 exec --no-startup-id $cycle ws $ws6
+bindsym $mod+7 exec --no-startup-id $cycle ws $ws7
+bindsym $mod+8 exec --no-startup-id $cycle ws $ws8
+bindsym $mod+9 exec --no-startup-id $cycle ws $ws9
+bindsym $mod+0 exec --no-startup-id $cycle ws $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
