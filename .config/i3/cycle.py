@@ -80,7 +80,8 @@ elif arg == 'ws':
     sys.exit(0)
 
 elif arg == 'toggle':
-    if not [e for e in nodes if str(e.get('id')) == destination_id]:
+    if not [e for i, e in enumerate(nodes)
+            if str(e.get('id')) == destination_id and i != focused_idx]:
         destination_id = nodes[focused_idx - 1].get('id')
 
 elif arg == 'up':
