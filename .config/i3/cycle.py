@@ -47,7 +47,8 @@ walk(json.loads(run_cmd(['i3-msg', '-t', 'get_tree']))['nodes'])
 
 toggle_fn = "/tmp/i3.previous.id"
 
-with open(toggle_fn, 'r+') as f:
+with open(toggle_fn, 'a+') as f:
+    f.seek(0)
     destination_id = f.read()
 
 

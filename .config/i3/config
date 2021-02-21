@@ -57,6 +57,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
+bindsym mod1+shift+4 exec --no-startup-id rofi-scrot
 bindsym mod1+space exec rofi-appsmenu
 bindsym $mod+space exec rofi-appsmenu
 bindsym mod1+Control+Tab exec rofi-appsselector
