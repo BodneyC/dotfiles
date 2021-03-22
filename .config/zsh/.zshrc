@@ -13,6 +13,7 @@ KEYTIMEOUT=1
 plugins=(
 		# aws
 		git
+		git-auto-fetch
 		docker
 		oc
 		kubectl

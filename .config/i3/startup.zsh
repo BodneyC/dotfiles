@@ -1,18 +1,18 @@
 #!/usr/bin/env zsh
 
-# _n_mon="$(xrandr -q | grep -c ' connected')"
-# case "$_n_mon" in
-#   2) 
-#     # shellcheck disable=SC2046
-#     xrandr --newmode 2560x1707 $(cvt 2560 1707 | tail +2 | cut -d' ' -f3-)
-#     xrandr --addmode eDP-1 2560x1707
-#     test -f "$HOME/.screenlayout/basic.sh" && "$HOME/.screenlayout/basic.sh"
-#     ;;
-#   *) 
-#     ;;
-# esac
-
 autorandr --change &
+
+_n_mon="$(xrandr -q | grep -c ' connected')"
+case "$_n_mon" in
+	1)
+		export GDK_DPI_SCALE=1.7
+		export QT_SCALE_FACTOR=1.7
+		;;
+	*)
+		export GDK_DPI_SCALE=1
+		export QT_SCALE_FACTOR=1
+		;;
+esac
 
 "$HOME/.config/polybar/launch.sh" &
 
