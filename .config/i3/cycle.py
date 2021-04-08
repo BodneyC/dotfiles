@@ -52,20 +52,19 @@ with open(toggle_fn, 'a+') as f:
     destination_id = f.read()
 
 
-focused_idx = [i for i, e in enumerate(nodes) if e.get('focused')]
+if len(nodes) > 0:
+    focused_idx = [i for i, e in enumerate(nodes) if e.get('focused')]
 
+    if focused_idx:
+        focused_idx = focused_idx[0]
+    else:
+        focused_idx = [i for i, e in enumerate(nodes)
+                       if e.get('id') == destination_id]
+        if not focused_idx:
+            focused_idx = 0
 
-if focused_idx:
-    focused_idx = focused_idx[0]
-else:
-    focused_idx = [i for i, e in enumerate(nodes)
-                   if e.get('id') == destination_id]
-    if not focused_idx:
-        focused_idx = 0
-
-with open(toggle_fn, 'w') as f:
-    f.write(str(nodes[focused_idx].get('id')))
-
+    with open(toggle_fn, 'w') as f:
+        f.write(str(nodes[focused_idx].get('id')))
 
 if arg == 'update':
     sys.exit(0)

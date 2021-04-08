@@ -6,3 +6,4 @@ multiplexing/.tmux/plugin*
 .config/ranger/.rem_hist
 __init__.py
 __pycache__
+tags
