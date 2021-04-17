@@ -1,6 +1,7 @@
 alias gi="git init && git commit -nm \"Initial commit\""
 alias ga="git add"
 alias gc="git commit"
+alias gcl="git clone"
 alias gch="git checkout"
 alias gp="git push"
 alias gd="git diff"
