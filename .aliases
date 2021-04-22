@@ -67,27 +67,27 @@ else
   _cd_cmd="ls -a"
 fi
 alias IGNORE_PROXY='ALL_PROXY="" HTTPS_PROXY="" HTTP_PROXY=""'
-alias tat="tmux attach"
 alias bdate="date '+%Y-%M-%d'"
-alias df='df -h'
-alias dockerun="docker run --rm -t -i"
-alias dt="tmux detach"
-alias du='du -h'
+# alias df='df -h'
+# alias du='du -h'
 alias gotop="TERM=xterm-256color gotop"
 alias gs="echo \"No ghostscript, you spanner\""
 alias lg="lazygit"
-alias mci="mvn clean install"
+# alias mci="mvn clean install"
 alias nettest="ping -c 2 google.com"
-alias podrun="podman run --rm -t -i"
+# alias dockerun="docker run --rm -t -i"
+# alias podrun="podman run --rm -t -i"
 alias q="_yes_or_no 'Are you sure?' && systemctl poweroff -i"
-alias qt="tmux kill-session"
 alias reboot="_yes_or_no 'Are you sure?' && systemctl reboot -i"
 # alias rm="_did_you_mean 'rem'"
 alias scim="TERM=xterm-256color scim"
 alias t="task"
-alias tkeep="tmux kill-session -a"
-alias tkill="tmux kill-server"
-alias tlist="tmux list-session"
+# alias qt="tmux kill-session"
+# alias tat="tmux attach"
+# alias dt="tmux detach"
+# alias tkeep="tmux kill-session -a"
+# alias tkill="tmux kill-server"
+# alias tlist="tmux list-session"
 alias rn="ranger"
 alias v-novirk="$(command -v nvim) +\"let g:virk_enabled=0\""
 alias v-="$(command -v nvim) +\"let g:virk_enabled=0\""
@@ -95,7 +95,21 @@ alias v-startup="$(command -v nvim) --startuptime /tmp/nvim.log -c 'qall' && v-n
 alias suv="sudo -E nvim"
 alias v="nvim"
 # alias vim="_did_you_mean 'v'"
-alias xi="xclip -in -selection clipboard"
-alias xo="xclip -out -selection clipboard"
+xi() {
+  if command -v xclip &>/dev/null; then
+    xclip -in -selection clipboard
+  elif command -v pbcopy &>/dev/null; then
+    pbcopy
+  fi
+}
+# alias xi="xclip -in -selection clipboard"
+xo() {
+  if command -v xclip &>/dev/null; then
+    xclip -out -selection clipboard
+  elif command -v pbpaste &>/dev/null; then
+    pbpaste
+  fi
+}
+# alias xo="xclip -out -selection clipboard"
 alias k="kubectl"
 command -v xdg-open &> /dev/null && alias open="xdg-open"
