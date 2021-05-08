@@ -4,7 +4,19 @@ alias gc="git commit"
 alias gcl="git clone"
 alias gch="git checkout"
 alias gp="git push"
-alias gd="git diff"
+# alias gd="git diff"
+
+function gd() {
+	preview='git diff $@ --color=always -- {-1}'
+  _files="$(git diff "$@" --name-only)"
+  if [[ -n $_files ]]; then
+		fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
+			--preview-window=up:70% --preview "$preview" \
+      <<< "$_files"
+  fi
+}
+compdef _git gd=git-diff
+
 alias gdc="git diff --cached"
 alias gb="git branch"
 alias gg="git graph"
@@ -35,8 +47,8 @@ function work_in_progress() {
     echo "WIP!!"
   fi
 }
-function gdv() { git diff -w "$@" | view - }
-compdef _git gdv=git-diff
+# function gdv() { git diff -w "$@" | view - }
+# compdef _git gdv=git-diff
 function ggf() {
   [[ "$#" != 1 ]] && local b="$(git_current_branch)"
   git push --force origin "${b:=$1}"

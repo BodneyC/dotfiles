@@ -2,15 +2,12 @@
 
 # shellcheck disable=SC2139
 
-# _did_you_mean() {
-#   echo "Did you mean '$1'?"; return 1
-# }
-
 pdfcat() {
-  command -v pdftotext &> /dev/null && \
+  if command -v pdftotext &> /dev/null; then
     for f in "$@"; do
       pdftotext "$f" - | less
     done
+  fi
 }
 
 curl() {
@@ -44,12 +41,18 @@ pretty-print-path() {
 }
 
 lns() {
-  [[ -z "$1" ]] && { echo "No args specified"; return 1; }
-  [[ -z "$2" ]] && { echo "No second arg specified"; return 1; }
+  [[ -z "$1" ]] && {
+    echo "No args specified"
+    return 1
+  }
+  [[ -z "$2" ]] && {
+    echo "No second arg specified"
+    return 1
+  }
   ln -s "$(realpath "$1")" "$(realpath "$2")"
 }
 
-if hash exa 2>/dev/null; then
+if hash exa 2> /dev/null; then
   alias e="exa --classify --group-directories-first --all"
   alias el="${aliases[e]} --long"
   alias ee="${aliases[e]} --long"
@@ -68,48 +71,37 @@ else
 fi
 alias IGNORE_PROXY='ALL_PROXY="" HTTPS_PROXY="" HTTP_PROXY=""'
 alias bdate="date '+%Y-%M-%d'"
-# alias df='df -h'
-# alias du='du -h'
 alias gotop="TERM=xterm-256color gotop"
 alias gs="echo \"No ghostscript, you spanner\""
 alias lg="lazygit"
-# alias mci="mvn clean install"
 alias nettest="ping -c 2 google.com"
-# alias dockerun="docker run --rm -t -i"
-# alias podrun="podman run --rm -t -i"
 alias q="_yes_or_no 'Are you sure?' && systemctl poweroff -i"
 alias reboot="_yes_or_no 'Are you sure?' && systemctl reboot -i"
-# alias rm="_did_you_mean 'rem'"
 alias scim="TERM=xterm-256color scim"
 alias t="task"
-# alias qt="tmux kill-session"
-# alias tat="tmux attach"
-# alias dt="tmux detach"
-# alias tkeep="tmux kill-session -a"
-# alias tkill="tmux kill-server"
-# alias tlist="tmux list-session"
 alias rn="ranger"
 alias v-novirk="$(command -v nvim) +\"let g:virk_enabled=0\""
 alias v-="$(command -v nvim) +\"let g:virk_enabled=0\""
 alias v-startup="$(command -v nvim) --startuptime /tmp/nvim.log -c 'qall' && v-novirk /tmp/nvim.log"
 alias suv="sudo -E nvim"
 alias v="nvim"
-# alias vim="_did_you_mean 'v'"
+
 xi() {
-  if command -v xclip &>/dev/null; then
+  if command -v xclip &> /dev/null; then
     xclip -in -selection clipboard
-  elif command -v pbcopy &>/dev/null; then
+  elif command -v pbcopy &> /dev/null; then
     pbcopy
   fi
 }
 # alias xi="xclip -in -selection clipboard"
 xo() {
-  if command -v xclip &>/dev/null; then
+  if command -v xclip &> /dev/null; then
     xclip -out -selection clipboard
-  elif command -v pbpaste &>/dev/null; then
+  elif command -v pbpaste &> /dev/null; then
     pbpaste
   fi
 }
 # alias xo="xclip -out -selection clipboard"
+
 alias k="kubectl"
 command -v xdg-open &> /dev/null && alias open="xdg-open"

@@ -1,19 +1,31 @@
 [user]
   email = benjcarrington@gmail.com
   name = BodneyC
+
 [alias]
-  branchdates = for-each-ref --sort=committerdate refs/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-  graph = log --graph --pretty=format:'%C(magenta)%h %Creset%C(dim blue)%an [%ce]%n%Creset  %m%C(yellow)%d%Creset %s %Cgreen(%cr)%n%Creset' --abbrev-commit
+  branchdates = for-each-ref --sort=committerdate refs/ --format='%(HEAD) \
+    %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)\
+    %(color:reset) - %(contents:subject) - %(authorname) (%(color:green)\
+    %(committerdate:relative)%(color:reset))'
+
+  graph = log --graph --pretty=format:'%C(magenta)%h %Creset%C(dim blue)%an \
+    [%ce]%n%Creset  %m%C(yellow)%d%Creset %s %Cgreen(%cr)%n%Creset' --abbrev-commit
+
   diffp = diff @^..@
 	ls = ls-tree -r --name-only @
   wc = rev-list --count
+
 [mergetool "nvim"]
 	cmd = nvim +'let g:virk_enabled=0' -c 'Gdiffsplit!' $MERGED
+
 [merge]
   tool = nvim
+
 [mergetool]
   prompt = false
+
 [pull]
 	ff = only
+
 [init]
 	defaultBranch = master
