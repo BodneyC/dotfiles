@@ -6,6 +6,8 @@ alias gch="git checkout"
 alias gp="git push"
 # alias gd="git diff"
 
+alias gdt="git difftool"
+
 function gd() {
 	preview='git diff $@ --color=always -- {-1}'
   _files="$(git diff "$@" --name-only)"

@@ -2,6 +2,12 @@
   email = benjcarrington@gmail.com
   name = BodneyC
 
+[pull]
+	ff = only
+
+[init]
+	defaultBranch = master
+
 [alias]
   branchdates = for-each-ref --sort=committerdate refs/ --format='%(HEAD) \
     %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)\
@@ -15,17 +21,16 @@
 	ls = ls-tree -r --name-only @
   wc = rev-list --count
 
+[merge]
+  tool = nvim
+[mergetool]
+  prompt = false
 [mergetool "nvim"]
 	cmd = nvim +'let g:virk_enabled=0' -c 'Gdiffsplit!' $MERGED
 
-[merge]
-  tool = nvim
-
-[mergetool]
-  prompt = false
-
-[pull]
-	ff = only
-
-[init]
-	defaultBranch = master
+[diff]
+    tool = nvimdiff
+[difftool]
+    prompt = true
+[difftool "nvimdiff"]
+	cmd = nvim +'let g:virk_enabled=0' -d \"$LOCAL\" \"$REMOTE\"

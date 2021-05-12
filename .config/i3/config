@@ -41,7 +41,7 @@ set $notify_brightness $HOME/.config/dunst/scripts/notify-brightness.sh
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer sset 'Master' 2%+ && $notify_volume
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer sset 'Master' 2%- && $notify_volume
-bindsym XF86AudioMute        exec --no-startup-id amixer sset 'Master' toggle && $notify_volume
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle && $notify-volume
 bindsym XF86AudioMicMute     exec --no-startup-id amixer set 'Capture' toggle && $notify_volume
 
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 3 && $notify_brightness
