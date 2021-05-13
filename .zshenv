@@ -105,4 +105,4 @@ export DOTNET_ROOT="$HOME/.dotnet"
 # Macos env for work...
 
 test -e "$HOME/.zshenv-macos" && . "$HOME/.zshenv-macos"
-source "$HOME/.cargo/env"
+test -e "$HOME/.cargo/env" && . "$HOME/.cargo/env"

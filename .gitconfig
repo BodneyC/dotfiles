@@ -19,7 +19,7 @@
 
   diffp = diff @^..@
 	ls = ls-tree -r --name-only @
-  wc = rev-list --count
+  wc = rev-list --count @
 
 [merge]
   tool = nvim
