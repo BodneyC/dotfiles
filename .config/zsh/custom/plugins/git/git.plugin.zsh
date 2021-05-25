@@ -9,17 +9,28 @@ alias gp="git push"
 alias gdt="git difftool"
 
 function gd() {
-	preview='git diff $@ --color=always -- {-1}'
+  preview='git diff $@ --color=always -- {-1}'
   _files="$(git diff "$@" --name-only)"
   if [[ -n $_files ]]; then
-		fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
-			--preview-window=up:70% --preview "$preview" \
+    fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
+      --preview-window=up:70% --preview "$preview" \
       <<< "$_files"
   fi
 }
 compdef _git gd=git-diff
 
-alias gdc="git diff --cached"
+function gdc() {
+  preview='git diff --cached $@ --color=always -- {-1}'
+  _files="$(git diff --cached "$@" --name-only)"
+  if [[ -n $_files ]]; then
+    fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
+      --preview-window=up:70% --preview "$preview" \
+      <<< "$_files"
+  fi
+}
+compdef _git gdc=git-diff
+
+# alias gdc="git diff --cached"
 alias gb="git branch"
 alias gg="git graph"
 alias gst="git status"
@@ -38,14 +49,14 @@ compdef _git gpfr=git-checkout
 function current_branch() {
   git_current_branch
 }
-function _git_log_prettily(){
+function _git_log_prettily() {
   if ! [ -z $1 ]; then
     git log --pretty=$1
   fi
 }
 compdef _git _git_log_prettily=git-log
 function work_in_progress() {
-  if $(git log -n 1 2>/dev/null | grep -q -c "\-\-wip\-\-"); then
+  if $(git log -n 1 2> /dev/null | grep -q -c "\-\-wip\-\-"); then
     echo "WIP!!"
   fi
 }
@@ -93,6 +104,6 @@ function ggu() {
 }
 compdef _git ggu=git-checkout
 autoload -Uz is-at-least
-is-at-least 2.13 "$(git --version 2>/dev/null | awk '{print $3}')" \
+is-at-least 2.13 "$(git --version 2> /dev/null | awk '{print $3}')" \
   && alias gsta='git stash push' \
   || alias gsta='git stash save'
