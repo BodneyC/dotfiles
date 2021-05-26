@@ -13,7 +13,7 @@ function gd() {
   _files="$(git diff "$@" --name-only)"
   if [[ -n $_files ]]; then
     fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
-      --preview-window=up:70% --preview "$preview" \
+      --preview-window=up:90% --preview "$preview" \
       <<< "$_files"
   fi
 }
@@ -24,7 +24,7 @@ function gdc() {
   _files="$(git diff --cached "$@" --name-only)"
   if [[ -n $_files ]]; then
     fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
-      --preview-window=up:70% --preview "$preview" \
+      --preview-window=up:90% --preview "$preview" \
       <<< "$_files"
   fi
 }

@@ -66,6 +66,8 @@ export SHOW_AWS_PROMPT=false # for zsh plugin
 export AWS_SDK_LOAD_CONFIG=1
 export AWS_CONFIG_FILE="$HOME/.aws/config"
 
+export MOZ_ENABLE_WAYLAND=1
+
 # ---- Langs
 
 # Java
