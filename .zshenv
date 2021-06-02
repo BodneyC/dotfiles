@@ -67,6 +67,7 @@ export AWS_SDK_LOAD_CONFIG=1
 export AWS_CONFIG_FILE="$HOME/.aws/config"
 
 export MOZ_ENABLE_WAYLAND=1
+export WINIT_UNIX_BACKEND=x11
 
 # ---- Langs
 
