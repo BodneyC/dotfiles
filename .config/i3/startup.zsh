@@ -16,7 +16,7 @@ esac
 
 "$HOME/.config/polybar/launch.sh" &
 
-xrdb -load ~/.Xresources &
-feh --bg-scale "$HOME/Pictures/wallpaper-space.jpg" &
+xrdb -merge ~/.Xresources
+# feh --bg-scale "$HOME/Pictures/wallpaper-space.jpg" &
 
-hash libinput-gestures-setup && libinput-gestures-setup restart &
+# hash libinput-gestures-setup && libinput-gestures-setup restart &
