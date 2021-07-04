@@ -8,11 +8,14 @@ alias gp="git push"
 
 alias gdt="git difftool"
 
+__GIT_PLUGIN_MIN_PREV=50
+
 function gd() {
-  preview='git diff $@ --color=always -- {-1}'
+  preview="git diff $@ --color=always -- {-1}"
   _files="$(git diff --name-only "$@" \
-    | xargs -I '{}' realpath --relative-to=. $(git rev-parse --show-toplevel)/'{}')"
+    | xargs -I '{}' realpath -q --relative-to=. $(git rev-parse --show-toplevel)/'{}')"
   _percent="$(bc <<< "96 - ($(wc -l <<< "$_files" | awk '{print $1}')00/$(tput lines))")"
+  [[ "$_percent" < "$__GIT_PLUGIN_MIN_PREV" ]] && _percent="$__GIT_PLUGIN_MIN_PREV"
   if [[ -n $_files ]]; then
     fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
       --preview-window="up:$_percent%" --preview "$preview" \
@@ -20,12 +23,13 @@ function gd() {
   fi
 }
 compdef _git gd=git-diff
-
+ 
 function gdc() {
-  preview='git diff --cached $@ --color=always -- {-1}'
+  preview="git diff --cached $@ --color=always -- {-1}"
   _files="$(git diff --cached --name-only "$@" \
-    | xargs -I '{}' realpath --relative-to=. $(git rev-parse --show-toplevel)/'{}')"
+    | xargs -I '{}' realpath -q --relative-to=. $(git rev-parse --show-toplevel)/'{}')"
   _percent="$(bc <<< "96 - ($(wc -l <<< "$_files" | awk '{print $1}')00/$(tput lines))")"
+  [[ "$_percent" < "$__GIT_PLUGIN_MIN_PREV" ]] && _percent="$__GIT_PLUGIN_MIN_PREV"
   if [[ -n $_files ]]; then
     fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
       --preview-window="up:$_percent%" --preview "$preview" \
