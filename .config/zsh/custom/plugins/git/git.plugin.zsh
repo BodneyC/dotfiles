@@ -10,32 +10,30 @@ alias gdt="git difftool"
 
 __GIT_PLUGIN_MIN_PREV=50
 
-function gd() {
-  preview="git diff $@ --color=always -- {-1}"
-  _files="$(git diff --name-only "$@" \
+function _gd() {
+  opt="$1"
+  if [[ -f "$2" ]]; then
+    preview="git diff $opt --color=always -- {-1}"
+  else
+    preview="git diff $opt $2 --color=always -- {-1}"
+  fi
+  shift
+  _files="$(git diff $opt --name-only "$@" \
     | xargs -I '{}' realpath -q --relative-to=. $(git rev-parse --show-toplevel)/'{}')"
   _percent="$(bc <<< "96 - ($(wc -l <<< "$_files" | awk '{print $1}')00/$(tput lines))")"
   [[ "$_percent" < "$__GIT_PLUGIN_MIN_PREV" ]] && _percent="$__GIT_PLUGIN_MIN_PREV"
   if [[ -n $_files ]]; then
-    fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
-      --preview-window="up:$_percent%" --preview "$preview" \
+    fzf -m --ansi --preview "$preview" \
+      --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
+      --preview-window="up:$_percent%" \
       <<< "$_files"
   fi
 }
+
+function gd() { _gd "" "$@"; }
 compdef _git gd=git-diff
- 
-function gdc() {
-  preview="git diff --cached $@ --color=always -- {-1}"
-  _files="$(git diff --cached --name-only "$@" \
-    | xargs -I '{}' realpath -q --relative-to=. $(git rev-parse --show-toplevel)/'{}')"
-  _percent="$(bc <<< "96 - ($(wc -l <<< "$_files" | awk '{print $1}')00/$(tput lines))")"
-  [[ "$_percent" < "$__GIT_PLUGIN_MIN_PREV" ]] && _percent="$__GIT_PLUGIN_MIN_PREV"
-  if [[ -n $_files ]]; then
-    fzf -m --ansi --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
-      --preview-window="up:$_percent%" --preview "$preview" \
-      <<< "$_files"
-  fi
-}
+
+function gdc() { _gd "--cached" "$@"; }
 compdef _git gdc=git-diff
 
 # alias gdc="git diff --cached"
