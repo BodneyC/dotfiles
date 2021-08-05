@@ -35,11 +35,6 @@ nvm-init() {
   fi
 }
 
-cd() {
-  builtin cd "$@" || return 1
-  eval "$_cd_cmd"
-}
-
 pretty-print-path() {
   echo "${PATH//:/\n}" | sort
 }
@@ -67,11 +62,9 @@ if hash exa 2> /dev/null; then
   [[ "${aliases[l]}" ]] && unalias l
   [[ "${aliases[ls]}" ]] && unalias ls
   [[ "${aliases[la]}" ]] && unalias la
-  _cd_cmd="exa --classify --group-directories-first --all"
 else
   alias l="ls -ha"
   alias ll="ls -hls"
-  _cd_cmd="ls -a"
 fi
 alias IGNORE_PROXY='ALL_PROXY="" HTTPS_PROXY="" HTTP_PROXY=""'
 alias bdate="date '+%Y-%M-%d'"

@@ -31,7 +31,14 @@ git_prompt_info () {
 }
 
 # _beam_cursor() { echo -ne '\e[6 q'; }
-# precmd_functions+=(_beam_cursor)
+_newline_after_cmd() { print ""; }
+precmd_functions+=(_newline_after_cmd)
+
+_exa_after_cmd() {
+  hash exa 2>/dev/null && exa --classify --group-directories-first --all
+}
+chpwd_functions+=(_exa_after_cmd)
+
 
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
