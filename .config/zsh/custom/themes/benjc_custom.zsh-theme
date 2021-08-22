@@ -31,8 +31,8 @@ git_prompt_info () {
 }
 
 # _beam_cursor() { echo -ne '\e[6 q'; }
-_newline_after_cmd() { print ""; }
-precmd_functions+=(_newline_after_cmd)
+# _newline_after_cmd() { print ""; }
+# precmd_functions+=(_newline_after_cmd)
 
 _exa_after_cmd() {
   hash exa 2>/dev/null && exa --classify --group-directories-first --all

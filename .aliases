@@ -2,6 +2,16 @@
 
 # shellcheck disable=SC2139
 
+gig() {
+  if ! tl="$(git rev-parse --show-toplevel)"; then
+    echo "Not in git directory"
+    return 1
+  fi
+  for e in "$@"; do
+    echo "$e" >> "$tl/.gitignore"
+  done
+}
+
 pdfcat() {
   if command -v pdftotext &> /dev/null; then
     for f in "$@"; do
