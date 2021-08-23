@@ -32,7 +32,33 @@ git_prompt_info () {
 
 # _beam_cursor() { echo -ne '\e[6 q'; }
 # _newline_after_cmd() { print ""; }
-# precmd_functions+=(_newline_after_cmd)
+
+__date=gdate
+hash gdate &>/dev/null || __date=date
+
+__zshrc_now() {
+  echo $(($("$__date" +%s%0N)/1000000))
+}
+
+_timer_preexec() {
+  t0="$(__zshrc_now)"
+}
+
+preexec_functions+=(_timer_preexec)
+
+_timer_precmd() {
+  if [ $t0 ]; then
+    t1="$(__zshrc_now)"
+    tdelta=$(($t1-$t0))
+
+    export RPROMPT="%F{cyan}${tdelta}ms %{$reset_color%}"
+    unset t0
+  else
+    export RPROMPT=
+  fi
+}
+
+precmd_functions+=(_timer_precmd)
 
 _exa_after_cmd() {
   hash exa 2>/dev/null && exa --classify --group-directories-first --all
