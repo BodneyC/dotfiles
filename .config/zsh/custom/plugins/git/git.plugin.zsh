@@ -15,7 +15,7 @@ function _gd() {
   if [[ -f "$2" ]]; then
     preview="git diff $opt --color=always -- {-1}"
   else
-    preview="git diff $opt $2 --color=always -- {-1}"
+    preview="git diff $opt $@ --color=always -- {-1}"
   fi
   shift
   _files="$(git diff $opt --name-only "$@" \
