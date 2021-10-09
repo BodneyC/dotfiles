@@ -63,7 +63,7 @@ bindkey "\e[3~" delete-char
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '[Z' reverse-menu-complete
-bindkey '^r' vi-forward-word
+bindkey '^s' vi-forward-word
 bindkey '^f' autosuggest-execute
 bindkey -r '^J'
 

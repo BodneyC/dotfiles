@@ -11,13 +11,13 @@ local version = _VERSION:gsub('Lua ', '')
 local home = os.getenv('HOME')
 
 add_to_path('path', {
-  '/root/.luarocks/share/lua/' .. version .. '/?.lua',
-  '/root/.luarocks/share/lua/' .. version .. '/?/init.lua',
-  home .. '/.luarocks/share/lua/' .. version .. '/?.lua',
-  home .. '/.luarocks/share/lua/' .. version .. '/?/init.lua'
+  -- '/root/.luarocks/share/lua/' .. version .. '/?.lua',
+  -- '/root/.luarocks/share/lua/' .. version .. '/?/init.lua',
+  home .. '/.local/share/lua/' .. version .. '/?.lua',
+  home .. '/.local/share/lua/' .. version .. '/?/init.lua',
 })
 
 add_to_path('cpath', {
-  '/root/.luarocks/lib/lua/' .. version .. '/?.so',
-  home .. '/.luarocks/lib/lua/' .. version .. '/?.so'
+  -- '/root/.luarocks/lib/lua/' .. version .. '/?.so',
+  home .. '/.local/lib/lua/' .. version .. '/?.so',
 })

@@ -113,3 +113,4 @@ xo() {
 
 alias k="kubectl"
 command -v xdg-open &> /dev/null && alias open="xdg-open"
+alias luajit="rlwrap luajit"
