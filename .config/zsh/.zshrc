@@ -18,6 +18,7 @@ plugins=(
   git-auto-fetch
   history-substring-search
   kubectl
+  helm
   mvn
   oc
   vi-mode

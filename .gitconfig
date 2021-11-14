@@ -6,7 +6,7 @@
 	ff = only
 
 [init]
-	defaultBranch = dev
+	defaultBranch = main
 
 [alias]
   branchdates = for-each-ref --sort=committerdate refs/ --format='%(HEAD) \
