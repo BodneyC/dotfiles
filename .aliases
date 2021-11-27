@@ -7,8 +7,16 @@ gig() {
     echo "Not in git directory"
     return 1
   fi
+  gitignore="$tl/.gitignore"
+  if [[ "$#" == 0 ]]; then
+    cat "$gitignore"
+  fi
   for e in "$@"; do
-    echo "$e" >> "$tl/.gitignore"
+    if ! grep -qe "^$e$" "$gitignore"; then
+      echo "$e" >> "$gitignore"
+    else
+      echo "'$e' already in $gitignore"
+    fi
   done
 }
 
@@ -34,7 +42,7 @@ v-which() {
 }
 
 sdkman-init() {
-	. "$HOME/.sdkman/bin/sdkman-init.sh"
+  . "$HOME/.sdkman/bin/sdkman-init.sh"
 }
 
 nvm-init() {
