@@ -69,6 +69,22 @@ lns() {
   ln -s "$(realpath "$1")" "$(realpath "$2")"
 }
 
+xi() {
+  if command -v xclip &> /dev/null; then
+    xclip -in -selection clipboard
+  elif command -v pbcopy &> /dev/null; then
+    pbcopy
+  fi
+}
+
+xo() {
+  if command -v xclip &> /dev/null; then
+    xclip -out -selection clipboard
+  elif command -v pbpaste &> /dev/null; then
+    pbpaste
+  fi
+}
+
 if hash exa 2> /dev/null; then
   alias e="exa --classify --group-directories-first --all"
   alias el="${aliases[e]} --long"
@@ -101,24 +117,7 @@ alias v-="$(command -v nvim) +\"let g:virk_enabled=0\""
 alias v-startup="$(command -v nvim) --startuptime /tmp/nvim.log -c 'qall' && v-novirk /tmp/nvim.log"
 alias suv="sudo -E nvim"
 alias v="nvim"
-
-xi() {
-  if command -v xclip &> /dev/null; then
-    xclip -in -selection clipboard
-  elif command -v pbcopy &> /dev/null; then
-    pbcopy
-  fi
-}
-# alias xi="xclip -in -selection clipboard"
-xo() {
-  if command -v xclip &> /dev/null; then
-    xclip -out -selection clipboard
-  elif command -v pbpaste &> /dev/null; then
-    pbpaste
-  fi
-}
-# alias xo="xclip -out -selection clipboard"
-
+alias linedo="xargs -d '\n' -I {}"
 alias k="kubectl"
 command -v xdg-open &> /dev/null && alias open="xdg-open"
 alias luajit="rlwrap luajit"

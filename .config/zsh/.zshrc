@@ -25,6 +25,7 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   taskwarrior
+  rust
 )
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
@@ -89,6 +90,8 @@ elif [[ "$TERMTHEME" == "dark" ]]; then
   export BAT_THEME="OneHalfDark"
 fi
 
-[[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
+if [[ -f ~/.fzf.zsh ]]; then
+  . ~/.fzf.zsh
+fi
 
 # [[ -z "$TMUX" ]] && tmux
