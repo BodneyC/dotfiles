@@ -11,8 +11,8 @@ local function font_with_fallback(name, params)
 end
 
 do
-  -- WARN: There is no way to control wezterm via the CLI, in other words,
-  --  there cannot be a vim-wezterm-navigator plugins at the mo
+  -- WARN: There is no way to focus a pane via the CLI, in other words,
+  --  there cannot be a vim-wezterm-navigator plugin at the mo
 
   local NVIM_PATH = os.getenv('HOME') .. '/.local/bin/nvim'
 
@@ -24,7 +24,6 @@ do
   }) do
     wezterm.on('pass-if-vim-M-' .. k, function(window, pane)
       if pane:get_foreground_process_name() == NVIM_PATH then
-        print('IS VIM!')
         window:perform_action(wezterm.action {
           SendKey = {
             key = k,
@@ -55,14 +54,13 @@ end
 return {
   -- Font config
   font_size = 16.0,
-  font = font_with_fallback('Iosevka', {
-    weight = 'Light',
+  font = font_with_fallback('Iosevka Nerd Font', {
+    weight = 'Regular',
   }),
   font_rules = {
     {
       italic = true,
-      font = font_with_fallback('VictorMono Nerd Font', {
-        weight = 'ExtraLight',
+      font = font_with_fallback('Victor Mono Nerd Font', {
         italic = true,
       }),
     },
@@ -145,7 +143,7 @@ return {
   -- },
   -- bindings
   leader = {
-    key = ' ',
+    key = '#',
     mods = 'CTRL',
   },
   keys = {
@@ -310,4 +308,9 @@ return {
     },
     table.unpack(tab_selectors),
   },
+  unix_domains = {
+    {
+      name = "unix"
+    }
+  }
 }
