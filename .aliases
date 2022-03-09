@@ -34,6 +34,14 @@ curl() {
   echo
 }
 
+ssh() {
+  if [[ -n "$KITTY_WINDOW_ID" ]]; then
+    kitty +kitten ssh "$@"
+  else
+    ssh "$@"
+  fi
+}
+
 usrbinlink() {
   mv "$1" /usr/local/bin/ && ln -s /usr/local/bin/"$1" .
 }
