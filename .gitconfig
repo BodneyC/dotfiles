@@ -26,11 +26,11 @@
 [mergetool]
   prompt = false
 [mergetool "nvim"]
-	cmd = nvim +'let g:virk_enabled=0' -c 'Gdiffsplit!' $MERGED
+	cmd = nvim -c 'Gdiffsplit!' $MERGED
 
 [diff]
     tool = nvimdiff
 [difftool]
     prompt = true
 [difftool "nvimdiff"]
-	cmd = nvim +'let g:virk_enabled=0' -d \"$LOCAL\" \"$REMOTE\"
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"

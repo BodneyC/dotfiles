@@ -11,7 +11,7 @@ ZSH_CUSTOM=$ZDOTDIR/custom
 KEYTIMEOUT=1
 
 plugins=(
-  aws
+  # aws
   dirhistory
   docker
   git
@@ -20,29 +20,15 @@ plugins=(
   kubectl
   helm
   mvn
-  oc
+  # oc
   vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
   taskwarrior
-  rust
+  # rust
 )
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
-
-_yes_or_no() { # msg
-  [[ "$2" ]] && OPTS="[Yn]" || OPTS="[yn]"
-  while true; do
-    read "REPLY?$1 "$OPTS" "
-    case "$REPLY" in
-      [yY]*) return 0 ;;
-      [nN]*) return 1 ;;
-      *)     [[ "$2" ]] \
-        && return 0 \
-        || printf "%s\n" "${ERRO_COL}Invalid option$NORM_COL"
-    esac
-  done
-}
 
 source "$ZSH/oh-my-zsh.sh"
 source "$HOME/.aliases"
@@ -52,6 +38,10 @@ fpath+=("$ZDOTDIR/completions")
 compinit
 _comp_options+=(globdots)
 zstyle ':completion:*' special-dirs false
+
+if command -v flux &>/dev/null; then
+  . <(flux completion zsh)
+fi
 
 # Navigation Keys
 bindkey "${terminfo[khome]}" beginning-of-line

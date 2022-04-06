@@ -35,15 +35,11 @@ export ZSH="$HOME/.oh-my-zsh"
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
 export PROMPT_EOL_MARK=""
 
-_shell="$(command -v zsh)" && export SHELL="$_shell"
-if _visual="$(command -v nvim)"; then
-  export VISUAL="$_visual +\"let g:virk_enabled=0\""
-elif _visual="$(command -v vi)"; then
-  export VISUAL="$_visual"
-fi
+export SHELL="$(command -v zsh)"
+export VISUAL="$(command -v nvim)"
 export EDITOR="$VISUAL"
 
-_pager="$(command -v less)" && export GIT_PAGER="$_pager -F -X"
+export GIT_PAGER="$(command -v less) -F -X"
 
 export ALL_PROXY=""
 export HTTP_PROXY=""

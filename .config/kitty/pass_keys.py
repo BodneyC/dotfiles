@@ -1,1 +1,1 @@
-/home/benjc/.local/share/nvim/site/pack/packer/opt/vim-kitty-navigator/pass_keys.py
+/home/benjc/.local/share/nvim/site/pack/packer/start/vim-kitty-navigator/pass_keys.py
