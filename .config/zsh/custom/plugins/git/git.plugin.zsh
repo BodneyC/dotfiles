@@ -13,18 +13,29 @@ __GIT_PLUGIN_MIN_PREV=50
 function _gd() {
   opt="$1"
   shift
-  preview="git diff $opt --color=always -- {-1}"
+
+  # This is becoming gross... I may need a re-write at some point
+  _branch_comp=
+  if [[ "$#" == 1 ]]; then
+    if [[ "$1" == *...* || "$1" =~ '^.*[^\/]\.\.[^\/].*$' ]]; then
+      _branch_comp="$1"
+    fi
+  fi
+
+  preview="git diff $opt $_branch_comp --color=always -- {-1}"
   _files="$(git diff $opt --name-only "$@" \
     | xargs -I '{}' realpath -q --relative-to=. \
       $(git rev-parse --show-toplevel)/'{}')"
+
   _percent="$(bc <<< "96 - ($(wc -l <<< "$_files" \
     | awk '{print $1}')00/$(tput lines))")"
   if [[ "$_percent" < "$__GIT_PLUGIN_MIN_PREV" ]]; then
     _percent="$__GIT_PLUGIN_MIN_PREV"
   fi
+
   if [[ -n $_files ]]; then
     fzf -m --ansi --preview "$preview" \
-      --bind 'enter:execute(nvim +"let g:virk_enabled=0" {1} < /dev/tty)' \
+      --bind 'enter:execute(nvim {1} < /dev/tty)' \
       --preview-window="up:$_percent%" \
       <<< "$_files"
   fi
