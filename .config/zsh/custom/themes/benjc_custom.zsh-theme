@@ -1,7 +1,6 @@
-# vim:ft=zsh ts=2 sw=2 sts=2
+# vim: ft=bash ts=2 sw=2 sts=2 :
 
 # shellcheck disable=SC1087
-
 _mag_b="%{$fg_bold[magenta]%}"
 _grn_b="%{$fg_bold[green]%}"
 _blu_b="%{$fg_bold[blue]%}"
@@ -40,31 +39,33 @@ __zshrc_now() {
   echo $(($("$__date" +%s%0N)/1000000))
 }
 
-_timer_preexec() {
-  t0="$(__zshrc_now)"
-}
+# _timer_preexec() { t0="$(__zshrc_now)"; }
+# preexec_functions+=(_timer_preexec)
 
-preexec_functions+=(_timer_preexec)
+# _timer_precmd() {
+#   if [ $t0 ]; then
+#     t1="$(__zshrc_now)"
+#     tdelta=$(($t1-$t0))
+#     export RPROMPT="%F{cyan}${tdelta}ms %{$reset_color%}"
+#     unset t0
+#   else
+#     export RPROMPT=
+#   fi
+# }
 
-_timer_precmd() {
-  if [ $t0 ]; then
-    t1="$(__zshrc_now)"
-    tdelta=$(($t1-$t0))
-
-    export RPROMPT="%F{cyan}${tdelta}ms %{$reset_color%}"
-    unset t0
-  else
-    export RPROMPT=
+_add_echo() {
+  if [ -z "$_do_newline" ]; then
+    _do_newline=1
+  elif [ "$_do_newline" -eq 1 ]; then
+    echo
   fi
 }
-
-precmd_functions+=(_timer_precmd)
+precmd_functions+=(_add_echo)
 
 _exa_after_cmd() {
   hash exa 2>/dev/null && exa --classify --group-directories-first --all
 }
 chpwd_functions+=(_exa_after_cmd)
-
 
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
@@ -75,12 +76,13 @@ vi_mode_prompt_info() {
   POT_RPS1="${${KEYMAP/vicmd/$MODE_INDICATOR_N}/(main|viins)/$MODE_INDICATOR_I}"
   [[ -z "$POT_RPS1" ]] && echo $MODE_INDICATOR_I || echo "$POT_RPS1"
 }
+
 RPS1=" "
 
-PROMPT='$_mag_n$USER$_reset \
-$_mag_n| $_grn_n$(vi_mode_prompt_info)$_reset \
+PROMPT='\
+${_mag_n} $_blu_n$(date +"%H:%M:%S") $_mag_n|$_reset \
+$_grn_n$(vi_mode_prompt_info)$_reset \
 $_mag_n| %(?.$_grn_n.$_red_n)%?$_reset \
 $_mag_n| $_blu_n${PWD/#$HOME/~}$_reset\
-$(git_prompt_info)$_reset$_mag_n \
-|${_reset}
-%(?.$_grn_n.$_red_n) $_reset'
+$(git_prompt_info)$_reset ${_mag_n})
+%(?.$_grn_n.$_red_n) > $_reset'
