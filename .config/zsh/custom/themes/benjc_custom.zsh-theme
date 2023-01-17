@@ -77,7 +77,7 @@ vi_mode_prompt_info() {
   [[ -z "$POT_RPS1" ]] && echo $MODE_INDICATOR_I || echo "$POT_RPS1"
 }
 
-RPS1=" "
+unset RPS1
 
 PROMPT='\
 ${_mag_n} $_blu_n$(date +"%H:%M:%S") $_mag_n|$_reset \

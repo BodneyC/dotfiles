@@ -11,7 +11,7 @@ ZSH_CUSTOM=$ZDOTDIR/custom
 KEYTIMEOUT=1
 
 plugins=(
-  # aws
+  aws
   dirhistory
   docker
   git
