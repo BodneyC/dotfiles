@@ -4,7 +4,15 @@ alias gc="git commit"
 alias gcl="git clone"
 alias gch="git checkout"
 alias gp="git push"
-# alias gd="git diff"
+alias gpl="git pull"
+
+function gpfr() {
+  [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+  if ! git pull --ff-only; then
+    git rebase -i "origin/${b:=$1}"
+  fi
+}
+compdef _git gpfr=git-checkout
 
 alias gdt="git difftool"
 
@@ -54,14 +62,6 @@ alias gst="git status"
 alias grso="git remote show origin"
 alias grsuo="git remote set-url origin"
 alias grao="git remote add origin"
-
-function gpfr() {
-  [[ "$#" != 1 ]] && local b="$(git_current_branch)"
-  if ! git pull --ff-only; then
-    git rebase -i "origin/${b:=$1}"
-  fi
-}
-compdef _git gpfr=git-checkout
 
 function current_branch() {
   git_current_branch

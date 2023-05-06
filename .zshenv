@@ -28,18 +28,15 @@ _add_to_path "/usr/local/opt/curl-openssl/bin"
 _add_to_path "/usr/local/opt/maven@3.3/bin"
 _add_to_path "/usr/local/sbin/"
 
-export TERMTHEME=dark
-
 export ZDOTDIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh"
-export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>|'
 export PROMPT_EOL_MARK=""
 
 export SHELL="$(command -v zsh)"
 export VISUAL="$(command -v nvim)"
 export EDITOR="$VISUAL"
 
-export GIT_PAGER="$(command -v less) -F -X"
+# export GIT_PAGER="$(command -v less) -F -X" # Using delta now
 
 export ALL_PROXY=""
 export HTTP_PROXY=""

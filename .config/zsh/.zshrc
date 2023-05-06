@@ -55,9 +55,16 @@ bindkey "\e[3~" delete-char
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '[Z' reverse-menu-complete
+
+# Other bindings
 bindkey '^s' vi-forward-word
 bindkey '^f' autosuggest-execute
 bindkey -r '^J'
+
+# Custom widgets
+[[ -f ~/.config/zsh/custom/widgets.zsh ]] && . ~/.config/zsh/custom/widgets.zsh
+export WORDCHARS='' # '*?_-.[]~=&;!#$%^(){}<>|'
+bindkey '^w' backward-kill-word-include-multi-char-ws
 
 # bindkey '^k' autosuggest-accept
 # bindkey '^i' expand-or-complete-prefix
@@ -74,14 +81,8 @@ fi
 
 unsetopt PROMPT_SP PROMPT_CR SHARE_HISTORY
 
-if [[ "$TERMTHEME" == "light" ]]; then
-  export BAT_THEME="GitHub"
-elif [[ "$TERMTHEME" == "dark" ]]; then
-  export BAT_THEME="OneHalfDark"
-fi
+export BAT_THEME="OneHalfDark"
 
-if [[ -f ~/.fzf.zsh ]]; then
-  . ~/.fzf.zsh
-fi
+[[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
 
 # [[ -z "$TMUX" ]] && tmux

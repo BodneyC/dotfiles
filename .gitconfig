@@ -3,10 +3,10 @@
   name = BodneyC
 
 [pull]
-	ff = only
+  ff = only
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 [alias]
   branchdates = for-each-ref --sort=committerdate refs/ --format='%(HEAD) \
@@ -14,23 +14,36 @@
     %(color:reset) - %(contents:subject) - %(authorname) (%(color:green)\
     %(committerdate:relative)%(color:reset))'
 
-  graph = log --graph --pretty=format:'%C(magenta)%h %Creset%C(dim blue)%an \
+  graph = log --graph --pretty=format:'%C(magenta)%h %Creset%G? %C(dim blue)%an \
     [%ce]%n%Creset  %m%C(yellow)%d%Creset %s %Cgreen(%cr)%n%Creset' --abbrev-commit
 
   diffp = diff @^..@
-	ls = ls-tree -r --name-only @
+  ls = ls-tree -r --name-only @
   wc = rev-list --count @
 
 [merge]
   tool = nvim
+  conflictstyle = diff3
 [mergetool]
   prompt = false
 [mergetool "nvim"]
-	cmd = nvim -c 'Gdiffsplit!' $MERGED
+  cmd = nvim -c 'Gdiffsplit!' $MERGED
 
 [diff]
-    tool = nvimdiff
+  tool = nvimdiff
 [difftool]
-    prompt = true
+  prompt = true
 [difftool "nvimdiff"]
-	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+  cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+
+[core]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+  light = false
+  line-numbers = true
+  ; side-by-side = true
