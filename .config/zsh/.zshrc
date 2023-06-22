@@ -2,6 +2,8 @@
 
 [[ -z "$ZSHRC_SOURCED" ]] && ZSHRC_SOURCED=1 || return
 
+export GPG_TTY=$(tty)
+
 setopt HIST_IGNORE_SPACE
 
 ZSH_THEME="benjc_custom"
@@ -13,7 +15,7 @@ KEYTIMEOUT=1
 plugins=(
   aws
   dirhistory
-  docker
+  # docker
   git
   git-auto-fetch
   history-substring-search
@@ -27,6 +29,10 @@ plugins=(
   taskwarrior
   # rust
 )
+
+# For podman completion
+# mkdir -p $ZSH_CUSTOM/plugins/podman/
+# podman completion zsh -f $ZSH_CUSTOM/plugins/podman/_podman
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 

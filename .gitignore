@@ -8,3 +8,4 @@ multiplexing/.tmux/plugin*
 __init__.py
 __pycache__
 tags
+.config/zsh/custom/plugins/podman
