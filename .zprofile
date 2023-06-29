@@ -3,30 +3,38 @@
 # ---- System
 
 _add_to_path() {
-  [[ ! "$PATH" =~ $1 ]] \
-    && export PATH="$PATH:$1"
+  if [[ ! "$PATH" =~ $2 ]]; then
+    case "$1" in
+      app|append) export PATH="$PATH:$2" ;;
+      pre|prepend) export PATH="$2:$PATH" ;;
+      *) echo "unknown subcommand ($1)"; return 1 ;;
+    esac
+  fi
 }
-_add_to_path "$HOME/.cargo/bin"
-_add_to_path "$HOME/.config/yarn/global/node_modules/.bin"
-_add_to_path "$HOME/.dotnet/tools"
-_add_to_path "$HOME/.fnm"
-_add_to_path "$HOME/.gem/ruby/2.6.0/bin"
-_add_to_path "$HOME/.gem/ruby/2.7.0/bin"
-_add_to_path "$HOME/.local/apps/npm/bin"
-_add_to_path "$HOME/.local/bin"
-_add_to_path "$HOME/.local/share/npm/bin"
-_add_to_path "$HOME/.poetry/bin"
-_add_to_path "$HOME/.rvm/bin"
-_add_to_path "$HOME/.yarn/bin"
-_add_to_path "$HOME/Library/Python/3.8/bin"
-_add_to_path "$HOME/go/bin"
-_add_to_path "$HOME/scripts"
-_add_to_path "$HOME/.luarocks/bin"
-_add_to_path "$HOME/perl5/bin"
-_add_to_path "/usr/local/opt/"
-_add_to_path "/usr/local/opt/curl-openssl/bin"
-_add_to_path "/usr/local/opt/maven@3.3/bin"
-_add_to_path "/usr/local/sbin/"
+_add_to_path pre "/opt/homebrew/bin"
+_add_to_path pre "/opt/homebrew/opt/coreutils/libexec/gnubin"
+_add_to_path pre "/usr/local/opt/"
+_add_to_path pre "/usr/local/sbin/"
+_add_to_path app "$HOME/.cargo/bin"
+_add_to_path app "$HOME/.config/yarn/global/node_modules/.bin"
+_add_to_path app "$HOME/.dotnet/tools"
+_add_to_path app "$HOME/.fnm"
+_add_to_path app "$HOME/.gem/ruby/2.6.0/bin"
+_add_to_path app "$HOME/.gem/ruby/2.7.0/bin"
+_add_to_path app "$HOME/.local/apps/npm/bin"
+_add_to_path app "$HOME/.local/bin"
+_add_to_path app "$HOME/.local/share/npm/bin"
+_add_to_path app "$HOME/.poetry/bin"
+_add_to_path app "$HOME/.rvm/bin"
+_add_to_path app "$HOME/.yarn/bin"
+_add_to_path app "$HOME/Library/Python/3.8/bin"
+_add_to_path app "$HOME/go/bin"
+_add_to_path app "$HOME/scripts"
+_add_to_path app "$HOME/.luarocks/bin"
+_add_to_path app "$HOME/perl5/bin"
+
+export MANPATH="/opt/homebrew/share/man${MANPATH+:MANPATH}:"
+export INFOPATH="/opt/homebrew/share/info${INFOPATH:-}"
 
 export ZDOTDIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh"
@@ -53,6 +61,10 @@ export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclu
 export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=onehalfdark --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
 
 export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+export HOMEBREW_REPOSITORY="/opt/homebrew"
+
 export N_PREFIX="$HOME/.local"
 
 export SHOW_AWS_PROMPT=false # for zsh plugin
@@ -64,7 +76,6 @@ export WINIT_UNIX_BACKEND=x11
 
 # ---- Langs
 
-# Java
 _get_java_home() {
   if command -v java &> /dev/null && command -v rg &> /dev/null; then
     java -XshowSettings:properties -version 2>&1 | rg -o --pcre2 '(?<=java.home = ).*'
@@ -100,5 +111,5 @@ export DOTNET_ROOT="$HOME/.dotnet"
 
 # Macos env for work...
 
-test -e "$HOME/.zshenv-macos" && . "$HOME/.zshenv-macos"
+test -e "$HOME/.zprofile-macos" && . "$HOME/.zprofile-macos"
 test -e "$HOME/.cargo/env" && . "$HOME/.cargo/env"

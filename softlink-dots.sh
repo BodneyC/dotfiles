@@ -28,7 +28,7 @@ _softlink() {
       || return
           /bin/rm -rf "$f"
   fi
-  ln -s "$GITDIR/$f" "$f"
+  ln -s "$GITDIR/$f" "${f%/}"
 }
 
 for f in \
