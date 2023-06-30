@@ -15,7 +15,7 @@ KEYTIMEOUT=1
 plugins=(
   aws
   dirhistory
-  # docker
+  docker
   git
   git-auto-fetch
   history-substring-search
@@ -36,18 +36,15 @@ plugins=(
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 
-source "$ZSH/oh-my-zsh.sh"
-source "$HOME/.aliases"
+source_if_exists() { [[ -e "$1" ]] && . "$1"; }
+
+source_if_exists "$ZSH/oh-my-zsh.sh"
 
 fpath+=("$ZDOTDIR/completions")
 
 compinit
 _comp_options+=(globdots)
 zstyle ':completion:*' special-dirs false
-
-if command -v flux &>/dev/null; then
-  . <(flux completion zsh)
-fi
 
 # Navigation Keys
 bindkey "${terminfo[khome]}" beginning-of-line
@@ -68,7 +65,7 @@ bindkey '^f' autosuggest-execute
 bindkey -r '^J'
 
 # Custom widgets
-[[ -f ~/.config/zsh/custom/widgets.zsh ]] && . ~/.config/zsh/custom/widgets.zsh
+source_if_exists "$HOME/.config/zsh/custom/widgets.zsh"
 export WORDCHARS='' # '*?_-.[]~=&;!#$%^(){}<>|'
 bindkey '^w' backward-kill-word-include-multi-char-ws
 
@@ -87,8 +84,6 @@ fi
 
 unsetopt PROMPT_SP PROMPT_CR SHARE_HISTORY
 
-export BAT_THEME="OneHalfDark"
+### Other software
 
-[[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
-
-# [[ -z "$TMUX" ]] && tmux
+source_if_exists "$ZDOTDIR/other.zsh"
