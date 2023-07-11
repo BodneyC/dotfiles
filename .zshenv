@@ -2,6 +2,16 @@
 
 # ---- System
 
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
+if [[ ! -d "$HOMEBREW_PREFIX" ]]; then
+  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+  export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
+fi
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+
 _add_to_path() {
   if [[ ! "$PATH" =~ $2 ]]; then
     case "$1" in
@@ -17,8 +27,9 @@ _add_to_path() {
 
 _add_to_path pre "/usr/local/opt/"
 _add_to_path pre "/usr/local/sbin/"
-_add_to_path pre "/opt/homebrew/opt/coreutils/libexec/gnubin"
-_add_to_path pre "/opt/homebrew/bin"
+_add_to_path pre "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
+_add_to_path pre "$HOMEBREW_PREFIX/bin"
+_add_to_path pre "$HOMEBREW_PREFIX/sbin"
 _add_to_path app "$HOME/.cargo/bin"
 _add_to_path app "$HOME/.local/bin"
 _add_to_path app "$HOME/.local/opt/google-cloud-sdk/bin"
@@ -30,8 +41,8 @@ _add_to_path app "$HOME/Library/Python/3.8/bin"
 _add_to_path app "$HOME/go/bin"
 _add_to_path app "$HOME/perl5/bin"
 
-export MANPATH="/opt/homebrew/share/man${MANPATH+:MANPATH}:"
-export INFOPATH="/opt/homebrew/share/info${INFOPATH:-}"
+export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 export ZDOTDIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh"
@@ -58,11 +69,6 @@ export BAT_THEME="OneHalfDark"
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor --exclude .clj-kondo --exclude .lsp"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=onehalfdark --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
-
-export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_PREFIX="/opt/homebrew"
-export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
-export HOMEBREW_REPOSITORY="/opt/homebrew"
 
 export N_PREFIX="$HOME/.local"
 
