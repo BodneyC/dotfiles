@@ -12,4 +12,4 @@ fi
 
 source_if_exists "$HOME/.cargo/env"
 
-# [[ -z "$TMUX" ]] && tmux
+[[ -n $ALACRITTY_LOG ]] && [[ -z "$TMUX" ]] && tmux && exit
