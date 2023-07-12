@@ -40,7 +40,10 @@ source_if_exists() { [[ -e "$1" ]] && . "$1"; }
 
 source_if_exists "$ZSH/oh-my-zsh.sh"
 
-fpath+=("$ZDOTDIR/completions")
+fpath+=(
+  "$ZDOTDIR/completions"
+  "$HOMEBREW_PREFIX/share/zsh/site-functions"
+)
 
 compinit
 _comp_options+=(globdots)

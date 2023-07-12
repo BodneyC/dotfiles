@@ -12,6 +12,10 @@ if [[ ! -d "$HOMEBREW_PREFIX" ]]; then
 fi
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 
+if [ -x /usr/libexec/path_helper ]; then
+  eval "$(/usr/libexec/path_helper -s)"
+fi
+
 _add_to_path() {
   if [[ ! "$PATH" =~ $2 ]]; then
     case "$1" in
@@ -30,6 +34,7 @@ _add_to_path pre "/usr/local/sbin/"
 _add_to_path pre "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
 _add_to_path pre "$HOMEBREW_PREFIX/bin"
 _add_to_path pre "$HOMEBREW_PREFIX/sbin"
+_add_to_path app "$HOME/.rd/bin"
 _add_to_path app "$HOME/.cargo/bin"
 _add_to_path app "$HOME/.local/bin"
 _add_to_path app "$HOME/.local/opt/google-cloud-sdk/bin"
@@ -47,6 +52,7 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 export ZDOTDIR="$HOME/.config/zsh"
 export ZSH="$HOME/.oh-my-zsh"
 export PROMPT_EOL_MARK=""
+export XDG_CONFIG_HOME="$HOME/.config"
 
 export SHELL="$(command -v zsh)"
 export VISUAL="$(command -v nvim)"
@@ -77,7 +83,7 @@ export AWS_SDK_LOAD_CONFIG=1
 export AWS_CONFIG_FILE="$HOME/.aws/config"
 export AWS_REGION="eu-west-2"
 
-export CLOUDSDK_COMPUTE_REGION="europe-west2"
+# export CLOUDSDK_COMPUTE_REGION="europe-west2"
 
 export MOZ_ENABLE_WAYLAND=1
 export WINIT_UNIX_BACKEND=x11

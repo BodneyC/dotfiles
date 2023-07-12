@@ -1,4 +1,50 @@
 local wezterm = require 'wezterm'
+local act = wezterm.action
+
+local function is_vi_process(pane)
+  -- get_foreground_process_name On Linux, macOS and Windows,
+  -- the process can be queried to determine this path. Other operating systems
+  -- (notably, FreeBSD and other unix systems) are not currently supported
+  return pane:get_foreground_process_name():find('n?vim') ~= nil
+  -- return pane:get_title():find("n?vim") ~= nil
+end
+
+local function conditional_activate_pane(window, pane, pane_direction, vim_direction)
+  if is_vi_process(pane) then
+    window:perform_action(
+    -- This should match the keybinds you set in Neovim.
+      act.SendKey({ key = vim_direction, mods = 'ALT' }),
+      pane
+    )
+  else
+    window:perform_action(act.ActivatePaneDirection(pane_direction), pane)
+  end
+end
+
+wezterm.on('ActivatePaneDirection-right', function(window, pane)
+  conditional_activate_pane(window, pane, 'Right', 'l')
+end)
+wezterm.on('ActivatePaneDirection-left', function(window, pane)
+  conditional_activate_pane(window, pane, 'Left', 'h')
+end)
+wezterm.on('ActivatePaneDirection-up', function(window, pane)
+  conditional_activate_pane(window, pane, 'Up', 'k')
+end)
+wezterm.on('ActivatePaneDirection-down', function(window, pane)
+  conditional_activate_pane(window, pane, 'Down', 'j')
+end)
+
+local tab_selectors = {}
+for i = 1, 8 do
+  -- CTRL+ALT + number to activate that tab
+  table.insert(tab_selectors, {
+    key = tostring(i),
+    mods = 'CTRL|ALT',
+    action = act {
+      ActivateTab = i - 1,
+    },
+  })
+end
 
 local function font_with_fallback(name, params)
   local names = {
@@ -10,71 +56,33 @@ local function font_with_fallback(name, params)
   return wezterm.font_with_fallback(names, params)
 end
 
-do
-  -- WARN: There is no way to focus a pane via the CLI, in other words,
-  --  there cannot be a vim-wezterm-navigator plugin at the mo
-
-  local NVIM_PATH = os.getenv('HOME') .. '/.local/bin/nvim'
-
-  for k, v in pairs({
-    l = 'Right',
-    k = 'Up',
-    j = 'Down',
-    h = 'Left',
-  }) do
-    wezterm.on('pass-if-vim-M-' .. k, function(window, pane)
-      if pane:get_foreground_process_name() == NVIM_PATH then
-        window:perform_action(wezterm.action {
-          SendKey = {
-            key = k,
-            mods = 'ALT',
-          },
-        }, pane)
-      else
-        window:perform_action(wezterm.action {
-          ActivatePaneDirection = v,
-        }, pane)
-      end
-    end)
-  end
-end
-
-local tab_selectors = {}
-for i = 1, 8 do
-  -- CTRL+ALT + number to activate that tab
-  table.insert(tab_selectors, {
-    key = tostring(i),
-    mods = 'CTRL|ALT',
-    action = wezterm.action {
-      ActivateTab = i - 1,
-    },
-  })
-end
-
 return {
   -- Font config
-  font_size = 16.0,
+  font_size = 14.0,
   font = font_with_fallback('Iosevka Nerd Font', {
     weight = 'Regular',
   }),
   font_rules = {
-    {
-      italic = true,
-      font = font_with_fallback('Victor Mono Nerd Font', {
-        italic = true,
-      }),
-    },
+    -- {
+    --   italic = true,
+    --   font = font_with_fallback('Victor Mono Nerd Font', {
+    --     italic = true,
+    --   }),
+    -- },
   },
   freetype_load_target = 'Light',
   -- Screen config
-  dpi = 96.0,
+  line_height = 1.2,
+  -- dpi = 96.0,
   bold_brightens_ansi_colors = true,
+  alternate_buffer_wheel_scroll_speed = 0,
   -- System config
+  audible_bell = 'Disabled',
   send_composed_key_when_left_alt_is_pressed = false,
   send_composed_key_when_right_alt_is_pressed = true,
   term = 'xterm-256color',
   scrollback_lines = 10000,
-  enable_wayland = false,
+  enable_wayland = true,
   cursor_blink_rate = 800,
   default_cursor_style = 'SteadyBar',
   window_padding = {
@@ -83,234 +91,41 @@ return {
     top = 4,
     bottom = 4,
   },
+
   -- Colors
-  color_scheme = 'spacegray',
+  color_scheme = 'nightfox',
   color_schemes = {
-    spacegray = {
-      foreground = '#B3B8C4',
-      background = '#111314',
-      cursor_bg = '#52ad70',
-      cursor_fg = 'black',
-      cursor_border = '#52ad70',
-      scrollbar_thumb = '#222222',
-      split = '#444444',
-      ansi = {
-        '#313234',
-        '#BF6262',
-        '#A2A565',
-        '#E9A96F',
-        '#789BAD',
-        '#9F7AA5',
-        '#638E8A',
-        '#E3E8E3',
-      },
-      brights = {
-        '#313234',
-        '#BF6262',
-        '#A2A565',
-        '#E9A96F',
-        '#789BAD',
-        '#9F7AA5',
-        '#638E8A',
-        '#E3E8E3',
-      },
-    },
+    nightfox = wezterm.color.load_scheme(os.getenv('HOME') .. '/.config/wezterm/schemes/nightfox.toml'),
   },
+
   -- tabbar
   enable_tab_bar = true,
+  use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
-  -- colors = {
-  --   tab_bar = {
-  --     background = '#0b0022',
-  --     active_tab = {
-  --       bg_color = '#2b2042',
-  --       fg_color = '#c0c0c0',
-  --       intensity = 'Normal',
-  --       underline = 'None',
-  --       italic = false,
-  --       strikethrough = false,
-  --     },
-  --     inactive_tab = {
-  --       bg_color = '#1b1032',
-  --       fg_color = '#808080',
-  --     },
-  --     inactive_tab_hover = {
-  --       bg_color = '#3b3052',
-  --       fg_color = '#909090',
-  --       italic = true,
-  --     },
-  --   },
-  -- },
+
   -- bindings
-  leader = {
-    key = '#',
-    mods = 'CTRL',
-  },
+  leader = { key = ' ', mods = 'CTRL', },
   keys = {
-    {
-      key = '5',
-      mods = 'LEADER',
-      action = wezterm.action {
-        SplitHorizontal = {
-          args = {'zsh'},
-        },
-      },
-    },
-    {
-      key = '%',
-      mods = 'LEADER',
-      action = wezterm.action {
-        SplitHorizontal = {
-          args = {'zsh'},
-        },
-      },
-    },
-    {
-      key = '2',
-      mods = 'LEADER',
-      action = wezterm.action {
-        SplitVertical = {
-          args = {'zsh'},
-        },
-      },
-    },
-    {
-      key = '"',
-      mods = 'LEADER',
-      action = wezterm.action {
-        SplitVertical = {
-          args = {'zsh'},
-        },
-      },
-    },
-    {
-      key = 'c',
-      mods = 'LEADER',
-      action = wezterm.action {
-        SpawnCommandInNewTab = {
-          args = {'zsh'},
-        },
-      },
-    },
-    {
-      key = 'x',
-      mods = 'LEADER',
-      action = wezterm.action {
-        CloseCurrentPane = {
-          confirm = true,
-        },
-      },
-    },
-    {
-      key = 'X',
-      mods = 'LEADER',
-      action = wezterm.action {
-        CloseCurrentTab = {
-          confirm = true,
-        },
-      },
-    },
-    {
-      key = 'z',
-      mods = 'LEADER',
-      action = 'TogglePaneZoomState',
-    },
-    {
-      key = 'h',
-      mods = 'ALT',
-      action = wezterm.action {
-        EmitEvent = 'pass-if-vim-M-h',
-      },
-    },
-    {
-      key = 'j',
-      mods = 'ALT',
-      action = wezterm.action {
-        EmitEvent = 'pass-if-vim-M-j',
-      },
-    },
-    {
-      key = 'k',
-      mods = 'ALT',
-      action = wezterm.action {
-        EmitEvent = 'pass-if-vim-M-k',
-      },
-    },
-    {
-      key = 'l',
-      mods = 'ALT',
-      action = wezterm.action {
-        EmitEvent = 'pass-if-vim-M-l',
-      },
-    },
-    {
-      key = 'H',
-      mods = 'ALT',
-      action = wezterm.action {
-        ActivatePaneDirection = 'Left',
-      },
-    },
-    {
-      key = 'J',
-      mods = 'ALT',
-      action = wezterm.action {
-        ActivatePaneDirection = 'Down',
-      },
-    },
-    {
-      key = 'K',
-      mods = 'ALT',
-      action = wezterm.action {
-        ActivatePaneDirection = 'Up',
-      },
-    },
-    {
-      key = 'L',
-      mods = 'ALT',
-      action = wezterm.action {
-        ActivatePaneDirection = 'Right',
-      },
-    },
-    {
-      key = 'H',
-      mods = 'CTRL|ALT',
-      action = wezterm.action {
-        AdjustPaneSize = {'Left', 5},
-      },
-    },
-    {
-      key = 'J',
-      mods = 'CTRL|ALT',
-      action = wezterm.action {
-        AdjustPaneSize = {'Down', 5},
-      },
-    },
-    {
-      key = 'K',
-      mods = 'CTRL|ALT',
-      action = wezterm.action {
-        AdjustPaneSize = {'Up', 5},
-      },
-    },
-    {
-      key = 'L',
-      mods = 'CTRL|ALT',
-      action = wezterm.action {
-        AdjustPaneSize = {'Right', 5},
-      },
-    },
-    {
-      key = '/',
-      mods = 'CTRL',
-      action = wezterm.action {
-        SendString = '',
-      },
-    },
+    { key = 'h', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-left') },
+    { key = 'j', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-down') },
+    { key = 'k', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-up') },
+    { key = 'l', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-right') },
+    { key = 'H', mods = 'ALT',      action = act { AdjustPaneSize = { 'Left', 5 } } },
+    { key = 'J', mods = 'ALT',      action = act { AdjustPaneSize = { 'Down', 5 } } },
+    { key = 'K', mods = 'ALT',      action = act { AdjustPaneSize = { 'Up', 5 } } },
+    { key = 'L', mods = 'ALT',      action = act { AdjustPaneSize = { 'Right', 5 } } },
+    { key = 'H', mods = 'CTRL|ALT', action = act { ActivatePaneDirection = 'Left', } },
+    { key = 'J', mods = 'CTRL|ALT', action = act { ActivatePaneDirection = 'Down', } },
+    { key = 'K', mods = 'CTRL|ALT', action = act { ActivatePaneDirection = 'Up', } },
+    { key = 'L', mods = 'CTRL|ALT', action = act { ActivatePaneDirection = 'Right', } },
+    { key = '5', mods = 'LEADER',   action = act { SplitHorizontal = { args = { 'zsh' } } } },
+    { key = '2', mods = 'LEADER',   action = act { SplitVertical = { args = { 'zsh' } } } },
+    { key = 'c', mods = 'LEADER',   action = act { SpawnCommandInNewTab = { args = { 'zsh' } } } },
+    { key = 'x', mods = 'LEADER',   action = act { CloseCurrentPane = { confirm = true, } } },
+    { key = 'X', mods = 'LEADER',   action = act { CloseCurrentTab = { confirm = true, } } },
+    { key = 'z', mods = 'LEADER',   action = 'TogglePaneZoomState', },
+    { key = '/', mods = 'CTRL',     action = act { SendString = '', } },
     table.unpack(tab_selectors),
   },
-  unix_domains = {
-    {
-      name = "unix"
-    }
-  }
+  unix_domains = { { name = "unix" } }
 }

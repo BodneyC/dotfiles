@@ -11,5 +11,6 @@ fi
 [[ -f ~/.fzf.zsh ]] && . ~/.fzf.zsh
 
 source_if_exists "$HOME/.cargo/env"
+source_if_exists "$HOME/.env.zsh"
 
 [[ -n $ALACRITTY_LOG ]] && [[ -z "$TMUX" ]] && tmux && exit
