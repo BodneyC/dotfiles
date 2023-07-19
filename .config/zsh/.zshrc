@@ -15,7 +15,7 @@ KEYTIMEOUT=1
 plugins=(
   aws
   dirhistory
-  docker
+  # docker
   git
   git-auto-fetch
   history-substring-search

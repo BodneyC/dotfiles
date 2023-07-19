@@ -2,47 +2,29 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 
 local function is_vi_process(pane)
-  -- get_foreground_process_name On Linux, macOS and Windows,
-  -- the process can be queried to determine this path. Other operating systems
-  -- (notably, FreeBSD and other unix systems) are not currently supported
-  return pane:get_foreground_process_name():find('n?vim') ~= nil
-  -- return pane:get_title():find("n?vim") ~= nil
+  return (pane:get_foreground_process_name() or ''):find('n?vim') ~= nil
 end
 
 local function conditional_activate_pane(window, pane, pane_direction, vim_direction)
   if is_vi_process(pane) then
-    window:perform_action(
-    -- This should match the keybinds you set in Neovim.
-      act.SendKey({ key = vim_direction, mods = 'ALT' }),
-      pane
-    )
+    window:perform_action(act.SendKey({ key = vim_direction, mods = 'ALT' }), pane)
   else
     window:perform_action(act.ActivatePaneDirection(pane_direction), pane)
   end
 end
 
-wezterm.on('ActivatePaneDirection-right', function(window, pane)
-  conditional_activate_pane(window, pane, 'Right', 'l')
-end)
-wezterm.on('ActivatePaneDirection-left', function(window, pane)
-  conditional_activate_pane(window, pane, 'Left', 'h')
-end)
-wezterm.on('ActivatePaneDirection-up', function(window, pane)
-  conditional_activate_pane(window, pane, 'Up', 'k')
-end)
-wezterm.on('ActivatePaneDirection-down', function(window, pane)
-  conditional_activate_pane(window, pane, 'Down', 'j')
-end)
+for name, key in pairs({ right = 'l', left = 'h', up = 'k', down = 'j' }) do
+  wezterm.on('ActivatePaneDirection-' .. name, function(window, pane)
+    conditional_activate_pane(window, pane, name:gsub("^%l", string.upper), key)
+  end)
+end
 
 local tab_selectors = {}
 for i = 1, 8 do
-  -- CTRL+ALT + number to activate that tab
   table.insert(tab_selectors, {
     key = tostring(i),
     mods = 'CTRL|ALT',
-    action = act {
-      ActivateTab = i - 1,
-    },
+    action = act { ActivateTab = i - 1, },
   })
 end
 
@@ -59,9 +41,7 @@ end
 return {
   -- Font config
   font_size = 14.0,
-  font = font_with_fallback('Iosevka Nerd Font', {
-    weight = 'Regular',
-  }),
+  font = font_with_fallback('Iosevka Nerd Font', { weight = 'Regular' }),
   font_rules = {
     -- {
     --   italic = true,
@@ -120,7 +100,7 @@ return {
     { key = 'L', mods = 'CTRL|ALT', action = act { ActivatePaneDirection = 'Right', } },
     { key = '5', mods = 'LEADER',   action = act { SplitHorizontal = { args = { 'zsh' } } } },
     { key = '2', mods = 'LEADER',   action = act { SplitVertical = { args = { 'zsh' } } } },
-    { key = 'c', mods = 'LEADER',   action = act { SpawnCommandInNewTab = { args = { 'zsh' } } } },
+    { key = 'c', mods = 'LEADER',   action = act { SpawnCommandInNewTab = { cwd = wezterm.home_dir } } },
     { key = 'x', mods = 'LEADER',   action = act { CloseCurrentPane = { confirm = true, } } },
     { key = 'X', mods = 'LEADER',   action = act { CloseCurrentTab = { confirm = true, } } },
     { key = 'z', mods = 'LEADER',   action = 'TogglePaneZoomState', },
