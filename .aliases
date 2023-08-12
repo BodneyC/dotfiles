@@ -50,7 +50,7 @@ pdfcat() {
 }
 
 curl() {
-  /usr/bin/curl "$@"
+  "$(command -pv curl)" "$@"
   echo
 }
 
@@ -58,12 +58,9 @@ ssh() {
   if [[ -n "$KITTY_WINDOW_ID" ]]; then
     kitty +kitten ssh "$@"
   else
+    unset -f ssh
     ssh "$@"
   fi
-}
-
-usrbinlink() {
-  mv "$1" /usr/local/bin/ && ln -s /usr/local/bin/"$1" .
 }
 
 v-which() {
