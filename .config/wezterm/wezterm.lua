@@ -31,6 +31,7 @@ end
 local function font_with_fallback(name, params)
   local names = {
     name,
+    'Iosevka Nerd Font',
     'Font Awesome 5 Free',
     'Font Awesome 5 Brands',
     'Hack Nerd Font',
@@ -41,14 +42,14 @@ end
 return {
   -- Font config
   font_size = 14.0,
-  font = font_with_fallback('Iosevka Nerd Font', { weight = 'Regular' }),
+  font = font_with_fallback('Victor Mono Nerd Font', { weight = 'Regular' }),
   font_rules = {
-    -- {
-    --   italic = true,
-    --   font = font_with_fallback('Victor Mono Nerd Font', {
-    --     italic = true,
-    --   }),
-    -- },
+    {
+      italic = true,
+      font = font_with_fallback('Victor Mono Nerd Font', {
+        italic = true,
+      }),
+    },
   },
   freetype_load_target = 'Light',
   -- Screen config
@@ -82,6 +83,7 @@ return {
   enable_tab_bar = true,
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
+  tab_max_width = 80,
 
   -- bindings
   leader = { key = ' ', mods = 'CTRL', },
