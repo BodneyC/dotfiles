@@ -2,7 +2,7 @@
 
 cd "$(dirname "${BASH_SOURCE[0]}")"/.. || exit
 
-! hash tmux 2>/dev/null && sudo pacman -S tmux
+! hash tmux 2> /dev/null && sudo pacman -S tmux
 
 cp -rt ~ ./multiplexing/.tmux{,.conf}
 

@@ -32,15 +32,8 @@
 [mergetool "nvim"]
   cmd = nvim -c 'Gdiffsplit!' $MERGED
 
-[diff]
-  tool = nvimdiff
-[difftool]
-  prompt = true
-[difftool "nvimdiff"]
-  cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
-
 [core]
-  pager = delta
+  pager = delta -w ${FZF_PREVIEW_COLUMNS:=$COLUMNS}
 
 [interactive]
   diffFilter = delta --color-only
@@ -50,5 +43,13 @@
   light = false
   line-numbers = true
   ; side-by-side = true
+
 [commit]
   gpgsign = true
+
+[diff]
+  tool = nvimdiff
+[difftool]
+  prompt = true
+[difftool "nvimdiff"]
+  cmd = nvim -d \"$LOCAL\" \"$REMOTE\"

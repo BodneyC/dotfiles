@@ -19,12 +19,12 @@ fi
 _add_to_path() {
   if [[ ! "$PATH" =~ $2 ]]; then
     case "$1" in
-      app | append) export PATH="$PATH:$2" ;;
-      pre | prepend) export PATH="$2:$PATH" ;;
-      *)
-        echo "unknown subcommand ($1)"
-        return 1
-        ;;
+    app | append) export PATH="$PATH:$2" ;;
+    pre | prepend) export PATH="$2:$PATH" ;;
+    *)
+      echo "unknown subcommand ($1)"
+      return 1
+      ;;
     esac
   fi
 }
@@ -90,9 +90,9 @@ export WINIT_UNIX_BACKEND=x11
 
 # ---- Langs
 
-if command -v java > /dev/null; then
+if command -v java >/dev/null; then
   _get_java_home() {
-    if command -v java &> /dev/null && command -v rg &> /dev/null; then
+    if command -v java &>/dev/null && command -v rg &>/dev/null; then
       java -XshowSettings:properties -version 2>&1 | rg -o --pcre2 '(?<=java.home = ).*'
     elif test -x /usr/libexec/java_home; then
       /usr/libexec/java_home

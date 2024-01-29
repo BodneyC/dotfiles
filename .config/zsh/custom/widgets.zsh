@@ -2,7 +2,7 @@
 
 # Adapted from:
 #  https://github.com/zsh-users/zsh/blob/master/Functions/Zle/backward-kill-word-match
-# 
+#
 # The purpose of this widget is to allow me to C-w through a command
 #  line based on my WORDCHARS var (select-word-style normal) which is empty
 #  but not skip non-whitespace which are also non-alphanumeric
@@ -41,11 +41,11 @@ backward-kill-word-include-multi-char-ws() {
   # echo "ws-after-word      '$matched_words[5]'"
   # echo "end                '$matched_words[6]'"
   # echo "is-word-start      '$matched_words[7]'"
-  
+
   ws_after_last_word="$matched_words[3]"
   # If the whitespace after the end of the previous word (bad naming) contains
   #  more than just spaces...
-  if [[ -n ${ws_after_last_word// } ]]; then
+  if [[ -n ${ws_after_last_word// /} ]]; then
     # ... the word we'd like to delete is just that whitespace (e.g. ' --')
     word="$ws_after_last_word"
     lbuffer="$matched_words[1]$matched_words[2]"

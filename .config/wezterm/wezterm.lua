@@ -62,7 +62,7 @@ return {
   send_composed_key_when_left_alt_is_pressed = false,
   send_composed_key_when_right_alt_is_pressed = true,
   term = 'xterm-256color',
-  scrollback_lines = 10000,
+  scrollback_lines = 50000,
   enable_wayland = true,
   cursor_blink_rate = 800,
   default_cursor_style = 'SteadyBar',
@@ -88,6 +88,9 @@ return {
   -- bindings
   leader = { key = ' ', mods = 'CTRL', },
   keys = {
+    { key = 'v', mods = 'CMD',      action = act.PasteFrom 'Clipboard' },
+    { key = 'c', mods = 'CMD',      action = act.CopyTo 'Clipboard' },
+    { key = '#', mods = 'ALT',      action = act { SendString = '#' } },
     { key = 'h', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-left') },
     { key = 'j', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-down') },
     { key = 'k', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-up') },
@@ -108,6 +111,20 @@ return {
     { key = 'z', mods = 'LEADER',   action = 'TogglePaneZoomState', },
     { key = '/', mods = 'CTRL',     action = act { SendString = '', } },
     table.unpack(tab_selectors),
+  },
+  mouse_bindings = {
+    {
+      event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+      mods = 'NONE',
+      action = act.ScrollByLine(-3),
+      alt_screen = false,
+    },
+    {
+      event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+      mods = 'NONE',
+      action = act.ScrollByLine(3),
+      alt_screen = false,
+    },
   },
   unix_domains = { { name = "unix" } }
 }

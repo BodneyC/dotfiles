@@ -16,7 +16,7 @@ _yes_or_no() { # msg
     case "$REPLY" in
       [yY]*) return 0 ;;
       [nN]*) return 1 ;;
-      *)     echo "Invalid option"
+      *) echo "Invalid option" ;;
     esac
   done
 }
@@ -26,14 +26,14 @@ _softlink() {
   if [[ -e "$f" ]]; then
     _yes_or_no "Delete $f?" \
       || return
-          /bin/rm -rf "$f"
+    /bin/rm -rf "$f"
   fi
   ln -s "$GITDIR/$f" "${f%/}"
 }
 
 for f in \
-    $(fd -H -tf -d1 "^\..*" | rg -v "\.git[mi]") \
-    $(fd -H -td -d1 . .config) \
-    .tmux/colorschemes; do
+  $(fd -H -tf -d1 "^\..*" | rg -v "\.git[mi]") \
+  $(fd -H -td -d1 . .config) \
+  .tmux/colorschemes; do
   (cd "$HOME" && _softlink "$f")
 done

@@ -6,6 +6,18 @@ alias gch="git checkout"
 alias gp="git push"
 alias gpl="git pull"
 
+function gsquash() {
+  if [[ $# == 0 ]]; then
+    echo "No destination branch provided"
+    return 1
+  fi
+  local branch=$1
+  git fetch
+  git reset --soft $(git merge-base "$branch" @)
+  git add .
+  git commit --no-verify
+}
+
 function gpfr() {
   [[ "$#" != 1 ]] && local b="$(git_current_branch)"
   if ! git pull --ff-only; then
@@ -30,13 +42,13 @@ function _gd() {
     fi
   fi
 
-  preview="git diff $opt $_branch_comp --color=always -- {-1}"
-  _files="$(git diff $opt --name-only "$@" \
-    | xargs -I '{}' realpath -q --relative-to=. \
+  preview="git diff $opt $_branch_comp --color=always -- {-1} | delta"
+  _files="$(git diff $opt --name-only "$@" |
+    xargs -I '{}' realpath -q --relative-to=. \
       $(git rev-parse --show-toplevel)/'{}')"
 
-  _percent="$(bc <<< "96 - ($(wc -l <<< "$_files" \
-    | awk '{print $1}')00/$(tput lines))")"
+  _percent="$(bc <<<"96 - ($(wc -l <<<"$_files" |
+    awk '{print $1}')00/$(tput lines))")"
   if [[ "$_percent" < "$__GIT_PLUGIN_MIN_PREV" ]]; then
     _percent="$__GIT_PLUGIN_MIN_PREV"
   fi
@@ -45,7 +57,7 @@ function _gd() {
     fzf -m --ansi --preview "$preview" \
       --bind 'enter:execute(nvim {1} < /dev/tty)' \
       --preview-window="up:$_percent%" \
-      <<< "$_files"
+      <<<"$_files"
   fi
 }
 
@@ -73,7 +85,7 @@ function _git_log_prettily() {
 }
 compdef _git _git_log_prettily=git-log
 function work_in_progress() {
-  if $(git log -n 1 2> /dev/null | grep -q -c "\-\-wip\-\-"); then
+  if $(git log -n 1 2>/dev/null | grep -q -c "\-\-wip\-\-"); then
     echo "WIP!!"
   fi
 }
@@ -121,6 +133,6 @@ function ggu() {
 }
 compdef _git ggu=git-checkout
 autoload -Uz is-at-least
-is-at-least 2.13 "$(git --version 2> /dev/null | awk '{print $3}')" \
-  && alias gsta='git stash push' \
-  || alias gsta='git stash save'
+is-at-least 2.13 "$(git --version 2>/dev/null | awk '{print $3}')" &&
+  alias gsta='git stash push' ||
+  alias gsta='git stash save'

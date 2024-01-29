@@ -5,11 +5,11 @@ _yes_or_no() { # msg
   while true; do
     read "REPLY?$1 "$OPTS" "
     case "$REPLY" in
-      [yY]*) return 0 ;;
-      [nN]*) return 1 ;;
-      *) [[ "$2" ]] \
-        && return 0 \
-        || printf "%s\n" "${ERRO_COL}Invalid option$NORM_COL" ;;
+    [yY]*) return 0 ;;
+    [nN]*) return 1 ;;
+    *) [[ "$2" ]] &&
+      return 0 ||
+      printf "%s\n" "${ERRO_COL}Invalid option$NORM_COL" ;;
     esac
   done
 }
@@ -27,14 +27,14 @@ gig() {
     cat "$gitignore"
   fi
   if [[ "$(tail -c1 "$gitignore" | wc -l)" -le 0 ]]; then
-    echo "" >> "$gitignore"
+    echo "" >>"$gitignore"
   fi
   for e in "$@"; do
     if [[ "$e" == ./* || "$e" == ../* ]]; then
       e="$(realpath --relative-to "$toplevel" "$e")"
     fi
     if ! grep -qe "^$e$" "$gitignore"; then
-      echo "$e" >> "$gitignore"
+      echo "$e" >>"$gitignore"
     else
       echo "'$e' already in $gitignore"
     fi
@@ -42,7 +42,7 @@ gig() {
 }
 
 pdfcat() {
-  if command -v pdftotext &> /dev/null; then
+  if command -v pdftotext &>/dev/null; then
     for f in "$@"; do
       pdftotext "$f" - | less
     done
@@ -73,17 +73,28 @@ sdkman() {
   sdkman "$@"
 }
 
-nvm() {
-  export NVM_DIR="$HOME/.nvm"
-  if [ -s "$NVM_DIR/nvm.sh" ]; then
-    # shellcheck source=$HOME/.nvm/nvm.sh
-    . "$NVM_DIR/nvm.sh"
-    nvm "$@"
-  fi
-}
+if command -v sdk >/dev/null; then
+  sdk() {
+    . "$HOME/.sdkman/bin/sdkman-init.sh"
+    unset -f sdk
+    sdk "$@"
+  }
+fi
+
+if command -v nvm >/dev/null; then
+  nvm() {
+    export NVM_DIR="$HOME/.nvm"
+    if [ -s "$NVM_DIR/nvm.sh" ]; then
+      unset -f nvm
+      # shellcheck source=$HOME/.nvm/nvm.sh
+      . "$NVM_DIR/nvm.sh"
+      nvm "$@"
+    fi
+  }
+fi
 
 pretty-print-path() {
-  echo "${PATH//:/\n}" | sort
+  echo "${PATH//:/\n}"
 }
 
 lns() {
@@ -99,24 +110,24 @@ lns() {
 }
 
 xi() {
-  if command -v clip.exe &> /dev/null; then
+  if command -v clip.exe &>/dev/null; then
     clip.exe "$@"
-  elif command -v xclip &> /dev/null; then
+  elif command -v xclip &>/dev/null; then
     xclip -in -selection clipboard "$@"
-  elif command -v pbcopy &> /dev/null; then
+  elif command -v pbcopy &>/dev/null; then
     pbcopy "$@"
   fi
 }
 
 xo() {
-  if command -v xclip &> /dev/null; then
+  if command -v xclip &>/dev/null; then
     xclip -out -selection clipboard "$@"
-  elif command -v pbpaste &> /dev/null; then
+  elif command -v pbpaste &>/dev/null; then
     pbpaste "$@"
   fi
 }
 
-if hash exa 2> /dev/null; then
+if hash exa 2>/dev/null; then
   alias e="exa --classify --group-directories-first --all"
   alias el="${aliases[e]} --long"
   alias ee="${aliases[e]} --long"
@@ -149,6 +160,6 @@ alias suv="sudo -E nvim"
 alias v="nvim"
 alias linedo="xargs -d '\n' -I {}"
 alias k="kubectl"
-command -v xdg-open &> /dev/null && alias open="xdg-open"
+command -v xdg-open &>/dev/null && alias open="xdg-open"
 alias luajit="rlwrap luajit"
 alias dfimage="docker run -v /var/run/docker.sock:/var/run/docker.sock alpine/dfimage"

@@ -7,17 +7,23 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 mkdir -p ~/.oh-my-zsh/customer/plugins/vi-mode
 
-cp -t ~/ .zshrc .zprofile 
+cp -t ~/ .zshrc .zprofile
 cp benjc_custom.zsh-theme ~/.oh-my-zsh/custom/
 cp vi-mode.plugin.zsh ~/.oh-my-zsh/custom/plugins/vi-mode/
 
 while true; do
-    read -p "Change shell? [y/n]" yn
-    case $yn in
-      [Yy]* ) chsh -s /bin/zsh && sudo chsh -s /bin/zsh; break;;
-      [Nn]* ) echo "Shell not changed"; break;;
-      * ) echo "Answer [y/n] please";;
-    esac
+  read -p "Change shell? [y/n]" yn
+  case $yn in
+    [Yy]*)
+      chsh -s /bin/zsh && sudo chsh -s /bin/zsh
+      break
+      ;;
+    [Nn]*)
+      echo "Shell not changed"
+      break
+      ;;
+    *) echo "Answer [y/n] please" ;;
+  esac
 done
 
 # FONTS
