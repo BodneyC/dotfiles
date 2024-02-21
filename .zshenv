@@ -71,7 +71,7 @@ export NO_PROXY=""
 
 # export GDK_DPI_SCALE=1.7
 
-export BAT_THEME="OneHalfDark"
+export BAT_THEME="Nord"
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor --exclude .clj-kondo --exclude .lsp"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=onehalfdark --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"

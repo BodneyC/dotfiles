@@ -52,6 +52,8 @@ return {
     },
   },
   freetype_load_target = 'Light',
+  warn_about_missing_glyphs = false,
+
   -- Screen config
   line_height = 1.2,
   -- dpi = 96.0,
@@ -74,10 +76,12 @@ return {
   },
 
   -- Colors
-  color_scheme = 'nightfox',
+  color_scheme = 'nordfox',
   color_schemes = {
     nightfox = wezterm.color.load_scheme(os.getenv('HOME') .. '/.config/wezterm/schemes/nightfox.toml'),
+    nordfox = wezterm.color.load_scheme(os.getenv('HOME') .. '/.config/wezterm/schemes/nordfox.toml'),
   },
+
 
   -- tabbar
   enable_tab_bar = true,

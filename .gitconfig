@@ -1,5 +1,6 @@
 [include]
   path = .gitconfig.priv
+  path = ~/.config/delta/themes.gitconfig
 
 [user]
   email = benjcarrington@gmail.com
@@ -43,6 +44,7 @@
   light = false
   line-numbers = true
   ; side-by-side = true
+  features = arctic-fox
 
 [commit]
   gpgsign = true

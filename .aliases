@@ -26,7 +26,7 @@ gig() {
   if [[ "$#" == 0 ]]; then
     cat "$gitignore"
   fi
-  if [[ "$(tail -c1 "$gitignore" | wc -l)" -le 0 ]]; then
+  if [[ -s "$gitignore" && "$(tail -c1 "$gitignore" | wc -l)" -le 0 ]]; then
     echo "" >>"$gitignore"
   fi
   for e in "$@"; do
