@@ -19,14 +19,25 @@ for name, key in pairs({ right = 'l', left = 'h', up = 'k', down = 'j' }) do
   end)
 end
 
-local tab_selectors = {}
+-- local tab_selectors = {}
+-- for i = 1, 8 do
+--   table.insert(tab_selectors, {
+--     key = tostring(i),
+--     mods = 'CTRL|ALT',
+--     action = act { ActivateTab = i - 1, },
+--   })
+-- end
+
+local tab_movers = {}
 for i = 1, 8 do
-  table.insert(tab_selectors, {
+  -- CTRL+ALT + number to move to that position
+  table.insert(tab_movers, {
     key = tostring(i),
     mods = 'CTRL|ALT',
-    action = act { ActivateTab = i - 1, },
+    action = wezterm.action.MoveTab(i - 1),
   })
 end
+
 
 local function font_with_fallback(name, params)
   local names = {
@@ -114,7 +125,8 @@ return {
     { key = 'X', mods = 'LEADER',   action = act { CloseCurrentTab = { confirm = true, } } },
     { key = 'z', mods = 'LEADER',   action = 'TogglePaneZoomState', },
     { key = '/', mods = 'CTRL',     action = act { SendString = '', } },
-    table.unpack(tab_selectors),
+    -- table.unpack(tab_selectors),
+    table.unpack(tab_movers),
   },
   mouse_bindings = {
     {
