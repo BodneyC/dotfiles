@@ -79,6 +79,14 @@ vi_mode_prompt_info() {
 
 unset RPS1
 
+TMOUT=1
+TRAPALRM() {
+    if [ "$WIDGET" != "expand-or-complete" ]; then
+        zle reset-prompt
+    fi
+}
+
+
 PROMPT='\
 ${_mag_n} $_blu_n$(date +"%H:%M:%S") $_mag_n|$_reset \
 $_grn_n$(vi_mode_prompt_info)$_reset \

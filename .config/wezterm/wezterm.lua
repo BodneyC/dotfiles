@@ -64,6 +64,9 @@ return {
   },
   freetype_load_target = 'Light',
   warn_about_missing_glyphs = false,
+  quick_select_patterns = {
+    '> (.*)',
+  },
 
   -- Screen config
   line_height = 1.2,
@@ -125,6 +128,7 @@ return {
     { key = 'X', mods = 'LEADER',   action = act { CloseCurrentTab = { confirm = true, } } },
     { key = 'z', mods = 'LEADER',   action = 'TogglePaneZoomState', },
     { key = '/', mods = 'CTRL',     action = act { SendString = '', } },
+
     -- table.unpack(tab_selectors),
     table.unpack(tab_movers),
   },
