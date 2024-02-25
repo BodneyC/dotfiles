@@ -793,13 +793,12 @@ hints:
 key_bindings:
   - { key: Paste, action: Paste }
   - { key: Copy,  action: Copy  }
-  - { key: C,     mods: Super,         action:   Copy            }
-  - { key: V,     mods: Super,         action:   Paste           }
-  - { key: C,     mods:     Shift|Control, action:   Copy            }
-  - { key: V,     mods:     Shift|Control, action:   Paste           }
-  - { key: W,     mods:     Command,       chars:    "w"             }
-  - { key: Q,     mods:     Command,       chars:    "q"             }
-  - { key: Q,     mods:     Control,       chars:    ""            }
+  - { key: C,     mods: Super,         action:   Copy     }
+  - { key: V,     mods: Super,         action:   Paste    }
+  - { key: C,     mods:     Shift|Control, action:   Copy }
+  - { key: V,     mods:     Shift|Control, action:   Paste}
+  - { key: W,     mods:     Command,       chars:    "w"  }
+  - { key: Q,     mods:     Command,       chars:    "q"  }
     # C-Tab and C-S-Tab are meaningless in Tmux, so Alacritty maps themm to
     #  C-numeric and tmux maps C-numeric to window cycling...
     # C-1: \x1b[27;5;49~ C-2: \x1b[27;5;50~ C-3: \x1b[27;5;51~

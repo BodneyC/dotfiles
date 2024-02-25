@@ -6,7 +6,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 export HOMEBREW_PREFIX="/opt/homebrew"
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
-if [[ ! -d "$HOMEBREW_PREFIX" ]]; then
+if [[ ! -d $HOMEBREW_PREFIX ]]; then
   export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
   export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
 fi
@@ -17,7 +17,7 @@ if [ -x /usr/libexec/path_helper ]; then
 fi
 
 _add_to_path() {
-  if [[ ! "$PATH" =~ $2 ]]; then
+  if [[ ! $PATH =~ $2 ]]; then
     case "$1" in
     app | append) export PATH="$PATH:$2" ;;
     pre | prepend) export PATH="$2:$PATH" ;;

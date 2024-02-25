@@ -12,7 +12,8 @@ sudo pacman -S --noconfirm nodejs npm python{,-pip} neovim wmctrl base-devel \
 
 mkdir -p "$HOME/.local/{bin,share/npm}"
 
-echo "prefix=\$HOME/.local/share/npm" > "$HOME/.npmrc"
+# shellcheck disable=SC2016
+echo 'prefix=$HOME/.local/share/npm' > "$HOME/.npmrc"
 
 npm i -g eslint-plugin-chai-friendly eslint-plugin-chai-expect \
   eslint-plugin-mocha docker-language-server-nodejs bash-language-server

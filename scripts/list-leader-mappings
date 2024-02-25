@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-LEAD=$(rg 'leader>' "$HOME/.config/nvim/config/remappings.vim" \
-  | sed 's/^.*leader>\([^ ]*\).*$/\1/g' \
-  | sort)
+LEAD=$(rg 'leader>' "$HOME/.config/nvim/config/remappings.vim" |
+  sed 's/^.*leader>\([^ ]*\).*$/\1/g' |
+  sort)
 
 function not_in() {
-    for l in $1; do
-        if ! rg -q "^$l$" <<< "$LEAD"; then
-            echo "$l"
-        fi
-    done
+  for l in $1; do
+    if ! rg -q "^$l$" <<<"$LEAD"; then
+      echo "$l"
+    fi
+  done
 }
 
 LOWER=$(not_in "$(echo {a..z})" | tr '\n' ' ')

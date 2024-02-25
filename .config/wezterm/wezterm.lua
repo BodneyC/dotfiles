@@ -1,20 +1,20 @@
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 local act = wezterm.action
 
 local function is_vi_process(pane)
-  return (pane:get_foreground_process_name() or ''):find('n?vim') ~= nil
+  return (pane:get_foreground_process_name() or ""):find("n?vim") ~= nil
 end
 
 local function conditional_activate_pane(window, pane, pane_direction, vim_direction)
   if is_vi_process(pane) then
-    window:perform_action(act.SendKey({ key = vim_direction, mods = 'ALT' }), pane)
+    window:perform_action(act.SendKey({ key = vim_direction, mods = "ALT" }), pane)
   else
     window:perform_action(act.ActivatePaneDirection(pane_direction), pane)
   end
 end
 
-for name, key in pairs({ right = 'l', left = 'h', up = 'k', down = 'j' }) do
-  wezterm.on('ActivatePaneDirection-' .. name, function(window, pane)
+for name, key in pairs({ right = "l", left = "h", up = "k", down = "j" }) do
+  wezterm.on("ActivatePaneDirection-" .. name, function(window, pane)
     conditional_activate_pane(window, pane, name:gsub("^%l", string.upper), key)
   end)
 end
@@ -33,19 +33,18 @@ for i = 1, 8 do
   -- CTRL+ALT + number to move to that position
   table.insert(tab_movers, {
     key = tostring(i),
-    mods = 'CTRL|ALT',
+    mods = "CTRL|ALT",
     action = wezterm.action.MoveTab(i - 1),
   })
 end
 
-
 local function font_with_fallback(name, params)
   local names = {
     name,
-    'Iosevka Nerd Font',
-    'Font Awesome 5 Free',
-    'Font Awesome 5 Brands',
-    'Hack Nerd Font',
+    "Iosevka Nerd Font",
+    "Font Awesome 5 Free",
+    "Font Awesome 5 Brands",
+    "Hack Nerd Font",
   }
   return wezterm.font_with_fallback(names, params)
 end
@@ -53,19 +52,19 @@ end
 return {
   -- Font config
   font_size = 14.0,
-  font = font_with_fallback('Victor Mono Nerd Font', { weight = 'Regular' }),
+  font = font_with_fallback("Victor Mono Nerd Font", { weight = "Regular" }),
   font_rules = {
     {
       italic = true,
-      font = font_with_fallback('Victor Mono Nerd Font', {
+      font = font_with_fallback("Victor Mono Nerd Font", {
         italic = true,
       }),
     },
   },
-  freetype_load_target = 'Light',
+  freetype_load_target = "Light",
   warn_about_missing_glyphs = false,
   quick_select_patterns = {
-    '> (.*)',
+    "> (.*)",
   },
 
   -- Screen config
@@ -74,14 +73,14 @@ return {
   bold_brightens_ansi_colors = true,
   alternate_buffer_wheel_scroll_speed = 0,
   -- System config
-  audible_bell = 'Disabled',
+  audible_bell = "Disabled",
   send_composed_key_when_left_alt_is_pressed = false,
   send_composed_key_when_right_alt_is_pressed = true,
-  term = 'xterm-256color',
+  term = "xterm-256color",
   scrollback_lines = 50000,
   enable_wayland = true,
   cursor_blink_rate = 800,
-  default_cursor_style = 'SteadyBar',
+  default_cursor_style = "SteadyBar",
   window_padding = {
     left = 4,
     right = 4,
@@ -90,12 +89,11 @@ return {
   },
 
   -- Colors
-  color_scheme = 'nordfox',
+  color_scheme = "nordfox",
   color_schemes = {
-    nightfox = wezterm.color.load_scheme(os.getenv('HOME') .. '/.config/wezterm/schemes/nightfox.toml'),
-    nordfox = wezterm.color.load_scheme(os.getenv('HOME') .. '/.config/wezterm/schemes/nordfox.toml'),
+    nightfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nightfox.toml"),
+    nordfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nordfox.toml"),
   },
-
 
   -- tabbar
   enable_tab_bar = true,
@@ -104,30 +102,30 @@ return {
   tab_max_width = 80,
 
   -- bindings
-  leader = { key = ' ', mods = 'CTRL', },
+  leader = { key = " ", mods = "CTRL" },
   keys = {
-    { key = 'v', mods = 'CMD',      action = act.PasteFrom 'Clipboard' },
-    { key = 'c', mods = 'CMD',      action = act.CopyTo 'Clipboard' },
-    { key = '#', mods = 'ALT',      action = act { SendString = '#' } },
-    { key = 'h', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-left') },
-    { key = 'j', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-down') },
-    { key = 'k', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-up') },
-    { key = 'l', mods = 'ALT',      action = act.EmitEvent('ActivatePaneDirection-right') },
-    { key = 'H', mods = 'ALT',      action = act { AdjustPaneSize = { 'Left', 5 } } },
-    { key = 'J', mods = 'ALT',      action = act { AdjustPaneSize = { 'Down', 5 } } },
-    { key = 'K', mods = 'ALT',      action = act { AdjustPaneSize = { 'Up', 5 } } },
-    { key = 'L', mods = 'ALT',      action = act { AdjustPaneSize = { 'Right', 5 } } },
-    { key = 'H', mods = 'CTRL|ALT', action = act { ActivatePaneDirection = 'Left', } },
-    { key = 'J', mods = 'CTRL|ALT', action = act { ActivatePaneDirection = 'Down', } },
-    { key = 'K', mods = 'CTRL|ALT', action = act { ActivatePaneDirection = 'Up', } },
-    { key = 'L', mods = 'CTRL|ALT', action = act { ActivatePaneDirection = 'Right', } },
-    { key = '5', mods = 'LEADER',   action = act { SplitHorizontal = { args = { 'zsh' } } } },
-    { key = '2', mods = 'LEADER',   action = act { SplitVertical = { args = { 'zsh' } } } },
-    { key = 'c', mods = 'LEADER',   action = act { SpawnCommandInNewTab = { cwd = wezterm.home_dir } } },
-    { key = 'x', mods = 'LEADER',   action = act { CloseCurrentPane = { confirm = true, } } },
-    { key = 'X', mods = 'LEADER',   action = act { CloseCurrentTab = { confirm = true, } } },
-    { key = 'z', mods = 'LEADER',   action = 'TogglePaneZoomState', },
-    { key = '/', mods = 'CTRL',     action = act { SendString = '', } },
+    { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+    { key = "c", mods = "CMD", action = act.CopyTo("Clipboard") },
+    { key = "#", mods = "ALT", action = act({ SendString = "#" }) },
+    { key = "h", mods = "ALT", action = act.EmitEvent("ActivatePaneDirection-left") },
+    { key = "j", mods = "ALT", action = act.EmitEvent("ActivatePaneDirection-down") },
+    { key = "k", mods = "ALT", action = act.EmitEvent("ActivatePaneDirection-up") },
+    { key = "l", mods = "ALT", action = act.EmitEvent("ActivatePaneDirection-right") },
+    { key = "H", mods = "ALT", action = act({ AdjustPaneSize = { "Left", 5 } }) },
+    { key = "J", mods = "ALT", action = act({ AdjustPaneSize = { "Down", 5 } }) },
+    { key = "K", mods = "ALT", action = act({ AdjustPaneSize = { "Up", 5 } }) },
+    { key = "L", mods = "ALT", action = act({ AdjustPaneSize = { "Right", 5 } }) },
+    { key = "H", mods = "CTRL|ALT", action = act({ ActivatePaneDirection = "Left" }) },
+    { key = "J", mods = "CTRL|ALT", action = act({ ActivatePaneDirection = "Down" }) },
+    { key = "K", mods = "CTRL|ALT", action = act({ ActivatePaneDirection = "Up" }) },
+    { key = "L", mods = "CTRL|ALT", action = act({ ActivatePaneDirection = "Right" }) },
+    { key = "5", mods = "LEADER", action = act({ SplitHorizontal = { args = { "zsh" } } }) },
+    { key = "2", mods = "LEADER", action = act({ SplitVertical = { args = { "zsh" } } }) },
+    { key = "c", mods = "LEADER", action = act({ SpawnCommandInNewTab = { cwd = wezterm.home_dir } }) },
+    { key = "x", mods = "LEADER", action = act({ CloseCurrentPane = { confirm = true } }) },
+    { key = "X", mods = "LEADER", action = act({ CloseCurrentTab = { confirm = true } }) },
+    { key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
+    { key = "/", mods = "CTRL", action = act({ SendString = "" }) },
 
     -- table.unpack(tab_selectors),
     table.unpack(tab_movers),
@@ -135,16 +133,16 @@ return {
   mouse_bindings = {
     {
       event = { Down = { streak = 1, button = { WheelUp = 1 } } },
-      mods = 'NONE',
+      mods = "NONE",
       action = act.ScrollByLine(-3),
       alt_screen = false,
     },
     {
       event = { Down = { streak = 1, button = { WheelDown = 1 } } },
-      mods = 'NONE',
+      mods = "NONE",
       action = act.ScrollByLine(3),
       alt_screen = false,
     },
   },
-  unix_domains = { { name = "unix" } }
+  unix_domains = { { name = "unix" } },
 }

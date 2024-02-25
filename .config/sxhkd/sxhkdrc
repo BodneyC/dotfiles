@@ -34,12 +34,12 @@ XF86AudioMute
 XF86MonBrightnessUp
   light -A 3 && \
     hash dunstify && \
-    dunstify -r 31231 -a "light" "$(light -G)" 
+    dunstify -r 31231 -a "light" "$(light -G)"
 
 XF86MonBrightnessDown
   light -U 3 && \
     hash dunstify && \
-    dunstify -r 31231 -a "light" "$(light -G)" 
+    dunstify -r 31231 -a "light" "$(light -G)"
 
 ################################################################
 # Polybar interaction

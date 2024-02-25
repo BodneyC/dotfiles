@@ -15,8 +15,8 @@ MENU="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p 'System' \
   <<< "Lock|Logout|Reboot|Shutdown")"
 
 case "$MENU" in
-  *Lock) i3lock-fancy-rapid 10 10 ;;
-  *Logout) bspc quit ;;
-  *Reboot) systemctl reboot ;;
-  *Shutdown) systemctl -i poweroff ;;
+*Lock) i3lock-fancy-rapid 10 10 ;;
+*Logout) bspc quit ;;
+*Reboot) systemctl reboot ;;
+*Shutdown) systemctl -i poweroff ;;
 esac

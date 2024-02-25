@@ -19,7 +19,7 @@ function gsquash() {
 }
 
 function gpfr() {
-  [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+  [[ $# != 1 ]] && local b="$(git_current_branch)"
   if ! git pull --ff-only; then
     git rebase -i "origin/${b:=$1}"
   fi
@@ -36,8 +36,8 @@ function _gd() {
 
   # This is becoming gross... I may need a re-write at some point
   _branch_comp=
-  if [[ "$#" == 1 ]]; then
-    if [[ "$1" == *...* || "$1" =~ '^.*[^\/]\.\.[^\/].*$' ]]; then
+  if [[ $# == 1 ]]; then
+    if [[ $1 == *...* || $1 =~ '^.*[^\/]\.\.[^\/].*$' ]]; then
       _branch_comp="$1"
     fi
   fi
@@ -49,7 +49,7 @@ function _gd() {
 
   _percent="$(bc <<<"96 - ($(wc -l <<<"$_files" |
     awk '{print $1}')00/$(tput lines))")"
-  if [[ "$_percent" < "$__GIT_PLUGIN_MIN_PREV" ]]; then
+  if [[ $_percent < $__GIT_PLUGIN_MIN_PREV ]]; then
     _percent="$__GIT_PLUGIN_MIN_PREV"
   fi
 
@@ -92,35 +92,35 @@ function work_in_progress() {
 # function gdv() { git diff -w "$@" | view - }
 # compdef _git gdv=git-diff
 function ggf() {
-  [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+  [[ $# != 1 ]] && local b="$(git_current_branch)"
   git push --force origin "${b:=$1}"
 }
 compdef _git ggf=git-checkout
 function ggfl() {
-  [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+  [[ $# != 1 ]] && local b="$(git_current_branch)"
   git push --force-with-lease origin "${b:=$1}"
 }
 compdef _git ggfl=git-checkout
 function ggl() {
-  if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
+  if [[ $# != 0 ]] && [[ $# != 1 ]]; then
     git pull origin "${*}"
   else
-    [[ "$#" == 0 ]] && local b="$(git_current_branch)"
+    [[ $# == 0 ]] && local b="$(git_current_branch)"
     git pull origin "${b:=$1}"
   fi
 }
 compdef _git ggl=git-checkout
 function ggp() {
-  if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
+  if [[ $# != 0 ]] && [[ $# != 1 ]]; then
     git push origin "${*}"
   else
-    [[ "$#" == 0 ]] && local b="$(git_current_branch)"
+    [[ $# == 0 ]] && local b="$(git_current_branch)"
     git push origin "${b:=$1}"
   fi
 }
 compdef _git ggp=git-checkout
 function ggpnp() {
-  if [[ "$#" == 0 ]]; then
+  if [[ $# == 0 ]]; then
     ggl && ggp
   else
     ggl "${*}" && ggp "${*}"
@@ -128,7 +128,7 @@ function ggpnp() {
 }
 compdef _git ggpnp=git-checkout
 function ggu() {
-  [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+  [[ $# != 1 ]] && local b="$(git_current_branch)"
   git pull --rebase origin "${b:=$1}"
 }
 compdef _git ggu=git-checkout

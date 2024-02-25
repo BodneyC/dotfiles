@@ -44,4 +44,3 @@ def handle_result(args, result, target_window_id, boss):
             window.write_to_child(encoded)
     else:
         boss.active_tab.neighboring_window(direction)
-

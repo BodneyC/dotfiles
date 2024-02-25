@@ -13,10 +13,10 @@ cp -r .config/{bspwm,compton.conf,panel,sxhkd,termite} "$HOME/.config"
 
 read -rp -n1 "Copy .xinitrc? [yN] "
 case $REPLY in
-  [yY]*)
-    cp .xinitrc "$HOME"
-    ;;
-  *)
-    echo "BSPWM not added to ~/.xinitrc"
-    ;;
+[yY]*)
+  cp .xinitrc "$HOME"
+  ;;
+*)
+  echo "BSPWM not added to ~/.xinitrc"
+  ;;
 esac

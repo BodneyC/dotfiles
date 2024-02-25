@@ -13,7 +13,7 @@ TPM_DIR="$HOME/.tmux/plugins/tpm"
 CLONE=1
 if [[ -d $TPM_DIR ]]; then
   read -rp "$TPM_DIR exists, overwrite? [yN]" REPLY
-  if [[ "$REPLY" =~ [yY].* ]]; then
+  if [[ $REPLY =~ [yY].* ]]; then
     rm -rf "$TPM_DIR"
   else
     CLONE=0

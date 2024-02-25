@@ -12,7 +12,7 @@ cp benjc_custom.zsh-theme ~/.oh-my-zsh/custom/
 cp vi-mode.plugin.zsh ~/.oh-my-zsh/custom/plugins/vi-mode/
 
 while true; do
-  read -p "Change shell? [y/n]" yn
+  read -rp "Change shell? [y/n]" yn
   case $yn in
     [Yy]*)
       chsh -s /bin/zsh && sudo chsh -s /bin/zsh

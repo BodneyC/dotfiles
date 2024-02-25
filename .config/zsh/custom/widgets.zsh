@@ -55,7 +55,7 @@ backward-kill-word-include-multi-char-ws() {
   fi
 
   if [[ -n $word ]]; then
-    if [[ $LASTWIDGET = *kill* ]]; then
+    if [[ $LASTWIDGET == *kill* ]]; then
       CUTBUFFER="$word$CUTBUFFER"
     else
       zle copy-region-as-kill -- "$word"

@@ -77,12 +77,12 @@ function handle_three() {
   "swipe")
     case "$2" in
     "up")
-      ((NEXT = ($CURRENT + $LAST + 2) % ($LAST + 1)))
-      [[ "$NEXT" != "0" ]] && wmctrl -s $NEXT
+      ((NEXT = (CURRENT + LAST + 2) % (LAST + 1)))
+      [[ $NEXT != "0" ]] && wmctrl -s $NEXT
       ;;
     "down")
-      ((NEXT = ($CURRENT + $LAST) % ($LAST + 1)))
-      [[ "$NEXT" != "$LAST" ]] && wmctrl -s $NEXT
+      ((NEXT = (CURRENT + LAST) % (LAST + 1)))
+      [[ $NEXT != "$LAST" ]] && wmctrl -s $NEXT
       ;;
     "left")
       xdotool key alt+Right
