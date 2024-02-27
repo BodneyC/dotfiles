@@ -73,24 +73,44 @@ VI_MODE_SET_CURSOR=true
 MODE_INDICATOR_N="N"
 MODE_INDICATOR_I="I"
 vi_mode_prompt_info() {
-  POT_RPS1="${${KEYMAP/vicmd/$MODE_INDICATOR_N}/(main|viins)/$MODE_INDICATOR_I}"
-  [[ -z "$POT_RPS1" ]] && echo $MODE_INDICATOR_I || echo "$POT_RPS1"
+  local indictor="${${KEYMAP/vicmd/$MODE_INDICATOR_N}/(main|viins)/$MODE_INDICATOR_I}"
+  [[ -z "$indictor" ]] && echo $MODE_INDICATOR_I || echo "$indictor"
+}
+
+__prompt_ns() {
+  local cfg=${KUBE_CONFIG:-$HOME/.kube/config}
+  if [[ -f "$cfg" ]]; then
+    local ns=$(yq -r \
+      '."current-context" as $ctx | .contexts[] | select(.name == $ctx) | .context.namespace' \
+      "$cfg" 2>/dev/null)
+    if [[ -n "$ns" ]]; then
+      if [[ $ns == *-* ]]; then
+        awk -F'-' \
+          -v mag="$_mag_n" -v blu="$_blu_n" \
+          '{print mag "| " $3 blu ":" mag $6}' <<< "$ns"
+      else
+        echo "${_mag_n}| $ns"
+      fi
+    else
+       echo "${_mag_n}| default"
+    fi
+  fi
 }
 
 unset RPS1
 
-TMOUT=1
+TMOUT=10
 TRAPALRM() {
     if [ "$WIDGET" != "expand-or-complete" ]; then
         zle reset-prompt
     fi
 }
 
-
 PROMPT='\
-${_mag_n} $_blu_n$(date +"%H:%M:%S") $_mag_n|$_reset \
+${_mag_n} $_blu_n$(date +"%H:%M") $_mag_n|$_reset \
 $_grn_n$(vi_mode_prompt_info)$_reset \
 $_mag_n| %(?.$_grn_n.$_red_n)%?$_reset \
+$(__prompt_ns) \
 $_mag_n| $_blu_n${PWD/#$HOME/~}$_reset\
 $(git_prompt_info)$_reset ${_mag_n})
 %(?.$_grn_n.$_red_n) > $_reset'
