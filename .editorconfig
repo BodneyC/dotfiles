@@ -11,7 +11,7 @@ trim_trailing_whitespace = true
 [*.lua]
 quote_style = AutoPreferSingle
 
-[*.sh]
+[{*.sh,.aliases,.config/zsh/**/*}]
 case_indent = true
 binary_next_line = true
 space_redirects = true

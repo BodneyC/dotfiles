@@ -12,10 +12,48 @@ function gsquash() {
     return 1
   fi
   local branch=$1
+  if [[ $branch != origin/* ]]; then
+    printf 'No remote found, use origin/%s? [Yn] ' "$branch"
+    yorn=$(bash -c 'read -n1 && echo $REPLY')
+    if [[ "$yorn" != [nN]* ]]; then
+      branch="origin/$branch"
+    fi
+  fi
   git fetch
+  git rebase "$branch" || {
+    echo "Rebase onto $branch not so simple, exiting gsquash"
+    return 1
+  }
   git reset --soft $(git merge-base "$branch" @)
   git add .
   git commit --no-verify
+}
+
+gig() {
+  if ! toplevel="$(git rev-parse --show-toplevel)"; then
+    echo "Not in git directory"
+    return 1
+  fi
+  gitignore="$toplevel/.gitignore"
+  if ! test -f "$gitignore"; then
+    touch "$gitignore"
+  fi
+  if [[ "$#" == 0 ]]; then
+    cat "$gitignore"
+  fi
+  if [[ -s "$gitignore" && "$(tail -c1 "$gitignore" | wc -l)" -le 0 ]]; then
+    echo "" >>"$gitignore"
+  fi
+  for e in "$@"; do
+    if [[ "$e" == ./* || "$e" == ../* ]]; then
+      e="$(realpath --relative-to "$toplevel" "$e")"
+    fi
+    if ! grep -qe "^$e$" "$gitignore"; then
+      echo "$e" >>"$gitignore"
+    else
+      echo "'$e' already in $gitignore"
+    fi
+  done
 }
 
 function gpfr() {

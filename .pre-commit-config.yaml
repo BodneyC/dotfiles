@@ -5,18 +5,11 @@ repos:
   - id: check-yaml
   - id: end-of-file-fixer
   - id: trailing-whitespace
-    exclude: ^(/zsh-autosuggestions|zsh-syntax-highlighting|ranger_devicon)
 
 # I know the 'local' repo is discouraged but I'm lazy and the sole
 #  developer on this one
 - repo: local
   hooks:
-
-  - id: stylua
-    name: stylua
-    language: system
-    entry: stylua
-    types: [lua]
 
   - id: shfmt
     name: shfmt
@@ -24,4 +17,9 @@ repos:
     entry: shfmt
     args: [-w, -s]
     types: [shell]
-    exclude: (/zsh-autosuggestions|/zsh-syntax-highlighting|/ranger_devicon|.*zsh[^/]*$)
+
+  - id: shellcheck
+    language: system
+    name: shellcheck
+    entry: shellcheck
+    types: [shell]
