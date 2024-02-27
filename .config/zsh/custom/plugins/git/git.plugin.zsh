@@ -15,7 +15,7 @@ function gsquash() {
   if [[ $branch != origin/* ]]; then
     printf 'No remote found, use origin/%s? [Yn] ' "$branch"
     yorn=$(bash -c 'read -n1 && echo $REPLY')
-    if [[ "$yorn" != [nN]* ]]; then
+    if [[ $yorn != [nN]* ]]; then
       branch="origin/$branch"
     fi
   fi
@@ -38,18 +38,18 @@ gig() {
   if ! test -f "$gitignore"; then
     touch "$gitignore"
   fi
-  if [[ "$#" == 0 ]]; then
+  if [[ $# == 0 ]]; then
     cat "$gitignore"
   fi
-  if [[ -s "$gitignore" && "$(tail -c1 "$gitignore" | wc -l)" -le 0 ]]; then
-    echo "" >>"$gitignore"
+  if [[ -s $gitignore && "$(tail -c1 "$gitignore" | wc -l)" -le 0 ]]; then
+    echo "" >> "$gitignore"
   fi
   for e in "$@"; do
-    if [[ "$e" == ./* || "$e" == ../* ]]; then
+    if [[ $e == ./* || $e == ../* ]]; then
       e="$(realpath --relative-to "$toplevel" "$e")"
     fi
     if ! grep -qe "^$e$" "$gitignore"; then
-      echo "$e" >>"$gitignore"
+      echo "$e" >> "$gitignore"
     else
       echo "'$e' already in $gitignore"
     fi
@@ -81,12 +81,12 @@ function _gd() {
   fi
 
   preview="git diff $opt $_branch_comp --color=always -- {-1} | delta"
-  _files="$(git diff $opt --name-only "$@" |
-    xargs -I '{}' realpath -q --relative-to=. \
+  _files="$(git diff $opt --name-only "$@" \
+    | xargs -I '{}' realpath -q --relative-to=. \
       $(git rev-parse --show-toplevel)/'{}')"
 
-  _percent="$(bc <<<"96 - ($(wc -l <<<"$_files" |
-    awk '{print $1}')00/$(tput lines))")"
+  _percent="$(bc <<< "96 - ($(wc -l <<< "$_files" \
+    | awk '{print $1}')00/$(tput lines))")"
   if [[ $_percent < $__GIT_PLUGIN_MIN_PREV ]]; then
     _percent="$__GIT_PLUGIN_MIN_PREV"
   fi
@@ -95,7 +95,7 @@ function _gd() {
     fzf -m --ansi --preview "$preview" \
       --bind 'enter:execute(nvim {1} < /dev/tty)' \
       --preview-window="up:$_percent%" \
-      <<<"$_files"
+      <<< "$_files"
   fi
 }
 
@@ -123,7 +123,7 @@ function _git_log_prettily() {
 }
 compdef _git _git_log_prettily=git-log
 function work_in_progress() {
-  if $(git log -n 1 2>/dev/null | grep -q -c "\-\-wip\-\-"); then
+  if $(git log -n 1 2> /dev/null | grep -q -c "\-\-wip\-\-"); then
     echo "WIP!!"
   fi
 }
@@ -171,6 +171,6 @@ function ggu() {
 }
 compdef _git ggu=git-checkout
 autoload -Uz is-at-least
-is-at-least 2.13 "$(git --version 2>/dev/null | awk '{print $3}')" &&
-  alias gsta='git stash push' ||
-  alias gsta='git stash save'
+is-at-least 2.13 "$(git --version 2> /dev/null | awk '{print $3}')" \
+  && alias gsta='git stash push' \
+  || alias gsta='git stash save'

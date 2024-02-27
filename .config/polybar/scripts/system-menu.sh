@@ -12,7 +12,7 @@ MENU="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p 'System' \
   -columns 1 \
   -show-icons -icon-theme "Papirus" \
   -font "Noto Sans 17" \
-  <<< "Lock|Logout|Reboot|Shutdown")"
+  <<<"Lock|Logout|Reboot|Shutdown")"
 
 case "$MENU" in
 *Lock) i3lock-fancy-rapid 10 10 ;;

@@ -13,7 +13,7 @@ sudo pacman -S --noconfirm nodejs npm python{,-pip} neovim wmctrl base-devel \
 mkdir -p "$HOME/.local/{bin,share/npm}"
 
 # shellcheck disable=SC2016
-echo 'prefix=$HOME/.local/share/npm' > "$HOME/.npmrc"
+echo 'prefix=$HOME/.local/share/npm' >"$HOME/.npmrc"
 
 npm i -g eslint-plugin-chai-friendly eslint-plugin-chai-expect \
   eslint-plugin-mocha docker-language-server-nodejs bash-language-server
@@ -42,8 +42,8 @@ cd "$GITCLONES" || _exit_msg "Could not find gitclones directory"
 git clone https://github.com/BodneyC/vim-neovim-config.git
 cd vim-neovim-config || _exit_msg "Could not find vim config directory"
 
-chmod +x ./inst-nvim.sh \
-  && (./inst-nvim.sh || _exit_msg "Could not run ./inst-nvim.sh")
+chmod +x ./inst-nvim.sh &&
+  (./inst-nvim.sh || _exit_msg "Could not run ./inst-nvim.sh")
 
 ### Rem
 

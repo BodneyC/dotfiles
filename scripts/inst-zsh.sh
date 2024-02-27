@@ -14,15 +14,15 @@ cp vi-mode.plugin.zsh ~/.oh-my-zsh/custom/plugins/vi-mode/
 while true; do
   read -rp "Change shell? [y/n]" yn
   case $yn in
-    [Yy]*)
-      chsh -s /bin/zsh && sudo chsh -s /bin/zsh
-      break
-      ;;
-    [Nn]*)
-      echo "Shell not changed"
-      break
-      ;;
-    *) echo "Answer [y/n] please" ;;
+  [Yy]*)
+    chsh -s /bin/zsh && sudo chsh -s /bin/zsh
+    break
+    ;;
+  [Nn]*)
+    echo "Shell not changed"
+    break
+    ;;
+  *) echo "Answer [y/n] please" ;;
   esac
 done
 
