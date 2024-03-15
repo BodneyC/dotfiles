@@ -29,29 +29,39 @@ git_prompt_info () {
   fi
 }
 
-# _beam_cursor() { echo -ne '\e[6 q'; }
-# _newline_after_cmd() { print ""; }
-
-__date=gdate
-hash gdate &>/dev/null || __date=date
-
 __zshrc_now() {
-  echo $(($("$__date" +%s%0N)/1000000))
+  export __t0=$(date '+%s')
 }
 
-# _timer_preexec() { t0="$(__zshrc_now)"; }
-# preexec_functions+=(_timer_preexec)
+preexec_functions+=(__zshrc_now)
 
-# _timer_precmd() {
-#   if [ $t0 ]; then
-#     t1="$(__zshrc_now)"
-#     tdelta=$(($t1-$t0))
-#     export RPROMPT="%F{cyan}${tdelta}ms %{$reset_color%}"
-#     unset t0
-#   else
-#     export RPROMPT=
-#   fi
-# }
+__uname=$(uname)
+
+__convert_time() {
+  local ts="$1"
+  if [[ $__uname == *Linux* ]]; then
+    date -d "@$ts" '+%H:%M:%S'
+  else
+    date -r "$ts" '+%H:%M:%s'
+  fi
+}
+
+_timer_precmd() {
+  if [ $__t0 ]; then
+    local t1=$(date '+%s')
+    local tdelta=$(($t1-$__t0))
+    if [[ $tdelta -gt 5 ]]; then
+      printf -v __tprompt '\n%s to %s (%s)\n\n' \
+        "$_blu_b$(__convert_time "$__t0")$_reset" \
+        "$_blu_b$(__convert_time "$t1")$_reset" \
+        "$_grn_b${tdelta}s$_reset"
+      export __tprompt
+    fi
+  else
+    export __tprompt=
+  fi
+  unset __t0 __t1
+}
 
 _add_echo() {
   if [ -z "$_do_newline" ]; then
@@ -60,7 +70,8 @@ _add_echo() {
     echo
   fi
 }
-precmd_functions+=(_add_echo)
+
+precmd_functions+=(_add_echo _timer_precmd)
 
 _exa_after_cmd() {
   hash exa 2>/dev/null && exa --classify --group-directories-first --all
@@ -107,7 +118,7 @@ TRAPALRM() {
 }
 
 PROMPT='\
-${_mag_n} $_blu_n$(date +"%H:%M") $_mag_n|$_reset \
+$__tprompt${_mag_n} $_blu_n$(date +"%H:%M") $_mag_n|$_reset \
 $_grn_n$(vi_mode_prompt_info)$_reset \
 $_mag_n| %(?.$_grn_n.$_red_n)%?$_reset \
 $(__prompt_ns) \
