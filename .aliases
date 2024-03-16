@@ -133,14 +133,16 @@ xo() {
   fi
 }
 
-if hash exa 2> /dev/null; then
-  alias e="exa --classify --group-directories-first --all"
+__list_cmd=exa
+hash eza 2>/dev/null && __list_cmd=eza
+if hash "$__list_cmd" 2> /dev/null; then
+  alias e="$__list_cmd --classify --group-directories-first --all"
   alias el="${aliases[e]} --long"
   alias ee="${aliases[e]} --long"
   alias es="${aliases[el]} --header --binary --group"
   alias ea="${aliases[es]} --all"
-  alias e1="exa -1 --all"
-  alias et="exa -T"
+  alias e1="$__list_cmd -1 --all"
+  alias et="$__list_cmd -T"
   [[ "${aliases[l]}" ]] && unalias l
   [[ "${aliases[ls]}" ]] && unalias ls
   [[ "${aliases[la]}" ]] && unalias la
@@ -149,7 +151,7 @@ else
   alias ll="ls -hls"
 fi
 alias IGNORE_PROXY='ALL_PROXY="" HTTPS_PROXY="" HTTP_PROXY=""'
-alias bdate="date '+%Y-%M-%d'"
+alias bdate="date '+%Y-%M-%d %H:%M:%S'"
 alias psrg="ps aux | rg"
 alias gotop="TERM=xterm-256color gotop"
 alias gs="echo \"No ghostscript, you spanner\""

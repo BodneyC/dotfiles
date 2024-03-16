@@ -29,6 +29,12 @@ git_prompt_info () {
   fi
 }
 
+##############################################################################
+# Timestamp
+##############################################################################
+
+hash date # For speeeeed
+
 __zshrc_now() {
   export __t0=$(date '+%s')
 }
@@ -47,10 +53,10 @@ __convert_time() {
 }
 
 _timer_precmd() {
-  if [ $__t0 ]; then
+  if [[ -n $__t0 ]]; then
     local t1=$(date '+%s')
     local tdelta=$(($t1-$__t0))
-    if [[ $tdelta -gt 5 ]]; then
+    if [[ $tdelta -ge 3 ]]; then
       printf -v __tprompt '\n%s to %s (%s)\n\n' \
         "$_blu_b$(__convert_time "$__t0")$_reset" \
         "$_blu_b$(__convert_time "$t1")$_reset" \
@@ -60,8 +66,12 @@ _timer_precmd() {
   else
     export __tprompt=
   fi
-  unset __t0 __t1
+  export __t0=
 }
+
+##############################################################################
+# Newline
+##############################################################################
 
 _add_echo() {
   if [ -z "$_do_newline" ]; then
@@ -72,6 +82,10 @@ _add_echo() {
 }
 
 precmd_functions+=(_add_echo _timer_precmd)
+
+##############################################################################
+# List on chpwd
+##############################################################################
 
 _exa_after_cmd() {
   hash exa 2>/dev/null && exa --classify --group-directories-first --all
