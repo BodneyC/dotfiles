@@ -33,13 +33,11 @@ git_prompt_info () {
 # Timestamp
 ##############################################################################
 
-hash date # For speeeeed
+hash date uname # For speeeeed
 
 __zshrc_now() {
   export __t0=$(date '+%s')
 }
-
-preexec_functions+=(__zshrc_now)
 
 __uname=$(uname)
 
@@ -62,11 +60,13 @@ _timer_precmd() {
         "$_blu_b$(__convert_time "$t1")$_reset" \
         "$_grn_b${tdelta}s$_reset"
       export __tprompt
+    else
+      unset __tprompt
     fi
   else
-    export __tprompt=
+    unset __tprompt
   fi
-  export __t0=
+  unset __t0
 }
 
 ##############################################################################
@@ -81,6 +81,7 @@ _add_echo() {
   fi
 }
 
+preexec_functions+=(__zshrc_now)
 precmd_functions+=(_add_echo _timer_precmd)
 
 ##############################################################################
@@ -112,7 +113,7 @@ __prompt_ns() {
       if [[ $ns == *-* ]]; then
         awk -F'-' \
           -v mag="$_mag_n" -v blu="$_blu_n" \
-          '{print mag "| " $3 blu ":" mag $6}' <<< "$ns"
+          '{print mag "| " $3 blu ":" mag $5 blu ":" mag $6}' <<< "$ns"
       else
         echo "${_mag_n}| $ns"
       fi

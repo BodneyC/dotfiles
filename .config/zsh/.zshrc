@@ -73,7 +73,7 @@ export WORDCHARS='' # '*?_-.[]~=&;!#$%^(){}<>|'
 bindkey '^w' backward-kill-word-include-multi-char-ws
 
 # bindkey '^k' autosuggest-accept
-# bindkey '^i' expand-or-complete-prefix
+bindkey '^i' expand-or-complete-prefix
 
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS

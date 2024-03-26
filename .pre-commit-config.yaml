@@ -18,6 +18,7 @@ repos:
     entry: shfmt
     args: [-w, -s]
     types: [shell]
+    exclude: ^.*(zsh|bspwm|panel).*$
 
   - id: shellcheck
     language: system

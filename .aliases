@@ -133,6 +133,21 @@ xo() {
   fi
 }
 
+update-creds() {
+  local creds="$HOME/.emails-dump/creds.asc"
+  gpg -f "$creds" > "$creds.sh"
+  local pre=$(sha256sum "$creds.sh")
+  nvim "$creds.sh"
+  if [[ "$pre" != $(sha256sum "$creds.sh") ]]; then
+    gpg \
+      --output "$creds" \
+      --encrypt \
+      --recipient "$EMAIL_ADDRESS" \
+      "$creds.sh"
+  fi
+  [[ -f "$creds.sh" ]] && rm "$creds.sh"
+}
+
 __list_cmd=exa
 hash eza 2>/dev/null && __list_cmd=eza
 if hash "$__list_cmd" 2> /dev/null; then
