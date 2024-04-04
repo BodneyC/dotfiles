@@ -12,6 +12,18 @@ repos:
 - repo: local
   hooks:
 
+  # cd ~/gitclones
+  # git clone https://github.com/CppCXY/EmmyLuaCodeStyle.git
+  # cd EmmyLuaCodeStyle
+  # mkdir build && cd build && cmake .. && cmake --build .
+  # ln -s $PWD/CodeFormat/CodeFormat ~/.local/bin/emmylua
+  - id: EmmyLuaCodeStyle
+    name: emmylua
+    language: system
+    entry: emmylua
+    args: [format, -ow, -c, .editorconfig, -w, .]
+    pass_filenames: false
+
   - id: shfmt
     name: shfmt
     language: system

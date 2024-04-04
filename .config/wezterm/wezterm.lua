@@ -50,13 +50,15 @@ local function font_with_fallback(name, params)
 end
 
 return {
+  check_for_updates = false,
+
   -- Font config
   font_size = 14.0,
-  font = font_with_fallback("Victor Mono Nerd Font", { weight = "Regular" }),
+  font = font_with_fallback("Iosevka Nerd Font", { weight = "Regular" }),
   font_rules = {
     {
       italic = true,
-      font = font_with_fallback("Victor Mono Nerd Font", {
+      font = font_with_fallback("Iosevka Nerd Font", {
         italic = true,
       }),
     },
@@ -89,10 +91,12 @@ return {
   },
 
   -- Colors
-  color_scheme = "nordfox",
+  color_scheme = "kanagawa",
   color_schemes = {
     nightfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nightfox.toml"),
     nordfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nordfox.toml"),
+    carbonfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/carbonfox.toml"),
+    kanagawa = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/kanagawa.toml"),
   },
 
   -- tabbar
@@ -121,6 +125,7 @@ return {
     { key = "J", mods = "CTRL|ALT", action = act({ ActivatePaneDirection = "Down" }) },
     { key = "K", mods = "CTRL|ALT", action = act({ ActivatePaneDirection = "Up" }) },
     { key = "L", mods = "CTRL|ALT", action = act({ ActivatePaneDirection = "Right" }) },
+    { key = "r", mods = "CTRL|ALT", action = wezterm.action.ReloadConfiguration },
     { key = "5", mods = "LEADER",   action = act({ SplitHorizontal = { args = { "zsh" } } }) },
     { key = "2", mods = "LEADER",   action = act({ SplitVertical = { args = { "zsh" } } }) },
     { key = "c", mods = "LEADER",   action = act({ SpawnCommandInNewTab = { cwd = wezterm.home_dir } }) },

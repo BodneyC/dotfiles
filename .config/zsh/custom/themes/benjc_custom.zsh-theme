@@ -39,15 +39,15 @@ __zshrc_now() {
   export __t0=$(date '+%s')
 }
 
-__uname=$(uname)
+# __uname=$(uname)
 
 __convert_time() {
   local ts="$1"
-  if [[ $__uname == *Linux* ]]; then
+  # if [[ $__uname == *Linux* ]]; then
     date -d "@$ts" '+%H:%M:%S'
-  else
-    date -r "$ts" '+%H:%M:%s'
-  fi
+  # else
+  #   date -r "$ts" '+%H:%M:%s'
+  # fi
 }
 
 _timer_precmd() {

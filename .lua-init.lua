@@ -14,16 +14,16 @@ add_to_path("path", {
   -- '/root/.luarocks/share/lua/' .. version .. '/?.lua',
   -- '/root/.luarocks/share/lua/' .. version .. '/?/init.lua',
   home
-    .. "/.local/share/lua/"
-    .. version
-    .. "/?.lua",
+  .. "/.local/share/lua/"
+  .. version
+  .. "/?.lua",
   home .. "/.local/share/lua/" .. version .. "/?/init.lua",
 })
 
 add_to_path("cpath", {
   -- '/root/.luarocks/lib/lua/' .. version .. '/?.so',
   home
-    .. "/.local/lib/lua/"
-    .. version
-    .. "/?.so",
+  .. "/.local/lib/lua/"
+  .. version
+  .. "/?.so",
 })
