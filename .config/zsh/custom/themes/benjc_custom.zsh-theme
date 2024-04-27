@@ -125,11 +125,12 @@ __prompt_ns() {
 
 unset RPS1
 
-TMOUT=10
+TMOUT=1
 TRAPALRM() {
-    if [ "$WIDGET" != "expand-or-complete" ]; then
-        zle reset-prompt
-    fi
+  _widgets=("expand-or-complete" "fzf_completion")
+  if ! (($_widgets[(Ie)$WIDGET])); then
+      zle reset-prompt
+  fi
 }
 
 PROMPT='\
