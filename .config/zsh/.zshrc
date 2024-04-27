@@ -73,13 +73,14 @@ export WORDCHARS='' # '*?_-.[]~=&;!#$%^(){}<>|'
 bindkey '^w' backward-kill-word-include-multi-char-ws
 
 # bindkey '^k' autosuggest-accept
-# bindkey '^i' expand-or-complete-prefix
-setopt completeinword
-zstyle ':completion:*' completer \
-  _oldlist _expand _complete _correct _ignored _prefix
-source $ZSH_CUSTOM/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh
-bindkey '^I' fzf_completion
-zstyle ':completion:*' fzf-search-display true
+bindkey '^i' expand-or-complete-prefix
+
+# setopt completeinword
+# zstyle ':completion:*' completer \
+#   _oldlist _expand _complete _correct _ignored _prefix
+# source $ZSH_CUSTOM/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+# bindkey '^I' fzf_completion
+# zstyle ':completion:*' fzf-search-display true
 
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
