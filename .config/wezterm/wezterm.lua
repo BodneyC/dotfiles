@@ -91,12 +91,13 @@ return {
   },
 
   -- Colors
-  color_scheme = "kanagawa",
+  color_scheme = "oldworld",
   color_schemes = {
     nightfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nightfox.toml"),
     nordfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nordfox.toml"),
     carbonfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/carbonfox.toml"),
     kanagawa = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/kanagawa.toml"),
+    oldworld = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/oldworld.toml"),
   },
 
   -- tabbar

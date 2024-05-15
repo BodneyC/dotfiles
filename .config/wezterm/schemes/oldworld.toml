@@ -1,0 +1,74 @@
+[metadata]
+name = "oldworld"
+
+[colors]
+background = "#161617"
+foreground = "#b9aeda"
+selection_bg = "#313134"
+# selection_fg =
+split = "#161617"
+# cursor_fg =
+
+# These (ansi and brights) are swapped because I prefer it...
+ansi = [
+  "#353539",
+  "#f591b2",
+  "#9dc6ac",
+  "#f0c5a9",
+  "#a6b6e9",
+  "#ecaad6",
+  "#99c9ce",
+  "#b9aeda",
+]
+
+brights = [
+  "#29292c",
+  "#ea83a5",
+  "#90b99f",
+  "#e6b99d",
+  "#92a2d5",
+  "#e29eca",
+  "#85b5ba",
+  "#a4a6c9",
+]
+
+[colors.indexed]
+16 = "#f5a191"
+17 = "#ffae9f"
+
+[colors.tab_bar]
+background = "#161617"
+inactive_tab_edge = "#161617"
+inactive_tab_edge_hover = "#2a2a2c"
+
+[colors.tab_bar.active_tab]
+bg_color = "#18181a"
+fg_color = "#a4a6c9"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#161617"
+fg_color = "#353539"
+intensity = "Normal"
+italic = true
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab]
+bg_color = "#161617"
+fg_color = "#353539"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#2a2a2c"
+fg_color = "#353539"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
