@@ -85,7 +85,8 @@ function _gd() {
     | xargs -I '{}' realpath -q --relative-to=. \
       $(git rev-parse --show-toplevel)/'{}')"
 
-  _percent="$(bc <<< "96 - ($(wc -l <<< "$_files" \
+  # The magic 9X is based on line height
+  _percent="$(bc <<< "93 - ($(wc -l <<< "$_files" \
     | awk '{print $1}')00/$(tput lines))")"
   if [[ $_percent < $__GIT_PLUGIN_MIN_PREV ]]; then
     _percent="$__GIT_PLUGIN_MIN_PREV"

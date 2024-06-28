@@ -54,11 +54,12 @@ return {
 
   -- Font config
   font_size = 14.0,
-  font = font_with_fallback("Iosevka Nerd Font", { weight = "Regular" }),
+  font = font_with_fallback("Maple Mono", { weight = "Light" }),
   font_rules = {
     {
       italic = true,
-      font = font_with_fallback("Iosevka Nerd Font", {
+      font = font_with_fallback("Maple Mono", {
+        weight = "Light",
         italic = true,
       }),
     },
@@ -70,7 +71,8 @@ return {
   },
 
   -- Screen config
-  line_height = 1.2,
+  line_height = 1.5,
+  cell_width = 0.9,
   -- dpi = 96.0,
   bold_brightens_ansi_colors = true,
   alternate_buffer_wheel_scroll_speed = 0,
@@ -91,7 +93,7 @@ return {
   },
 
   -- Colors
-  color_scheme = "oldworld",
+  color_scheme = "kanagawa",
   color_schemes = {
     nightfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nightfox.toml"),
     nordfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nordfox.toml"),
