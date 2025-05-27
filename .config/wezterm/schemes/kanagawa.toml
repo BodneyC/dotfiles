@@ -4,72 +4,80 @@ author = "Tommaso Laurenzi"
 origin_url = "https://github.com/revelot/kanagawa.nvim"
 
 [colors]
-background = "#181616"
-foreground = "#c5c9c5"
-selection_bg = "#223b4e"
-# selection_fg = "#c8c093"
-split = "#181616"
-cursor_fg = "#c8c093"
+background = "#1F1F28"
+foreground = "#DCD7BA"
+selection_bg = "#2A2A37"
+# selection_fg = "#C8C093"
+split = "#1F1F28"
+cursor_fg = "#C8C093"
 
 ansi = [
-  "#0d0c0c",
-  "#c4746e",
-  "#8a9a7b",
-  "#c4b28a",
-  "#8ba4b0",
-  "#a292a3",
-  "#8ea4a2",
-  "#c8c093",
+  "#16161D",
+  "#C34043",
+  "#76946A",
+  "#C0A36E",
+  "#7E9CD8",
+  "#957FB8",
+  "#6A9589",
+  "#C8C093",
 ]
 
 brights = [
-  "#a6a69c",
-  "#e46876",
-  "#87a987",
-  "#e6c384",
-  "#7fb4ca",
-  "#938aa9",
-  "#7aa89f",
-  "#c5c9c5",
+  "#727169",
+  "#E82424",
+  "#98BB6C",
+  "#E6C384",
+  "#7FB4CA",
+  "#938AA9",
+  "#7AA89F",
+  "#DCD7BA",
 ]
 
 [colors.indexed]
-16 = "#b6927b"
-17 = "#b98d7b"
+16 = "#FFA066"
+17 = "#FF5D62"
 
 [colors.tab_bar]
-background = "#181616"
-inactive_tab_edge = "#181616"
-inactive_tab_edge_hover = "#252525"
+background = "#1F1F28"
+inactive_tab_edge = "#1F1F28"
+inactive_tab_edge_hover = "#2A2A37"
 
 [colors.tab_bar.active_tab]
-bg_color = "#12120f"
-fg_color = "#c8c093"
+bg_color = "#2A2A37"
+fg_color = "#C8C093"
 intensity = "Normal"
 italic = false
 strikethrough = false
 underline = "None"
 
 [colors.tab_bar.inactive_tab]
-bg_color = "#181616"
-fg_color = "#a6a69c"
+bg_color = "#1F1F28"
+fg_color = "#727169"
 intensity = "Normal"
 italic = true
 strikethrough = false
 underline = "None"
 
 [colors.tab_bar.new_tab]
-bg_color = "#181616"
-fg_color = "#a6a69c"
+bg_color = "#1F1F28"
+fg_color = "#727169"
 intensity = "Normal"
 italic = false
 strikethrough = false
 underline = "None"
 
 [colors.tab_bar.new_tab_hover]
-bg_color = "#252525"
-fg_color = "#a6a69c"
+bg_color = "#2A2A37"
+fg_color = "#727169"
 intensity = "Normal"
 italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#2A2A37"
+fg_color = "#727169"
+intensity = "Normal"
+italic = true
 strikethrough = false
 underline = "None"
