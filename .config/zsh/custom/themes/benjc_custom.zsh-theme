@@ -33,7 +33,7 @@ git_prompt_info () {
 # Timestamp
 ##############################################################################
 
-hash date uname # For speeeeed
+hash yq date uname cksum # For speeeeed
 
 __zshrc_now() {
   export __t0=$(date '+%s')
@@ -42,12 +42,7 @@ __zshrc_now() {
 # __uname=$(uname)
 
 __convert_time() {
-  local ts="$1"
-  # if [[ $__uname == *Linux* ]]; then
-    date -d "@$ts" '+%H:%M:%S'
-  # else
-  #   date -r "$ts" '+%H:%M:%s'
-  # fi
+  date -d "@$1" '+%H:%M:%S'
 }
 
 _timer_precmd() {
@@ -82,16 +77,16 @@ _add_echo() {
 }
 
 preexec_functions+=(__zshrc_now)
-precmd_functions+=(_add_echo _timer_precmd)
+precmd_functions+=(_add_echo _timer_precmd __prompt_ns)
 
 ##############################################################################
 # List on chpwd
 ##############################################################################
 
-_exa_after_cmd() {
-  hash exa 2>/dev/null && exa --classify --group-directories-first --all
+_eza_after_cmd() {
+  hash eza 2>/dev/null && eza --classify --group-directories-first --all
 }
-chpwd_functions+=(_exa_after_cmd)
+chpwd_functions+=(_eza_after_cmd)
 
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
@@ -103,46 +98,42 @@ vi_mode_prompt_info() {
   [[ -z "$indictor" ]] && echo $MODE_INDICATOR_I || echo "$indictor"
 }
 
+export __KUBE_CONFIG_HASH __PROMPT_NS_SEGMENT
+
 __prompt_ns() {
   local cfg=${KUBE_CONFIG:-$HOME/.kube/config}
+  local hash=$(cksum "$cfg")
+  if [[ $__KUBE_CONFIG_HASH == $hash ]]; then
+    return
+  fi
+  __KUBE_CONFIG_HASH=$hash
   if [[ -f "$cfg" ]]; then
     local ns=$(yq -r \
       '."current-context" as $ctx | .contexts[] | select(.name == $ctx) | .context.namespace' \
       "$cfg" 2>/dev/null)
     if [[ -n "$ns" ]]; then
       if [[ $ns == *-* ]]; then
-        awk -F'-' \
-          -v mag="$_mag_n" -v blu="$_blu_n" \
-          '{print mag "| " $3 blu ":" mag $5 blu ":" mag $6}' <<< "$ns"
+        __PROMPT_NS_SEGMENT=$(
+          awk -F'-' \
+            -v mag="$_mag_n" -v blu="$_blu_n" \
+            '{print mag "| " $3 blu ":" mag $5 blu ":" mag $6}' <<< "$ns"
+        )
       else
-        echo "${_mag_n}| $ns"
+        __PROMPT_NS_SEGMENT="${_mag_n}| $ns"
       fi
     else
-       echo "${_mag_n}| default"
+       __PROMPT_NS_SEGMENT="${_mag_n}| default"
     fi
   fi
 }
 
 unset RPS1
 
-TMOUT=5
-TRAPALRM() {
-  echo "$WIDGET" >> /tmp/widgets
-  _widgets=(
-    "expand-or-complete"
-    "expand-or-complete-prefix"
-    "fzf_completion"
-  )
-  if ! (($_widgets[(Ie)$WIDGET])); then
-      zle reset-prompt
-  fi
-}
-
 PROMPT='\
 $__tprompt${_mag_n} $_blu_n$(date +"%H:%M") $_mag_n|$_reset \
 $_grn_n$(vi_mode_prompt_info)$_reset \
 $_mag_n| %(?.$_grn_n.$_red_n)%?$_reset \
-$(__prompt_ns) \
+$__PROMPT_NS_SEGMENT \
 $_mag_n| $_blu_n${PWD/#$HOME/~}$_reset\
 $(git_prompt_info)$_reset ${_mag_n})
 %(?.$_grn_n.$_red_n) > $_reset'

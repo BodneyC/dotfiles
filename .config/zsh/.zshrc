@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# zmodload zsh/zprof
+
 [[ -z "$ZSHRC_SOURCED" ]] && ZSHRC_SOURCED=1 || return
 
 export GPG_TTY=$(tty)
@@ -17,7 +19,7 @@ plugins=(
   dirhistory
   docker
   git
-  git-auto-fetch
+  # git-auto-fetch
   history-substring-search
   kubectl
   helm
@@ -26,7 +28,7 @@ plugins=(
   vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
-  taskwarrior
+  # taskwarrior
   # rust
 )
 
@@ -38,7 +40,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 
 source_if_exists() { [[ -e "$1" ]] && . "$1"; }
 
-source_if_exists "$ZSH/oh-my-zsh.sh"
+. "$ZSH/oh-my-zsh.sh"
 
 fpath+=(
   "$ZDOTDIR/completions"
@@ -48,6 +50,12 @@ fpath+=(
 compinit
 _comp_options+=(globdots)
 zstyle ':completion:*' special-dirs false
+
+if hash -v aws &>/dev/null; then
+  autoload bashcompinit && bashcompinit
+  autoload -Uz compinit && compinit
+  complete -C '/usr/bin/aws_completer' aws
+fi
 
 # Navigation Keys
 bindkey "${terminfo[khome]}" beginning-of-line
@@ -68,7 +76,7 @@ bindkey '^f' autosuggest-execute
 bindkey -r '^J'
 
 # Custom widgets
-source_if_exists "$HOME/.config/zsh/custom/widgets.zsh"
+. "$HOME/.config/zsh/custom/widgets.zsh"
 export WORDCHARS='' # '*?_-.[]~=&;!#$%^(){}<>|'
 bindkey '^w' backward-kill-word-include-multi-char-ws
 
@@ -97,3 +105,5 @@ unsetopt PROMPT_SP PROMPT_CR SHARE_HISTORY
 ### Other software
 
 source_if_exists "$ZDOTDIR/other.zsh"
+
+# zprof

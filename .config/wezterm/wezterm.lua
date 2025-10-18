@@ -116,7 +116,7 @@ return {
   },
 
   -- Colors
-  color_scheme = "kanagawa-wave",
+  color_scheme = "github_dark_dimmed",
   color_schemes = {
     nightfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nightfox.toml"),
     nordfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nordfox.toml"),
@@ -124,6 +124,8 @@ return {
     ['kanagawa-wave'] = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/kanagawa.toml"),
     ['kanagawa-dragon'] = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/kanagawa-dragon.toml"),
     oldworld = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/oldworld.toml"),
+    github_dark_dimmed = wezterm.color.load_scheme(os.getenv("HOME") ..
+      "/.config/wezterm/schemes/github_dark_dimmed.toml"),
   },
 
   -- tabbar

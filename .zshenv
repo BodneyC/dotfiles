@@ -73,7 +73,7 @@ export NO_PROXY=""
 
 export BAT_THEME="Nord"
 
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor --exclude .clj-kondo --exclude .lsp"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude vendor --exclude .clj-kondo --exclude .lsp --exclude snippets"
 export FZF_PREVIEW_COMMAND="bat --style=numbers --theme=onehalfdark --color=always {} || highlight -O ansi -l {} || coderay {} || rougify {} || cat {}"
 # This gets in the way of "multi"... whatever the heck that is in FZF
 export FZF_COMPLETION_OPTS='--bind="tab:toggle-down,btab:toggle-up"'

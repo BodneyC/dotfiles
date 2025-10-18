@@ -1,0 +1,79 @@
+[metadata]
+name = "kanagawa_dragon"
+author = "Tommaso Laurenzi"
+origin_url = "https://github.com/revelot/kanagawa.nvim"
+
+[colors]
+background = "#22272e"
+foreground = "#adbac7"
+selection_bg = "#36557e"
+# selection_fg = "#C8C093"
+split = "#444c56"
+cursor_fg = "#22272e"
+
+ansi = [
+  "#22272e",
+  "#f47067",
+  "#57ab5a",
+  "#c69026",
+  "#539bf5",
+  "#b083f0",
+  "#76e3ea",
+  "#909dab",
+]
+
+brights = [
+  "#2d333b",
+  "#ff938a",
+  "#6bc46d",
+  "#daaa3f",
+  "#6cb6ff",
+  "#dcbdfb",
+  "#b3f0ff",
+  "#909dab",
+]
+
+[colors.tab_bar]
+background = "#1e232a"
+inactive_tab_edge = "#2d333b"
+inactive_tab_edge_hover = "#2b4f81"
+
+[colors.tab_bar.active_tab]
+bg_color = "#2d333b"
+fg_color = "#909dab"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#1e232a"
+fg_color = "#636e7b"
+intensity = "Normal"
+italic = true
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab]
+bg_color = "#1e232a"
+fg_color = "#636e7b"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#25364d"
+fg_color = "#636e7b"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#25364d"
+fg_color = "#636e7b"
+intensity = "Normal"
+italic = true
+strikethrough = false
+underline = "None"
