@@ -72,11 +72,17 @@ local function font_with_fallback(name, params)
   return wezterm.font_with_fallback(names, params)
 end
 
+local is_linux = string.find(wezterm.target_triple, 'linux') ~= nil
+
+local function _if(cond, if_true, if_false)
+  if cond then return if_true else return if_false end
+end
+
 return {
   check_for_updates = false,
 
   -- Font config
-  font_size = 14.0,
+  font_size = _if(is_linux, 14.0, 17.0),
   font = font_with_fallback("Maple Mono", { weight = "Light" }),
   font_rules = {
     {

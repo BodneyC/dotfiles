@@ -54,7 +54,7 @@ zstyle ':completion:*' special-dirs false
 if hash -v aws &>/dev/null; then
   autoload bashcompinit && bashcompinit
   autoload -Uz compinit && compinit
-  complete -C '/usr/bin/aws_completer' aws
+  complete -C '/usr/local/bin/aws_completer' aws
 fi
 
 # Navigation Keys
