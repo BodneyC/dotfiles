@@ -122,7 +122,7 @@ return {
   },
 
   -- Colors
-  color_scheme = "github_dark_dimmed",
+  color_scheme = "nightfox",
   color_schemes = {
     nightfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nightfox.toml"),
     nordfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nordfox.toml"),
@@ -184,6 +184,21 @@ return {
       mods = "NONE",
       action = act.ScrollByLine(3),
       alt_screen = false,
+    },
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = "CTRL",
+      action = act.OpenLinkAtMouseCursor,
+    },
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = "NONE",
+      action = act.DisableDefaultAssignment,
+    },
+    {
+      event = { Down = { streak = 1, button = 'Left' } },
+      mods = "CTRL",
+      action = act.Nop,
     },
   },
   unix_domains = { { name = "unix" } },

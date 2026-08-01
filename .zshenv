@@ -57,6 +57,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export SHELL="$(command -v zsh)"
 export VISUAL="$(command -v nvim)"
 export EDITOR="$VISUAL"
+export KUBE_EDITOR="$VISUAL"
 
 # export GIT_PAGER="$(command -v less) -F -X" # Using delta now
 
@@ -84,6 +85,7 @@ export SHOW_AWS_PROMPT=false # for zsh plugin
 export AWS_SDK_LOAD_CONFIG=1
 export AWS_CONFIG_FILE="$HOME/.aws/config"
 export AWS_REGION="eu-west-2"
+export AWS_PAGER=''
 
 # export CLOUDSDK_COMPUTE_REGION="europe-west2"
 
@@ -119,3 +121,6 @@ export DOTNET_ROOT="$HOME/.dotnet"
 # export PERL_LOCAL_LIB_ROOT="$HOME/perl5/${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
 # export PERL_MB_OPT="--install_base \"$HOME/perl5/\""
 # export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5/"
+
+export TG_PROVIDER_CACHE=true
+export TG_PROVIDER_CACHE_DIR="$HOME/.local/state/terragrunt-provider-cache"
