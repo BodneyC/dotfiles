@@ -64,6 +64,7 @@ end)
 local function font_with_fallback(name, params)
   local names = {
     name,
+    "Maple Mono",
     "Iosevka Nerd Font",
     "Font Awesome 5 Free",
     "Font Awesome 5 Brands",
@@ -83,17 +84,17 @@ return {
 
   -- Font config
   font_size = _if(is_linux, 14.0, 17.0),
-  font = font_with_fallback("Maple Mono", { weight = "Light" }),
+  font = font_with_fallback("Lilex Nerd Font Mono", { weight = 'Regular' }),
   font_rules = {
     {
       italic = true,
-      font = font_with_fallback("Maple Mono", {
-        weight = "Light",
+      font = font_with_fallback("Lilex Nerd Font Mono", {
+        weight = "Regular",
         italic = true,
       }),
     },
   },
-  freetype_load_target = "Light",
+  freetype_load_target = "Normal",
   warn_about_missing_glyphs = false,
   quick_select_patterns = {
     "> (.*)",
@@ -122,7 +123,7 @@ return {
   },
 
   -- Colors
-  color_scheme = "nightfox",
+  color_scheme = "kanagawa-dragon",
   color_schemes = {
     nightfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nightfox.toml"),
     nordfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nordfox.toml"),
