@@ -1,0 +1,81 @@
+[metadata]
+name = "catppuccin-macchiato"
+
+[colors]
+background = "#24273a"
+foreground = "#cad3f5"
+selection_bg = "#494d64"
+# selection_fg = "#c8c093"
+split = "#24273a"
+cursor_fg = "#c8c093"
+
+ansi = [
+  "#939ab7",
+  "#ed8796",
+  "#a6da95",
+  "#eed39f",
+  "#91d7e3",
+  "#c6a0f6",
+  "#8bd5ca",
+  "#b8c0e0",
+]
+
+brights = [
+  "#939ab7",
+  "#ed8796",
+  "#a6da95",
+  "#eed39f",
+  "#91d7e3",
+  "#c6a0f6",
+  "#8bd5ca",
+  "#b8c0e0",
+]
+
+[colors.indexed]
+16 = "#b6927b"
+17 = "#b98d7b"
+
+[colors.tab_bar]
+background = "#24273a"
+inactive_tab_edge = "#24273a"
+inactive_tab_edge_hover = "#363a4f"
+
+[colors.tab_bar.active_tab]
+bg_color = "#363a4f"
+fg_color = "#b7bdf8"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#24273a"
+fg_color = "#a5adcb"
+intensity = "Normal"
+italic = true
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#363a4f"
+fg_color = "#a5adcb"
+intensity = "Normal"
+italic = true
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab]
+bg_color = "#24273a"
+fg_color = "#a5adcb"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#363a4f"
+fg_color = "#a5adcb"
+intensity = "Normal"
+italic = false
+strikethrough = false
+underline = "None"

@@ -73,6 +73,26 @@ local function font_with_fallback(name, params)
   return wezterm.font_with_fallback(names, params)
 end
 
+local function tab_title(tab_info)
+  local title = tab_info.tab_title
+  if title and #title > 0 then
+    return title
+  end
+  return tab_info.active_pane.title
+end
+
+wezterm.on(
+  'format-tab-title',
+  ---@diagnostic disable-next-line: unused-local
+  function(tab, tabs, panes, config, hover, max_width)
+    local index_display = tostring(tab.tab_index + 1)
+    local title = " " .. index_display .. ". " .. tab_title(tab) .. " "
+    return {
+      { Text = ' ' .. title .. ' ' },
+    }
+  end
+)
+
 local is_linux = string.find(wezterm.target_triple, 'linux') ~= nil
 
 local function _if(cond, if_true, if_false)
@@ -123,7 +143,7 @@ return {
   },
 
   -- Colors
-  color_scheme = "kanagawa-dragon",
+  color_scheme = "catppuccin-macchiato",
   color_schemes = {
     nightfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nightfox.toml"),
     nordfox = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/nordfox.toml"),
@@ -133,6 +153,8 @@ return {
     oldworld = wezterm.color.load_scheme(os.getenv("HOME") .. "/.config/wezterm/schemes/oldworld.toml"),
     github_dark_dimmed = wezterm.color.load_scheme(os.getenv("HOME") ..
       "/.config/wezterm/schemes/github_dark_dimmed.toml"),
+    ['catppuccin-macchiato'] = wezterm.color.load_scheme(os.getenv("HOME") ..
+      "/.config/wezterm/schemes/catppuccin-macchiato.toml"),
   },
 
   -- tabbar
