@@ -2,6 +2,36 @@
 
 # zmodload zsh/zprof
 
+_add_to_path() {
+  if [[ ! $PATH =~ $2 ]]; then
+    case "$1" in
+    app | append) export PATH="$PATH:$2" ;;
+    pre | prepend) export PATH="$2:$PATH" ;;
+    *)
+      echo "unknown subcommand ($1)"
+      return 1
+      ;;
+    esac
+  fi
+}
+
+_add_to_path pre "/usr/local/opt/"
+_add_to_path pre "/usr/local/sbin/"
+_add_to_path pre "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
+_add_to_path pre "$HOMEBREW_PREFIX/bin"
+_add_to_path pre "$HOMEBREW_PREFIX/sbin"
+_add_to_path app "$HOME/.rd/bin"
+_add_to_path app "$HOME/.cargo/bin"
+_add_to_path app "$HOME/.local/bin"
+_add_to_path app "$HOME/.local/opt/google-cloud-sdk/bin"
+_add_to_path app "$HOME/.luarocks/bin"
+_add_to_path app "$HOME/.poetry/bin"
+_add_to_path app "$HOME/.rvm/bin"
+_add_to_path app "$HOME/.yarn/bin"
+_add_to_path app "$HOME/Library/Python/3.8/bin"
+_add_to_path app "$HOME/go/bin"
+_add_to_path app "$HOME/perl5/bin"
+
 [[ -z "$ZSHRC_SOURCED" ]] && ZSHRC_SOURCED=1 || return
 
 export GPG_TTY=$(tty)
@@ -107,3 +137,5 @@ unsetopt PROMPT_SP PROMPT_CR SHARE_HISTORY
 source_if_exists "$ZDOTDIR/other.zsh"
 
 # zprof
+
+# <<< ipa-helper: fnm <<<
