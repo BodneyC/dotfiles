@@ -26,10 +26,13 @@
   wc = rev-list --count @
 
 [merge]
-  tool = nvim
-  conflictstyle = diff3
+	tool = diffview
+	conflictstyle = zdiff3
+
 [mergetool]
   prompt = false
+	keepBackup = false
+
 [mergetool "nvim"]
   cmd = nvim -c 'Gdiffsplit!' $MERGED
 
@@ -52,7 +55,15 @@
 
 [diff]
   tool = nvimdiff
+
 [difftool]
   prompt = true
+
 [difftool "nvimdiff"]
   cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
